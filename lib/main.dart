@@ -1,5 +1,5 @@
 import 'package:chef_frontend/constants/routes.dart';
-import 'package:chef_frontend/views/cheff/dashboard.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
