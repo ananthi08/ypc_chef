@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class KDualColour_widget extends StatelessWidget {
   final String text1;
@@ -21,19 +21,19 @@ class KDualColour_widget extends StatelessWidget {
         children: <TextSpan>[
           TextSpan(
             text: text1,
-            style: TextStyle(
+            style: GoogleFonts.dmSans(
               fontSize: 25.0,
               fontWeight: FontWeight.bold,
               color: color1 ?? Colors.black,
             ),
           ),
+        
           TextSpan(
             text: text2,
-            style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
-              color: color2 ?? Colors.red.shade700,
-            ),
+            style: GoogleFonts.dmSans(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: color2 ?? Colors.red.shade700),
           ),
         ],
       ),
@@ -41,25 +41,19 @@ class KDualColour_widget extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 class Headtextdualcolor extends StatelessWidget {
   final String text1;
   final String text2;
   final String? text3;
   final double paddingHorizontal;
   final MainAxisAlignment mainaxisalignment;
-  const Headtextdualcolor({
-    super.key,
-    required this.text1,
-    required this.text2,
-    this.text3,
-    required this.paddingHorizontal,
-    required this.mainaxisalignment
-  });
+  const Headtextdualcolor(
+      {super.key,
+      required this.text1,
+      required this.text2,
+      this.text3,
+      required this.paddingHorizontal,
+      required this.mainaxisalignment});
 
   @override
   Widget build(BuildContext context) {

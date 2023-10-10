@@ -1,5 +1,6 @@
 import 'package:chef_frontend/constants/routes.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
+import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,6 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
   
 
