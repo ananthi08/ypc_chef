@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Bottomnavbar extends StatelessWidget {
   const Bottomnavbar({
-    super.key,
+    super.key, required MaterialColor backgroundColor,
   });
 
   @override
@@ -11,7 +11,7 @@ class Bottomnavbar extends StatelessWidget {
       data: NavigationBarThemeData(
           indicatorColor: Colors.blue.shade100,
           labelTextStyle: MaterialStateProperty.all(
-          const  TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           )),
       child: NavigationBar(destinations:const [
         NavigationDestination(
@@ -22,22 +22,22 @@ class Bottomnavbar extends StatelessWidget {
             label: 'Home'),
         NavigationDestination(
             icon: Icon(
-              Icons.category,
+              Icons.notifications,
               color: Colors.black54,
             ),
-            label: 'Category'),
+            label: 'Notification'),
         NavigationDestination(
             icon: Icon(
-              Icons.chat,
+              Icons.email,
               color: Colors.black54,
             ),
-            label: 'Chat'),
-        NavigationDestination(
-            icon: Icon(
-              Icons.feed,
-              color: Colors.black54,
-            ),
-            label: 'Feed'),
+            label: 'Mail'),
+        // NavigationDestination(
+        //     icon: Icon(
+        //       Icons.feed,
+        //       color: Colors.black54,
+        //     ),
+        //     label: 'Feed'),
       ]),
     );
   }
