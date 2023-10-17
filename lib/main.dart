@@ -1,6 +1,9 @@
 import 'package:chef_frontend/constants/routes.dart';
+import 'package:chef_frontend/views/auth/signin/signin_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
-import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
+import 'package:chef_frontend/views/first_page_view.dart';
+// import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
+// import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,7 +26,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: Dashboardview.route,
+      // home:const Dashboardview(),
+      initialRoute: Firstpage.route,
       routes: routes,
     );
   }

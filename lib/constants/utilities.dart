@@ -11,7 +11,7 @@ void popuperror({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
+        title: const Text(
           "Error",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -23,7 +23,7 @@ void popuperror({
             onPressed: () {
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       );
@@ -96,21 +96,21 @@ class AwesomeSnackbarContent extends StatelessWidget {
     
     return Container(
       color: backgroundColor,
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
         
-          Icon(
+          const Icon(
             Icons.info, 
             color: Colors.white,
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ void showAwesomeSnackBar({
         backgroundColor: backgroundColor,
         contentType: contentType, 
       ),
-      duration: Duration(seconds: 3), 
+      duration: const Duration(seconds: 3), 
        behavior: SnackBarBehavior.floating,
     ),
   );

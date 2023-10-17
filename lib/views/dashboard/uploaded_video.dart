@@ -195,7 +195,7 @@ class _UploadVideoState extends State<UploadVideo> {
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: const Color.fromARGB(255, 217, 217, 217),
+                          color:  Color.fromARGB(255, 217, 217, 217),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         child: Row(
@@ -366,7 +366,7 @@ class _UploadVideoState extends State<UploadVideo> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -385,7 +385,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                 onTap: () {
                                   addIngredientRow();
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Add +',
                                   style: TextStyle(
                                     fontSize: 15,
@@ -409,7 +409,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                     onChanged: (value) {
                                       ingredients[0].name = value;
                                     },
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Enter Ingredient name',
                                     ),
                                   ),
@@ -422,7 +422,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                     onChanged: (value) {
                                       ingredients[0].quantity = value;
                                     },
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Qnty',
                                     ),
                                   ),
@@ -445,7 +445,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                       onChanged: (value) {
                                         ingredient.name = value;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: 'Enter Ingredient name',
                                       ),
                                     ),
@@ -458,7 +458,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                       onChanged: (value) {
                                         ingredient.quantity = value;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: 'Qnty',
                                       ),
                                     ),

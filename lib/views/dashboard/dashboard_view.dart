@@ -29,7 +29,7 @@ class _DashboardviewState extends State<Dashboardview> {
 
     return Scaffold(
 //  theme: new ThemeData(scaffoldBackgroundColor: const Color(#FFEFEF)),
-backgroundColor: Color.fromARGB(248, 246, 246, 246),
+backgroundColor: const Color.fromARGB(248, 246, 246, 246),
  
    body:SingleChildScrollView(
     
@@ -37,7 +37,7 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
      child: SafeArea(
       
        child: Padding(
-         padding:  EdgeInsets.all(25.0),
+         padding:  const EdgeInsets.all(25.0),
          child: Column(
           
           children: [
@@ -68,7 +68,7 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
            child: Column(
       children: [
         Container(
-          padding: EdgeInsets.all(17),
+          padding: const EdgeInsets.all(17),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
           height: 120,
           child: Row(
@@ -180,7 +180,7 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
                 children: [
                   Image.asset("assets/peoples.jpeg"),const SizedBox(height: 1,),
                  const Text('My customers',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                   Text('23 peoples'),
+                   const Text('23 peoples'),
 
 
                 ],
@@ -226,7 +226,7 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
            child: Column(
       children: [
         Container(
-          padding: EdgeInsets.all(17),
+          padding: const EdgeInsets.all(17),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
           height: 120,
           child: Row(
@@ -294,7 +294,7 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
            child: Column(
       children: [
         Container(
-          padding: EdgeInsets.all(17),
+          padding: const EdgeInsets.all(17),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
           height: 120,
           child: Row(
@@ -304,14 +304,14 @@ backgroundColor: Color.fromARGB(248, 246, 246, 246),
                 children: [
                   Image.asset("assets/payment.jpg"),const SizedBox(height: 1,),
                   const Text('Payment',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                   Text('23 Payment'),
+                   const Text('23 Payment'),
 
 
                 ],
 
               ),
               
-              SizedBox(width: 140),
+              const SizedBox(width: 140),
             
            
               const Expanded(
