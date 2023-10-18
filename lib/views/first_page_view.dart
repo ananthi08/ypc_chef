@@ -16,7 +16,7 @@ class Firstpage extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/chef.jpg'),
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           child: Align(
@@ -48,8 +48,8 @@ class Firstpage extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color.fromRGBO(156, 29, 6, 0.4),
-                        Color.fromRGBO(207, 163, 50, 0.478),
+                        Color.fromRGBO(255, 38, 0, 0.4),
+                        Color.fromRGBO(247, 177, 0, 0.475),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(screenHeight * 0.0125),
@@ -59,7 +59,7 @@ class Firstpage extends StatelessWidget {
                     child: Text(
                       'Get Started',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 26, 3, 236),
                         fontSize: screenWidth * 0.04,
                       ),
                     ),

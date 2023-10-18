@@ -1,5 +1,6 @@
 
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
 import 'package:flutter/material.dart';
 // import 'package:svg_flutter/svg.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -42,22 +43,42 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           
           children: [
         
-         const Row(
+          Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
          
-            Text('Dashboard',
+            const Text('Dashboard',
              style: TextStyle(color: Colors.black,
               fontSize: 34,
               fontWeight: FontWeight.bold,
               ),
               ),
+               Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.account_circle_rounded,
+                                ),
+                                color: Colors.black87,
+                                onPressed: () async {
+                                   Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Profilepage(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
           
-          Icon(Icons.account_circle_rounded,
-          color: Colors.black,
-           size: 50.0,
-        
-          )
+          
+     
+     
+     
          ],
          ),
          const SizedBox(height: 50),

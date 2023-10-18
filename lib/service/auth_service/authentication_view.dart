@@ -33,14 +33,14 @@ class SignupApi {
         userName: name,
         mobileNumber: mobilenumber,
       );
-      print("$mobilenumber");
+      // print("$mobilenumber");
       
       http.Response response = await http.post(
         Uri.parse(baseUrl),
         headers: Kheader,
         body: signupbody.toJson(),
       );
-
+print(response);
       httpErroHandle(
         context: context,
         response: response,
@@ -68,12 +68,12 @@ class SignupApi {
         await prefs.setString("mobilenumber", mobilenumber);
          print("hello mobilenumber $mobilenumber");
 
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>  MyLayout(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>const  Dashboardview(),
+            ),
+          );
         },
       );
     } catch (e) {
@@ -123,13 +123,12 @@ class SignupApi {
 // ................userId   end
 
 
-
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>const Chefflow(selectedCuisineIds: [],),
-          //   ),
-          // );
+  Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>const  Dashboardview(),
+            ),
+          );
         },
       );
     } catch (e) {
@@ -143,38 +142,38 @@ class SignupApi {
 
 // get apifor getting session token..........................
 
-  Future<String?> getToken({
-    required context,
-  }) async {
-    try {
-      String baseUrl = '$ksessionUrl/Session/Token';
+  // Future<String?> getToken({
+  //   required context,
+  // }) async {
+  //   try {
+  //     String baseUrl = '$ksessionUrl/Session/Token';
 
-      final sessionTokenResponse = await http.get(
-        Uri.parse(baseUrl),
-        headers: Kheader,
-      );
-      String? sessionToken;
-      httpErroHandle(
-        context: context,
-        response: sessionTokenResponse,
-        onSuccess: () {
-          sessionToken = jsonDecode(sessionTokenResponse.body)['sessionToken'];
-          print(
-              "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::$sessionToken");
+  //     final sessionTokenResponse = await http.get(
+  //       Uri.parse(baseUrl),
+  //       headers: Kheader,
+  //     );
+  //     String? sessionToken;
+  //     httpErroHandle(
+  //       context: context,
+  //       response: sessionTokenResponse,
+  //       onSuccess: () {
+  //         sessionToken = jsonDecode(sessionTokenResponse.body)['sessionToken'];
+  //         print(
+  //             "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::$sessionToken");
 
-          // return sessionToken;
-        },
-      );
+  //         // return sessionToken;
+  //       },
+  //     );
 
-      return sessionToken;
-    } catch (e) {
-      showCustomSnackBar(
-        context: context,
-        text: "An error occurred: $e",
-      );
-    }
-    return null;
-  }
+  //     return sessionToken;
+  //   } catch (e) {
+  //     showCustomSnackBar(
+  //       context: context,
+  //       text: "An error occurred: $e",
+  //     );
+  //   }
+  //   return null;
+  // }
   // ..............end of getting session token
 
 //  RESET password api

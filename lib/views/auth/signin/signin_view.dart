@@ -68,17 +68,17 @@ class _SigninState extends State<Signin> {
   @override
   void initState() {
     super.initState();
-    tokencheck();
+    // tokencheck();
     getuserTOKEN();
     getuserId();
     gettingmobilenumber();
     loadRememberMeData();
   }
 
-  tokencheck() async {
-    token = await getToken.getToken(context: context);
-    print("Your session token is : $token");
-  }
+  // tokencheck() async {
+  //   token = await getToken.getToken(context: context);
+  //   print("Your session token is : $token");
+  // }
 
 // .......end of session token..........
 
