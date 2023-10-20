@@ -27,22 +27,22 @@ class _OTPFieldState extends State<OTPField> {
     required context,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString("userId");
+    String? loginId = prefs.getString("loginId");
     String? token = prefs.getString("token");
     String? mobileNumber = prefs.getString("mobileNumber");
-    if (userId != null) {
+    if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$userId/mobile';
+        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTPRequest verifyRequest = VerifyOTPRequest(
           // token: 'token',
           mobileNumber: mobileNumber,
           otp: otp,
-          userId: userIdParameter,
+          loginId: userIdParameter,
         );
         print(otp);
         print(token);
-        print(userId);
+        print('hiii loginnnnnnnnnid$loginId');
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),

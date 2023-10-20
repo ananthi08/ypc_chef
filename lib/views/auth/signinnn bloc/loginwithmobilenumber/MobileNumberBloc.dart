@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/constants/httperrorhandling.dart';
@@ -6,8 +7,8 @@ import 'package:chef_frontend/constants/utilities.dart';
 import 'package:chef_frontend/model/auth_model.dart';
 import 'package:chef_frontend/views/auth/signin/otpformobile.dart';
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 class MobileNumberBloc {
   final _mobileNumberController = StreamController<String>();
   final _loadingController = StreamController<bool>();
@@ -35,17 +36,26 @@ class MobileNumberBloc {
         headers: Kheader,
         body: sendingotp.toJson(),
       );
-
+   print('wqwqwqwqwqwqw$response');
       // ignore: use_build_context_synchronously
       httpErroHandle(
         context: context,
         response: response,
-        onSuccess: () {
-         
+        onSuccess: ()async {
+      
           _loadingController.sink.add(false);
           _mobileNumberController.sink.add(mobileNumber);
 
-        
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          var loginId = jsonDecode(response.body)['loginId'];
+          await prefs.setString("loginId", "$loginId");
+          //  var mobileNumber = jsonDecode(response.body)['loginId'];
+          await prefs.setString("mobileNumber", "$mobileNumber");
+print('hi fgmobnnumberrndzzz$mobileNumber');
+
+          loginId = prefs.getString("loginId");
+          print('hi frndzzz$loginId');
+          // ignore: use_build_context_synchronously
           Navigator.push(
             context,
             MaterialPageRoute(

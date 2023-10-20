@@ -188,18 +188,18 @@ class VerifyOTP {
 class VerifyOTPRequest {
   String? mobileNumber;
   String otp;
-  String userId;
+  String loginId;
   VerifyOTPRequest({
     required this.otp,
     required this.mobileNumber,
-    required this.userId,
+    required this.loginId,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'otp': otp,
       'mobileNumber': mobileNumber,
-      'userId': userId,
+      'loginId': loginId,
     };
   }
 
@@ -207,7 +207,7 @@ class VerifyOTPRequest {
     return VerifyOTPRequest(
       mobileNumber: map['mobileNumber'] as String,
       otp: map['otp'] as String,
-      userId: map['userId'] as String,
+      loginId: map['loginId'] as String,
     );
   }
 

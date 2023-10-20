@@ -1,8 +1,7 @@
+import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:chef_frontend/common_widget/dual_color_widget.dart';
 import 'package:chef_frontend/views/auth/signinnn%20bloc/loginwithmobilenumber/MobileNumberBloc.dart';
 import 'package:flutter/material.dart';
-
-
 class MobileNumber extends StatefulWidget {
   static String route = '/chef/send otp';
 
@@ -47,11 +46,11 @@ class _MobileNumberState extends State<MobileNumber> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // const CustomSVGImage(
-                //   path: "assets/number_input.svg",
-                //   height: 280,
-                //   bordercolor: Colors.black,
-                // ),
+                const CustomSVGImage(
+                  path: "assets/number_input.svg",
+                  height: 280,
+                  bordercolor: Colors.black,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -95,8 +94,8 @@ class _MobileNumberState extends State<MobileNumber> {
                           width: mediaQuery.size.width / 2,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFFA51C05),
-                              onPrimary: Colors.white,
+                              primary: const Color(0xFF3E4D52),
+                              onPrimary: Colors.white,                             
                             ),
                             onPressed: () {
                               press();

@@ -3,6 +3,7 @@ import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/constants/httperrorhandling.dart';
 import 'package:chef_frontend/constants/utilities.dart';
 import 'package:chef_frontend/model/auth_model.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -52,14 +53,14 @@ print("csacszcxszc$mobileNumber");
 
 SharedPreferences prefs = await SharedPreferences.getInstance();
     String? loginId = prefs.getString("loginId");
-print("loginnnnnnnnnnnnn id$loginId");
+print("login id$loginId");
 
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => Dashboard(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Dashboardview(),
+            ),
+          );
         },
       );
     } catch (e) {
@@ -86,7 +87,7 @@ print("loginnnnnnnnnnnnn id$loginId");
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -145,12 +146,12 @@ print("loginnnnnnnnnnnnn id$loginId");
                     ),
                   const  SizedBox(height: 25),
                     Container(
-                      margin: EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.all(8.0),
                       height: 47.56,
                       width: 150,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xFFA51C05),
+                          primary: const Color(0xFFA51C05),
                           onPrimary: Colors.white,
                         ),
                         onPressed: press,

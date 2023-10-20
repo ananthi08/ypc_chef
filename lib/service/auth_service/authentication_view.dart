@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/constants/httperrorhandling.dart';
 import 'package:chef_frontend/constants/utilities.dart';
-import 'package:chef_frontend/model/auth_model.dart';
 import 'package:chef_frontend/views/auth/signin/otpformobile.dart';
 import 'package:chef_frontend/views/auth/signin/resetpassword_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../model/auth_model.dart';
 
 
 class SignupApi {
@@ -34,13 +34,16 @@ class SignupApi {
         mobileNumber: mobilenumber,
       );
       // print("$mobilenumber");
+  
+     
       
       http.Response response = await http.post(
         Uri.parse(baseUrl),
         headers: Kheader,
         body: signupbody.toJson(),
+        // body:encryptedData,
       );
-print(response);
+// print('encrypteddata $encryptedData');
       httpErroHandle(
         context: context,
         response: response,
@@ -52,7 +55,7 @@ print(response);
 
           token = prefs.getString("token");
 
-          print("heloo frnd $token");
+          // print("heloo frnd $token");
 // USER TOKEN  END
 
           //  .....userId...........start
@@ -61,17 +64,17 @@ print(response);
 
           userId = prefs.getString("userId");
 
-          print("hello frnd $userId");
+          print("heloo frnd $userId");
 // ................userId   end
 
  // Save mobilenumber in local storage
         await prefs.setString("mobilenumber", mobilenumber);
-         print("hello mobilenumber $mobilenumber");
+         print("heloo mobilenumber $mobilenumber");
 
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>const  Dashboardview(),
+              builder: (context) =>  const Dashboardview(),
             ),
           );
         },
@@ -95,38 +98,47 @@ print(response);
     try {
       String baseUrl = '$KbaseUrl/chef/login';
 
-      // Replace with your backend API endpoint
+    
       Signinn signinbody = Signinn(
         email: email,
         password: password,
       );
+
+    //    final encryptionData = EncryptionData.instance; 
+
+    // final dataToEncrypt = signinbody.toMap();
+
+    // Encrypt the data
+    // final encryptedData = encryptionData.encrypt(jsonEncode(dataToEncrypt));
+
       final response = await http.post(
         Uri.parse(baseUrl),
         headers: Kheader,
         body: signinbody.toJson(),
+        // body: encryptedData,
+
       );
-      print(response.body);
-      
+      // print('encrypteddata $encryptedData');
+      // final decryptionData = EncryptionData.instance;
+      // final datatodecrypt =  encryptionData.decrypt(encryptedData);
+      // print('decryptionnnnnnnnnnnnnn$datatodecrypt');
+      // print(response.body);
       httpErroHandle(
         context: context,
         response: response,
         onSuccess: () async {
+          print("djwdwewd");
           //  .....userId...........start
           SharedPreferences prefs = await SharedPreferences.getInstance();
           var userId = jsonDecode(response.body)['userId'];
           await prefs.setString("userId", "$userId");
 
           userId = prefs.getString("userId");
-
-          print("hello frnd $userId");
-
-// ................userId   end
-
-
-  Navigator.push(
+        // ................userId   end
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>const  Dashboardview(),
+              builder: (context) =>const Dashboardview(),
             ),
           );
         },
@@ -142,38 +154,38 @@ print(response);
 
 // get apifor getting session token..........................
 
-  // Future<String?> getToken({
-  //   required context,
-  // }) async {
-  //   try {
-  //     String baseUrl = '$ksessionUrl/Session/Token';
+  Future<String?> getToken({
+    required context,
+  }) async {
+    try {
+      String baseUrl = '$ksessionUrl/Session/Token';
 
-  //     final sessionTokenResponse = await http.get(
-  //       Uri.parse(baseUrl),
-  //       headers: Kheader,
-  //     );
-  //     String? sessionToken;
-  //     httpErroHandle(
-  //       context: context,
-  //       response: sessionTokenResponse,
-  //       onSuccess: () {
-  //         sessionToken = jsonDecode(sessionTokenResponse.body)['sessionToken'];
-  //         print(
-  //             "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::$sessionToken");
+      final sessionTokenResponse = await http.get(
+        Uri.parse(baseUrl),
+        headers: Kheader,
+      );
+      String? sessionToken;
+      httpErroHandle(
+        context: context,
+        response: sessionTokenResponse,
+        onSuccess: () {
+          sessionToken = jsonDecode(sessionTokenResponse.body)['sessionToken'];
+          print(
+              "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::$sessionToken");
 
-  //         // return sessionToken;
-  //       },
-  //     );
+          // return sessionToken;
+        },
+      );
 
-  //     return sessionToken;
-  //   } catch (e) {
-  //     showCustomSnackBar(
-  //       context: context,
-  //       text: "An error occurred: $e",
-  //     );
-  //   }
-  //   return null;
-  // }
+      return sessionToken;
+    } catch (e) {
+      showCustomSnackBar(
+        context: context,
+        text: "An error occurred: $e",
+      );
+    }
+    return null;
+  }
   // ..............end of getting session token
 
 //  RESET password api
@@ -386,13 +398,15 @@ void sendotpwith_mobilenumber({
     required context,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString("userId");
+    // String? userId = prefs.getString("userId");
+    String? loginId = prefs.getString("loginId");
+
     // String? token = prefs.getString("token");
     String? mobileNumber = prefs.getString("mobileNumber");
 
-    if (userId != null) {
+    if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$userId/mobile';
+        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTP verifyRequest = VerifyOTP(
           // token: 'token',
@@ -402,7 +416,7 @@ void sendotpwith_mobilenumber({
         );
         print(otp);
        
-        print(userId);
+        print('vdxvcxvxvxvxvxvsvssadsds$loginId');
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),
@@ -415,12 +429,12 @@ void sendotpwith_mobilenumber({
           context: context,
           response: response,
           onSuccess: () {
-          // Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                   builder: (context) => Dashboard(),
-          //                 ),
-          //               );
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboardview(),
+                          ),
+                        );
           },
         );
       } catch (e) {
@@ -432,7 +446,7 @@ void sendotpwith_mobilenumber({
         print(e);
       }
     } else {
-      print("chef ID not found in SharedPreferences");
+      print("User ID not found in SharedPreferences");
      
     }
   }
@@ -453,23 +467,23 @@ String otpp = '';
     required context,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString("userId");
+    String? loginId = prefs.getString("loginId");
     // String? token = prefs.getString("token");
     String? mobileNumber = prefs.getString("mobileNumber");
 
-    if (userId != null) {
+    if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$userId/mobile';
+        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTPRequest verifyRequest = VerifyOTPRequest(
           // token: 'token',
           mobileNumber: mobileNumber,
           otp: otpp,
-          userId: userIdParameter,
+          loginId: userIdParameter,
         );
         print(otp);
        
-        print(userId);
+        print('okokokoakokokaokoakoka$loginId');
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),
@@ -482,12 +496,12 @@ String otpp = '';
           context: context,
           response: response,
           onSuccess: () {
-          // Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                   builder: (context) => Dashboard(),
-          //                 ),
-          //               );
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboardview(),
+                          ),
+                        );
           },
         );
       } catch (e) {
@@ -499,7 +513,7 @@ String otpp = '';
         print(e);
       }
     } else {
-      print("chef ID not found in SharedPreferences");
+      print("User ID not found in SharedPreferences");
      
     }
   }
