@@ -1,4 +1,4 @@
-String KbaseUrl = "http://192.168.0.124:4000/ypc-authentication-micro-service";
+String KbaseUrl = "http://192.168.0.124:4000/ypc-chef-micro-service";
 
 
 Map<String, String> Kheader = {
@@ -7,7 +7,7 @@ Map<String, String> Kheader = {
       "auth-key" :"CZAZHBL9MPWQ14MLBRF6",
     };
 // for sessiontoken
-String ksessionUrl = "http://192.168.0.124:4000/ypc-session-micro-service";
+String ksessionUrl = "http://192.168.0.124:4000/ypc-chef-micro-service";
 
 
 
