@@ -148,7 +148,7 @@ class _MobileNumberState extends State<MobileNumber> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 180, 0, 0),
+                          color:  Color(0xFF3E4D52),
                         ),
                       ),
                     ),

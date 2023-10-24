@@ -45,12 +45,12 @@ class Forgot extends StatelessWidget {
               children: [
                 const Center(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 270, 30, 0),
+                    padding: EdgeInsets.fromLTRB(0, 270, 30, 10),
                     child: Text(
                       "Forgot your Password ?",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(168, 28, 5, 1),
+                          color:  Color(0xFF3E4D52),
                           fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
@@ -98,7 +98,7 @@ class Forgot extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
-                    primary: const Color(0xFFA51C05),
+                    primary: const Color(0xFF3E4D52),
                     minimumSize: const Size(200, 40),
                   ),
                   onPressed: () {

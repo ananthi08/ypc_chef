@@ -199,7 +199,7 @@ class _SigninState extends State<Signin> {
                           style:  GoogleFonts.dmSans(
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red.shade700,
+                            color: const Color(0xFF3E4D52),
                           ),
                         ),
                       ],
@@ -323,7 +323,7 @@ class _SigninState extends State<Signin> {
                               child:  Text(
                                 'Forgot Password?',
                                 style:  GoogleFonts.dmSans(
-                                  color: const Color(0xFFA51C05),
+                                  color: const Color(0xFF3E4D52),
                                   fontSize: 12,
                                 ),
                               ),
@@ -341,7 +341,7 @@ class _SigninState extends State<Signin> {
                           child:  Text(
                             'or',
                             style:  GoogleFonts.dmSans(
-                              color: const Color(0xFFA51C05),
+                              color: const Color(0xFF3E4D52),
                               fontSize: 12,
                             ),
                           ),
@@ -364,7 +364,7 @@ class _SigninState extends State<Signin> {
                                 child:  Text(
                                   'Continue With Mobile Number',
                                   style:  GoogleFonts.dmSans(
-                                    color: const Color(0xFFA51C05),
+                                    color:const Color(0xFF3E4D52),
                                     fontSize: 12,
                                   ),
                                 ),
@@ -397,7 +397,7 @@ class _SigninState extends State<Signin> {
                       child:  Text(
                         'Resend OTP',
                         style:  GoogleFonts.dmSans(
-                          color: const Color(0xFFA51C05),
+                          color: const Color(0xFF3E4D52),
                           fontSize: 12,
                         ),
                       ),
@@ -408,10 +408,10 @@ class _SigninState extends State<Signin> {
                   child: Container(
                     margin: const EdgeInsets.all(8.0),
                     height: 47.56,
-                    width: 700,
+                    width: 200,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFFA51C05),
+                        primary:const Color(0xFF3E4D52),
                         onPrimary: Colors.white,
                       ),
                       onPressed: () {
@@ -447,7 +447,7 @@ class _SigninState extends State<Signin> {
                           style:  GoogleFonts.dmSans(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red.shade700,
+                            color:const Color(0xFF3E4D52),
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

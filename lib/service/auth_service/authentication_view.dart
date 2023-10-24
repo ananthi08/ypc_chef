@@ -130,10 +130,10 @@ class SignupApi {
           print("djwdwewd");
           //  .....userId...........start
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          var userId = jsonDecode(response.body)['userId'];
-          await prefs.setString("userId", "$userId");
+          var chefId = jsonDecode(response.body)['chefId'];
+          await prefs.setString("chefId", "$chefId");
 
-          userId = prefs.getString("userId");
+          chefId = prefs.getString("chefId");
         // ................userId   end
           Navigator.push(
             context,

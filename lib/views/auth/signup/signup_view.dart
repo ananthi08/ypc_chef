@@ -123,7 +123,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 currentStep: currentStep,
                                 size: 8,
                                 padding: 0,
-                                selectedColor: Colors.red.shade700,
+                                selectedColor: const Color(0xFF3E4D52),
                                 unselectedColor: Colors.grey.shade300,
                               ),
                             ),
@@ -150,7 +150,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 style: GoogleFonts.dmSans(
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.red.shade700,
+                                  color:const Color(0xFF3E4D52),
                                 ),
                               ),
                             ],
@@ -452,7 +452,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 width: mediaQuery.size.width,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: const Color(0xFFA51C05),
+                                    primary:const Color(0xFF3E4D52),
                                     onPrimary: Colors.white,
                                   ),
                                   onPressed: () {

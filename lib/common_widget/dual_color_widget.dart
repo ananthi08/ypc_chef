@@ -77,7 +77,7 @@ class Headtextdualcolor extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color: Color.fromARGB(255, 171, 0, 0),
+              color:  Color(0xFF3E4D52),
             ),
           ),
           SizedBox(

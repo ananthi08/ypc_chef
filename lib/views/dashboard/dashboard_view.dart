@@ -51,6 +51,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
              style: TextStyle(color: Colors.black,
               fontSize: 34,
               fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic
               ),
               ),
                Padding(
@@ -60,6 +61,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
                               IconButton(
                                 icon: const Icon(
                                   Icons.account_circle_rounded,
+                                  size: 40,
                                 ),
                                 color: Colors.black87,
                                 onPressed: () async {
@@ -81,7 +83,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
      
          ],
          ),
-         const SizedBox(height: 50),
+         const SizedBox(height: 30),
 
    
           Container(
@@ -95,6 +97,8 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+             const SizedBox(width: 30),
+
               Column(
                 children: [
                   Image.asset("assets/mxplayer.jpeg"),const SizedBox(height: 1,),
@@ -106,7 +110,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
               ),
               
-             const SizedBox(width: 150),
+             const SizedBox(width: 50),
             
            
              const Expanded(
@@ -146,6 +150,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+             const SizedBox(width: 30),
               Column(
                 children: [
                   Image.asset("assets/receipes1.jpeg"),const SizedBox(height: 1,),
@@ -157,7 +162,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
               ),
               
-             const SizedBox(width: 150),
+             const SizedBox(width: 100),
             
            
              const Expanded(
@@ -195,8 +200,10 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
           height: 120,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+             const SizedBox(width: 30),
+
               Column(
                 children: [
                   Image.asset("assets/peoples.jpeg"),const SizedBox(height: 1,),
@@ -208,7 +215,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
               ),
               
-             const SizedBox(width: 130),
+             const SizedBox(width: 80),
             
            
              const Expanded(
@@ -253,6 +260,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+             const SizedBox(width: 30),
               Column(
                 children: [
                   Image.asset("assets/calendar.jpeg"),const SizedBox(height: 1,),
@@ -264,7 +272,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
               ),
               
-             const SizedBox(width: 130),
+             const SizedBox(width: 80),
             
            
              const Expanded(
@@ -321,6 +329,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+             const SizedBox(width: 30),
               Column(
                 children: [
                   Image.asset("assets/payment.jpg"),const SizedBox(height: 1,),
@@ -332,7 +341,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
               ),
               
-              const SizedBox(width: 140),
+              const SizedBox(width: 100),
             
            
               const Expanded(

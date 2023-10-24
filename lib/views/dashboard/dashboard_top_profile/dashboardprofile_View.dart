@@ -1,6 +1,9 @@
 // import 'package:chef_frontend/common_widget/token_manager.dart';
+import 'dart:math';
+
 import 'package:chef_frontend/common_widget/token_manager.dart';
 import 'package:chef_frontend/service/GET_services/getting_userDetails.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboard_editprofile_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
 // import 'package:chef_frontend/views/first_page_view.dart';
@@ -17,7 +20,7 @@ class _ProfilepageState extends State<Profilepage> {
   late String userId = '';
   late String userName = '';
   late String email = '';
-  final GETUserDetails _userDetails = GETUserDetails();
+  final GETchefDetails _chefDetails = GETchefDetails();
 
   @override
   void initState() {
@@ -27,14 +30,17 @@ class _ProfilepageState extends State<Profilepage> {
 
   Future<void> getUserId() async {
     try {
-      final userDetails = await _userDetails
-          .getUserDetails(context: context, selectedCuisineIds: []);
-      if (userDetails != null) {
+      final chefDetails = await _chefDetails
+          .getchefDetails(context: context, selectedCuisineIds: []);
+      if (chefDetails != null) {
         setState(() {
-          userId = userDetails['id'] ?? '';
-          userName = userDetails['userName'] ?? '';
-          email = userDetails['email'] ?? '';
+          userId = chefDetails['id'] ?? '';
+          userName = chefDetails['userName'] ?? '';
+          email = chefDetails['email'] ?? '';
         });
+      // print(chefDetails);
+          // log(email);
+
       }
     } catch (e) {
       print("Error fetching user details: $e");
@@ -71,7 +77,7 @@ class _ProfilepageState extends State<Profilepage> {
               "Profile",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(168, 28, 5, 1),
+                  color: Color(0xFF3E4D52),
                   fontSize: 20),
               textAlign: TextAlign.center,
             ),
@@ -104,14 +110,14 @@ class _ProfilepageState extends State<Profilepage> {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
-                primary: const Color(0xFFA51C05),
+                primary: const Color(0xFF3E4D52),
                 minimumSize: const Size(200, 40),
               ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Dashboardview(),
+                    builder: (context) => const Editprofile(),
                   ),
                 );
               },
@@ -130,7 +136,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Account",
                     style: TextStyle(
-                      color: Color.fromRGBO(168, 28, 5, 1),
+                      color: Color(0xFF3E4D52),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -252,7 +258,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Support & About",
                     style: TextStyle(
-                      color: Color.fromRGBO(168, 28, 5, 1),
+                      color:Color(0xFF3E4D52),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -286,7 +292,7 @@ class _ProfilepageState extends State<Profilepage> {
                           ),
                           GestureDetector(
                             child: const Text(
-                              "Sign up",
+                              "My Subscription",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -371,7 +377,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Actions",
                     style: TextStyle(
-                      color: Color.fromRGBO(168, 28, 5, 1),
+                      color:Color(0xFF3E4D52),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -406,6 +412,35 @@ class _ProfilepageState extends State<Profilepage> {
                           GestureDetector(
                             child: const Text(
                               "Report a Problem",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Container(
+                      height: 30,                    
+                      margin: const EdgeInsets.fromLTRB(20, 20, 0, 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.account_circle ,
+                            color: Colors.black87,
+                          ),
+                          const SizedBox(
+                            width: 35,
+                          ),
+                          GestureDetector(
+                            child: const Text(
+                              "Add account",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
