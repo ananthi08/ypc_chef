@@ -1,8 +1,11 @@
 import 'package:chef_frontend/common_widget/videoplayer.dart';
 import 'package:chef_frontend/service/get_api/GETproductcategory.dart';
+import 'package:chef_frontend/service/imageupload/formfiled.dart';
+import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class UploadVideo extends StatefulWidget {
   static String route = '/chef/upload';
@@ -21,27 +24,89 @@ class Ingredient {
 }
 
 class _UploadVideoState extends State<UploadVideo> {
+  //for product serve category
   String selectedDropdownValue = 'Select';
-  List<String> dropdownItems = ['Select'];
+  List<String> dropdownItems = [];
 
-  final TextEditingController _textEditingController = TextEditingController();
-  final TextEditingController _ingredientsController = TextEditingController();
-  final TextEditingController _quantityEditingController =
-      TextEditingController();
+// for international category
+  String selectedIValue = '';
+  List<String> dropdownIItems = [];
+  // for national category
+  String selectedNValue = 'Select';
+  List<String> dropdownNItems = ['Select'];
 
-  final List<Ingredient> ingredients = [];
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void addIngredientRow() {
-    setState(() {
-      ingredients.add(Ingredient('', ''));
-    });
+// final work
+  final TextEditingController _dietTypeController = TextEditingController();
+  final TextEditingController _productnameController = TextEditingController();
+  final TextEditingController _mainCategoryController = TextEditingController();
+  final TextEditingController _sideCategoryController = TextEditingController();
+  final TextEditingController internationalController = TextEditingController();
+  final TextEditingController nationalController = TextEditingController();
+  final TextEditingController productserveController = TextEditingController();
+  String? selectedCategory;
+  
+  
+  TextEditingController nameController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+
+  FormfieldApi formdatas = FormfieldApi();
+  final List<NewIngredient> ingredients = [];
+
+void addIngredientRow() {
+  setState(() {
+    // Create controllers for the new ingredient
+    TextEditingController nameController = TextEditingController();
+    TextEditingController quantityController = TextEditingController();
+
+    // Add the controllers to the lists
+    nameControllers.add(nameController);
+    quantityControllers.add(quantityController);
+
+    ingredients.add(NewIngredient('', ''));
+  });
+}
+
+
+
+
+List<TextEditingController> nameControllers = [];
+List<TextEditingController> quantityControllers = [];
+
+
+  void press() async {
+    String category = selectedCategory ?? "";
+
+    List<Map<String, dynamic>> ingredientsJson =
+        ingredients.map((ingredient) => ingredient.toJson()).toList();
+    print(ingredientsJson);
+
+    if (_sideCategoryController.text.isNotEmpty) {
+      category = _sideCategoryController.text;
+    }
+
+    await formdatas.dataload(
+      productname: _productnameController.text,
+      diettype: _dietTypeController.text,
+      category: category,
+      international: internationalController.text,
+      national: nationalController.text,
+      productserve: productserveController.text,
+      ingredients: ingredientsJson,
+      context: context,
+    );
+    print('ingredientsszzzzzzzzzzzzzzz$ingredientsJson');
+
+    print('Selected category: $selectedCategory');
   }
 
   bool isText1Selected = true;
 
   String MainCategory = 'Main Dish';
   String SideCategory = 'Side Dish';
-  String selectedCategory = 'Veg';
+  // String selectedCategory = 'Veg';
+  String selectedDietType = 'Veg';
 
   final ApiService _apiService = ApiService();
 
@@ -61,22 +126,94 @@ class _UploadVideoState extends State<UploadVideo> {
   @override
   void initState() {
     super.initState();
-    fetchDataFromApi();
+    fetchserveCategoryFromApi();
+    fetchInternationaldata();
+     nameControllers.add(TextEditingController());
+  quantityControllers.add(TextEditingController());
+  
   }
 
-  Future<void> fetchDataFromApi() async {
+// fetchservecategory
+
+  Future<void> fetchserveCategoryFromApi() async {
     try {
-      final data = await _apiService.fetchData();
-      List<String> items = [];
+      final data = await _apiService.fetchservecategory();
+      List<String> serveCategories = [];
       for (var item in data) {
-        items.add(item['name']);
+        if (item.containsKey("serveCategory")) {
+          serveCategories.add(item["serveCategory"]);
+        }
       }
+
       setState(() {
-        dropdownItems = items;
-        selectedDropdownValue = items.isNotEmpty ? items[0] : 'Select';
+        dropdownItems = serveCategories;
+        selectedDropdownValue =
+            serveCategories.isNotEmpty ? serveCategories[0] : 'Select';
       });
     } catch (e) {
-      // Handle error
+      print('Error fetching : $e');
+    }
+  }
+
+  // fetch international cuisine
+  // for provider to store data
+
+  List<Map<String, dynamic>> internationalList = [];
+
+  Future<void> fetchInternationaldata() async {
+    try {
+      final data = await _apiService.fetchInternationalCuisine();
+      List<Map<String, dynamic>> international = [];
+
+      for (var item in data!) {
+        if (item.containsKey("cuisine")) {
+          international.add(item);
+        }
+      }
+
+      setState(() {
+        internationalList = international;
+        dropdownIItems =
+            international.map((item) => item["cuisine"] as String).toList();
+        selectedIValue =
+            dropdownIItems.isNotEmpty ? dropdownIItems[0] : 'Select';
+      });
+    } catch (e) {
+      print('Error fetching : $e');
+    }
+  }
+
+// end of international cuisine
+
+// start of national cuisine
+
+  List<int> _selectedCuisineIds = [];
+
+  Future<void> fetchnationaldata() async {
+    final selectedDataModel =
+        Provider.of<SelectedDataModel>(context, listen: false);
+    _selectedCuisineIds = selectedDataModel.selectedCuisineIds;
+
+    try {
+      final data = await _apiService.fetchnationalcuisine(_selectedCuisineIds);
+      List<Map<String, dynamic>> international = [];
+      for (var item in data!) {
+        if (item.containsKey("cuisine")) {
+          international.add(item);
+        }
+      }
+
+      setState(() {
+        internationalList = international;
+        // print('interrrr $internationalList');
+
+        dropdownNItems =
+            international.map((item) => item["cuisine"] as String).toList();
+        selectedNValue =
+            dropdownNItems.isNotEmpty ? dropdownNItems[0] : 'Select';
+      });
+    } catch (e) {
+      print('Error fetching : $e');
     }
   }
 
@@ -96,510 +233,598 @@ class _UploadVideoState extends State<UploadVideo> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isText1Selected = true;
-                        });
-                      },
-                      child: Container(
-                        width: screenWidth * 0.4,
-                        color: isText1Selected
-                            ? const Color.fromARGB(255, 35, 140, 1)
-                            : Colors.transparent,
-                        child: Center(
-                          child: Text(
-                            'Veg',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color:
-                                  isText1Selected ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isText1Selected = false;
-                        });
-                      },
-                      child: Container(
-                        width: screenWidth * 0.4,
-                        color: !isText1Selected
-                            ? const Color.fromARGB(255, 183, 0, 0)
-                            : Colors.transparent,
-                        child: Center(
-                          child: Text(
-                            'Non-Veg',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: !isText1Selected
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Product Name',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              const SizedBox(height: 5),
-              TextField(
-                controller: _textEditingController,
-                decoration: InputDecoration(
-                  hintText: "Enter Product Name",
-                  hintStyle: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey.shade400,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                ),
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                'Product Category',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              Container(
-                height: 70, // Adjust the height as needed
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 217, 217, 217),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              MainCategory,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Radio<String>(
-                              value: MainCategory,
-                              groupValue: selectedCategory,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedCategory = value!;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 13,
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 217, 217, 217),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              SideCategory,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Radio<String>(
-                              value: SideCategory,
-                              groupValue: selectedCategory,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedCategory = value!;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                'Product Serve Category',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Container(
-                width: screenWidth * 0.7,
-                height: 65,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey, // Customize the border color
-                    width: 1.0, // Customize the border width
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
-                    border: InputBorder.none,
-                    suffixIcon: null,
-                  ),
-                  value: selectedDropdownValue,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedDropdownValue = newValue!;
-                    });
-                  },
-                  items: dropdownItems
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: screenWidth,
-                height: 80,
-                child: DottedBorder(
-                  color: Colors.grey,
-                  strokeWidth: 2,
-                  dashPattern: const [8, 8],
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        _pickVideoFromGallery(context);
-                      },
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.cloud_upload),
-                          SizedBox(height: 8),
-                          Text('Upload Video'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 6),
-              Column(
-                children: [
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: Align(
-                  //         alignment: Alignment.centerLeft,
-                  //         child: Text(
-                  //           'Ingredients',
-                  //           style: TextStyle(
-                  //             fontSize: 15,
-                  //             color: Color.fromARGB(255, 0, 0, 0),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Expanded(
-                  //       child: Align(
-                  //         alignment: Alignment.centerRight,
-                  //         child: GestureDetector(
-                  //           onTap: () {
-                  //             addIngredientRow();
-                  //           },
-                  //           child: Text(
-                  //             'Add +',
-                  //             style: TextStyle(
-                  //               fontSize: 15,
-                  //               color: Color.fromARGB(255, 157, 10, 0),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  const SizedBox(height: 6),
-
-                  Column(
+        child: Form(
+          key: _formKey,
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Ingredients',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 0, 0, 0),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedDietType =
+                                'Veg'; // Update the selected value
+                            _dietTypeController.text =
+                                selectedDietType; // Update the controller's value
+                            print("Veg is selected");
+                          });
+                        },
+                        child: Container(
+                          width: screenWidth * 0.4,
+                          color: selectedDietType == 'Veg'
+                              ? const Color.fromARGB(255, 35, 140, 1)
+                              : Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'Veg',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: selectedDietType == 'Veg'
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedDietType =
+                                'Non-Veg'; // Update the selected value
+                            _dietTypeController.text =
+                                selectedDietType; // Update the controller's value
+                            print("Non-Veg is selected");
+                          });
+                        },
+                        child: Container(
+                          width: screenWidth * 0.4,
+                          color: selectedDietType == 'Non-Veg'
+                              ? const Color.fromARGB(255, 183, 0, 0)
+                              : Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              'Non-Veg',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: selectedDietType == 'Non-Veg'
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Product Name',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                TextFormField(
+                  controller: _productnameController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Product Name",
+                    hintStyle: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey.shade400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                const Text(
+                  'Product Category',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+
+                Container(
+                  height: 70,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 217, 217, 217),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                MainCategory,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
                                 ),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                onTap: () {
-                                  addIngredientRow();
+                              Radio<String>(
+                                value: 'Main',
+                                groupValue: selectedCategory,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedCategory = value;
+                                    print(
+                                        "Selected product category Value: $selectedCategory");
+                                  });
                                 },
-                                child: const Text(
-                                  'Add +',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 13,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 217, 217, 217),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                SideCategory,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Radio<String>(
+                                value: 'Side',
+                                groupValue: selectedCategory,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedCategory = value;
+                                    print(
+                                        "Selected product category Value: $selectedCategory");
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+                const Text(
+                  'InterNational Cuisine',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                const SizedBox(height: 5),
+
+// start of international category
+
+                Container(
+                  width: screenWidth * 0.7,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+                      border: InputBorder.none,
+                      suffixIcon: null,
+                    ),
+                    value: selectedIValue,
+                    hint: const Text('Select international cuisine'),
+                    onChanged: (String? newValue) async {
+                      try {
+                        await fetchInternationaldata();
+                        final selectedData = internationalList.firstWhere(
+                          (item) => item["cuisine"] == newValue,
+                        );
+
+                        if (selectedData.containsKey("id") &&
+                            selectedData["id"] != null) {
+                          print(
+                              "Selected international cuisine: $newValue, id: ${selectedData["id"]}");
+                          final selectedDataModel =
+                              // ignore: use_build_context_synchronously
+                              Provider.of<SelectedDataModel>(context,
+                                  listen: false);
+                          selectedDataModel
+                              .updateSelectedData(selectedData["id"]);
+                          fetchnationaldata();
+                        } else {
+                          print("Selected data is missing an ID.");
+                        }
+                      } catch (e) {
+                        print("No matching data found for: $newValue");
+                      }
+                      // Update the controller with the selected value
+                      internationalController.text = newValue ?? 'Select';
+                    },
+                    items: dropdownIItems
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+// end of international category
+                const SizedBox(height: 5),
+                // start of national category
+                const Text(
+                  'National Cuisine',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                const SizedBox(height: 5),
+
+                Container(
+                  width: screenWidth * 0.7,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+                      border: InputBorder.none,
+                      suffixIcon: null,
+                    ),
+                    value: selectedNValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedNValue = newValue!;
+
+                        print("Selected  national cuisine: $selectedNValue");
+                      });
+                      nationalController.text = newValue ?? 'Select';
+                    },
+                    items: dropdownNItems
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // end of national category
+                const SizedBox(height: 5),
+
+                const Text(
+                  'Product Serve Category',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  width: screenWidth * 0.7,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+                      border: InputBorder.none,
+                      suffixIcon: null,
+                    ),
+                    value: selectedDropdownValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDropdownValue = newValue!;
+                        print(
+                            "Selected  serve categoryValue: $selectedDropdownValue");
+                      });
+                      // Update the controller with the selected value
+                      productserveController.text = newValue ?? 'Select';
+                    },
+                    items: dropdownItems
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // product serve category end
+
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: screenWidth,
+                  height: 80,
+                  child: DottedBorder(
+                    color: Colors.grey,
+                    strokeWidth: 2,
+                    dashPattern: const [8, 8],
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(10),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          _pickVideoFromGallery(context);
+                        },
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.cloud_upload),
+                            SizedBox(height: 8),
+                            Text('Upload Video'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const SizedBox(height: 6),
+
+                Column(
+                  children: [
+                    const SizedBox(height: 6),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Ingredients',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: Color.fromARGB(255, 157, 10, 0),
+                                    color: Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Column(
-                        children: [
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    addIngredientRow();
+                                  },
+                                  child: const Text(
+                                    'Add +',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color.fromARGB(255, 157, 10, 0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Column(
+                          children: [
+                            Container(
+                              height: 70,
+                              width: 500,
+                              color: Colors.grey.shade400,
+                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 6,
+                                      child: Container(
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255),
+                                        child: Center(
+                                          child: TextField(
+                                            // controller: TextEditingController(
+                                            //     text: ingredients.isNotEmpty
+                                            //         ? ingredients[0].name
+                                            //         : ''),
+                                            controller: nameControllers[0], 
+                                            decoration: const InputDecoration(
+                                              hintText: 'Enter Ingredient name',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: TextField(
+                                           controller: quantityControllers[0],
+                                          // controller: TextEditingController(
+                                          //     text: ingredients.isNotEmpty
+                                          //         ? ingredients[0].quantity
+                                          //         : ''),
+                                          decoration: const InputDecoration(
+                                            hintText: 'Qnty',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        for (var i = 1; i < ingredients.length; i++)
                           Container(
                             height: 70,
                             width: 500,
                             color: Colors.grey.shade400,
-                            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 6,
-                                    child: Container(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      child: Center(
-                                        child: TextField(
-                                          onChanged: (value) {
-                                            ingredients[0].name = value;
-                                          },
-                                          decoration: const InputDecoration(
-                                            hintText: 'Enter Ingredient name',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      color: Colors.white,
-                                      child: TextField(
-                                        onChanged: (value) {
-                                          ingredients[0].quantity = value;
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'Qnty',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      // Additional rows for ingredients and quantities go here
-                      ...ingredients
-                          .skip(1)
-                          .map(
-                            (ingredient) => Container(
-                              height: 70,
-                              width: 500,
-                              color: Colors.grey.shade400,
-                              child: Container(
-                                color: Colors.grey,
-                                margin: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 6,
-                                        child: Container(
-                                          color: Colors.white,
-                                          child: Center(
-                                            child: TextField(
-                                              onChanged: (value) {
-                                                ingredient.name = value;
-                                              },
-                                              decoration: const InputDecoration(
-                                                hintText:
-                                                    'Enter Ingredient name',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 7,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          color: Colors.white,
+                            child: Container(
+                              color: Colors.grey,
+                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 6,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: Center(
                                           child: TextField(
-                                            onChanged: (value) {
-                                              ingredient.quantity = value;
-                                            },
+                                            // controller: TextEditingController(
+                                            //     text: ingredients[i].name),
+                                             controller: nameControllers[i],
                                             decoration: const InputDecoration(
-                                              hintText: 'Qnty',
+                                              hintText: 'Enter Ingredient name',
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    const SizedBox(
+                                      width: 7,
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: TextField(
+                                          // controller: TextEditingController(
+                                          //     text: ingredients[i].quantity),
+
+                                         
+                                          controller: quantityControllers[i],
+                                          decoration: const InputDecoration(
+                                            hintText: 'Qnty',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          )
-                          .toList(),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Steps',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                  fontWeight: FontWeight.normal),
-                            ),
                           ),
-                        ],
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Column(
+                      children: [
+                        Row(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Steps',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SizedBox(
+                      width: 340, // <-- TextField width
+                      height: 110, // <-- TextField height
+                      child: TextField(
+                        maxLines: null,
+                        expands: true,
+                        keyboardType: TextInputType.multiline,
+                        decoration: InputDecoration(
+                          filled: true,
+                        ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  // Column(
-                  //   children: [
-                  //     Container(
-                  //       height: 100,
-                  //       width: 340,
-                  //       color: Colors.grey,
-                  //       child: TextField(
-                  //         decoration: InputDecoration(
-                  //           border: OutlineInputBorder(
-                  //               borderRadius: BorderRadius.circular(5)),
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
-                  SizedBox(
-                    width: 340, // <-- TextField width
-                    height: 110, // <-- TextField height
-                    child: TextField(
-                      maxLines: null,
-                      expands: true,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        filled: true,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: const Color(0xFFA51C05),
+                        minimumSize: const Size(175, 50),
+                      ),
+                      onPressed: () {
+                        // if (_formKey.currentState!.validate()) {
+                        press();
+                        //     }
+                      },
+                      child: const Text(
+                        'Upload',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  ),
-
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: <Widget>[
-                  //     const Padding(
-                  //       padding:
-                  //           EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  //       child: TextField(
-                  //         decoration: InputDecoration(
-                  //           border: OutlineInputBorder(),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // )
-                  const SizedBox(
-                    height: 10,
-                  ),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      primary: const Color(0xFFA51C05),
-                      minimumSize: const Size(175, 50),
-                    ),
-                    onPressed: () {
-                      // if (_formKey.currentState!.validate()) {
-                      //       verifyEmail();
-                      //     }
-                    },
-                    child: const Text(
-                      'Upload',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+class NewIngredient {
+  String name;
+  String quantity;
+
+  NewIngredient(this.name, this.quantity);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'quantity': quantity,
+    };
   }
 }
