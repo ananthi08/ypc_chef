@@ -7,6 +7,8 @@ class Videodata {
   String international;
   String national;
   String productserve;
+  String steps;
+
   List<Map<String, dynamic>> ingredients;
 
   Videodata({
@@ -17,10 +19,12 @@ class Videodata {
     required this.national,
     required this.productserve,
     required this.ingredients,
+    required this.steps,
+
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+  Map<String, dynamic> toJson() {
+    return {
       'productname': productname,
       'diettype': diettype,
       'category': category,
@@ -28,6 +32,8 @@ class Videodata {
       'national': national,
       'productserve': productserve,
       'ingredients': ingredients,
+      'steps': steps,
+
     };
   }
 
@@ -38,12 +44,10 @@ class Videodata {
       category: map['category'] as String,
       international: map['international'] as String,
       national: map['national'] as String,
-      ingredients: List<Map<String, dynamic>>.from(map['ingredients']), // Corrected this line
+      steps: map['steps'] as String,
+
+      ingredients: List<Map<String, dynamic>>.from(map['ingredients']),
       productserve: map['productserve'] as String,
     );
   }
-
-  toJson() {}
 }
-
-

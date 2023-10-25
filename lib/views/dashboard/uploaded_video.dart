@@ -24,6 +24,7 @@ class Ingredient {
 }
 
 class _UploadVideoState extends State<UploadVideo> {
+  
   //for product serve category
   String selectedDropdownValue = 'Select';
   List<String> dropdownItems = [];
@@ -46,59 +47,76 @@ class _UploadVideoState extends State<UploadVideo> {
   final TextEditingController nationalController = TextEditingController();
   final TextEditingController productserveController = TextEditingController();
   String? selectedCategory;
-  
-  
+TextEditingController descriptionController = TextEditingController();
+int maxWordLimit = 100;
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
-
   FormfieldApi formdatas = FormfieldApi();
   final List<NewIngredient> ingredients = [];
 
-void addIngredientRow() {
-  setState(() {
-    // Create controllers for the new ingredient
-    TextEditingController nameController = TextEditingController();
-    TextEditingController quantityController = TextEditingController();
+  void addIngredientRow() {
+    setState(() {
+      TextEditingController nameController = TextEditingController();
+      TextEditingController quantityController = TextEditingController();
 
-    // Add the controllers to the lists
-    nameControllers.add(nameController);
-    quantityControllers.add(quantityController);
+      nameControllers.add(nameController);
+      quantityControllers.add(quantityController);
 
-    ingredients.add(NewIngredient('', ''));
-  });
-}
+      ingredients.add(NewIngredient('', ''));
 
+      if (ingredients.isEmpty) {
+        ingredients[0].name = nameController.text;
+        ingredients[0].quantity = quantityController.text;
+      }
+    });
+  }
 
-
-
-List<TextEditingController> nameControllers = [];
-List<TextEditingController> quantityControllers = [];
-
+  List<TextEditingController> nameControllers = [];
+  List<TextEditingController> quantityControllers = [];
 
   void press() async {
     String category = selectedCategory ?? "";
 
-    List<Map<String, dynamic>> ingredientsJson =
-        ingredients.map((ingredient) => ingredient.toJson()).toList();
-    print(ingredientsJson);
+    List<Map<String, dynamic>> ingredientsJson = [];
+
+    if (ingredients.isEmpty) {
+      ingredientsJson.add({
+        'name': nameControllers[0].text,
+        'quantity': quantityControllers[0].text,
+      });
+    } else {
+      for (int i = 0; i < ingredients.length; i++) {
+        ingredientsJson.add({
+          'name': nameControllers[i].text,
+          'quantity': quantityControllers[i].text,
+        });
+      }
+    }
 
     if (_sideCategoryController.text.isNotEmpty) {
       category = _sideCategoryController.text;
     }
 
-    await formdatas.dataload(
-      productname: _productnameController.text,
-      diettype: _dietTypeController.text,
-      category: category,
-      international: internationalController.text,
-      national: nationalController.text,
-      productserve: productserveController.text,
-      ingredients: ingredientsJson,
-      context: context,
-    );
-    print('ingredientsszzzzzzzzzzzzzzz$ingredientsJson');
+    try {
+      await formdatas.dataload(
+        productname: _productnameController.text,
+        diettype: _dietTypeController.text,
+        category: category,
+        international: internationalController.text,
+        national: nationalController.text,
+        productserve: productserveController.text,
+        steps: descriptionController.text,
 
-    print('Selected category: $selectedCategory');
+        ingredients: ingredientsJson,
+        context: context,
+      );
+
+      print('Form data submitted successfully');
+      print('Selected category: $category');
+      print('Ingredients: $ingredientsJson');
+    } catch (e) {
+      print('Error submitting form data: $e');
+    }
   }
 
   bool isText1Selected = true;
@@ -128,9 +146,8 @@ List<TextEditingController> quantityControllers = [];
     super.initState();
     fetchserveCategoryFromApi();
     fetchInternationaldata();
-     nameControllers.add(TextEditingController());
-  quantityControllers.add(TextEditingController());
-  
+    nameControllers.add(TextEditingController());
+    quantityControllers.add(TextEditingController());
   }
 
 // fetchservecategory
@@ -277,10 +294,9 @@ List<TextEditingController> quantityControllers = [];
                         onTap: () {
                           setState(() {
                             selectedDietType =
-                                'Non-Veg'; // Update the selected value
+                                'Non-Veg'; 
                             _dietTypeController.text =
-                                selectedDietType; // Update the controller's value
-                            print("Non-Veg is selected");
+                                selectedDietType;                          print("Non-Veg is selected");
                           });
                         },
                         child: Container(
@@ -558,7 +574,7 @@ List<TextEditingController> quantityControllers = [];
                         print(
                             "Selected  serve categoryValue: $selectedDropdownValue");
                       });
-                      // Update the controller with the selected value
+
                       productserveController.text = newValue ?? 'Select';
                     },
                     items: dropdownItems
@@ -605,152 +621,166 @@ List<TextEditingController> quantityControllers = [];
                 Column(
                   children: [
                     const SizedBox(height: 6),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Ingredients',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    addIngredientRow();
-                                  },
-                                  child: const Text(
-                                    'Add +',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 157, 10, 0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                   Column(
+  children: [
+    Row(
+      children: [
+        const Expanded(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Ingredients',
+              style: TextStyle(
+                fontSize: 15,
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                addIngredientRow();
+              },
+              child: const Text(
+                'Add +',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color.fromARGB(255, 157, 10, 0),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(height: 6),
+    Column(
+      children: [
+        Container(
+          height: 70,
+          width: 500,
+          color: Colors.grey.shade400,
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Container(
+                    color: const Color.fromARGB(
+                        255, 255, 255, 255),
+                    child: Center(
+                      child: TextField(
+                        controller: nameControllers[0],
+                        onChanged: (value) {
+                          if (ingredients.isNotEmpty) {
+                            ingredients[0].name = value;
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          hintText: 'Enter Ingredient name',
                         ),
-                        const SizedBox(height: 6),
-                        Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 500,
-                              color: Colors.grey.shade400,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 6,
-                                      child: Container(
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        child: Center(
-                                          child: TextField(
-                                            // controller: TextEditingController(
-                                            //     text: ingredients.isNotEmpty
-                                            //         ? ingredients[0].name
-                                            //         : ''),
-                                            controller: nameControllers[0], 
-                                            decoration: const InputDecoration(
-                                              hintText: 'Enter Ingredient name',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: TextField(
-                                           controller: quantityControllers[0],
-                                          // controller: TextEditingController(
-                                          //     text: ingredients.isNotEmpty
-                                          //         ? ingredients[0].quantity
-                                          //         : ''),
-                                          decoration: const InputDecoration(
-                                            hintText: 'Qnty',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        for (var i = 1; i < ingredients.length; i++)
-                          Container(
-                            height: 70,
-                            width: 500,
-                            color: Colors.grey.shade400,
-                            child: Container(
-                              color: Colors.grey,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 6,
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: Center(
-                                          child: TextField(
-                                            // controller: TextEditingController(
-                                            //     text: ingredients[i].name),
-                                             controller: nameControllers[i],
-                                            decoration: const InputDecoration(
-                                              hintText: 'Enter Ingredient name',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: TextField(
-                                          // controller: TextEditingController(
-                                          //     text: ingredients[i].quantity),
-
-                                         
-                                          controller: quantityControllers[i],
-                                          decoration: const InputDecoration(
-                                            hintText: 'Qnty',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
+                      ),
                     ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    color: Colors.white,
+                    child: TextField(
+                      controller: quantityControllers[0],
+                      onChanged: (value) {
+                        if (ingredients.isNotEmpty) {
+                          ingredients[0].quantity = value;
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Qnty',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+    for (var i = 1; i < ingredients.length; i++)
+      Dismissible(
+        key: Key('ingredient_$i'),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          setState(() {
+            ingredients.removeAt(i);
+            nameControllers.removeAt(i);
+            quantityControllers.removeAt(i);
+          });
+        },
+        background: Container(
+          color: Colors.red,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 16),
+          child: Icon(Icons.delete, color: Colors.white),
+        ),
+        child: Container(
+          height: 70,
+          width: 500,
+          color: Colors.grey.shade400,
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Container(
+                    color: Colors.white,
+                    child: Center(
+                      child: TextField(
+                        controller: nameControllers[i],
+                        decoration: const InputDecoration(
+                          hintText: 'Enter Ingredient name',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 7,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    color: Colors.white,
+                    child: TextField(
+                      controller: quantityControllers[i],
+                      decoration: const InputDecoration(
+                        hintText: 'Qnty',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+  ],
+),
+
                     const SizedBox(
                       height: 10,
                     ),
+
+
+
                     const Column(
                       children: [
                         Row(
@@ -772,15 +802,18 @@ List<TextEditingController> quantityControllers = [];
                     const SizedBox(
                       height: 10,
                     ),
-                    const SizedBox(
+                     SizedBox(
                       width: 340, // <-- TextField width
                       height: 110, // <-- TextField height
-                      child: TextField(
+                      child:
+                       TextField(
+                        controller: descriptionController,
                         maxLines: null,
                         expands: true,
                         keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
+                        decoration:const InputDecoration(
                           filled: true,
+                           hintText: 'Enter steps to be followed',
                         ),
                       ),
                     ),
