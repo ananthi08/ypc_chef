@@ -1,5 +1,6 @@
 
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
+import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
 import 'package:flutter/material.dart';
 // import 'package:svg_flutter/svg.dart';
@@ -86,220 +87,198 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
          const SizedBox(height: 30),
 
    
-          Container(
-        child: Center(
-           child: Column(
+          Center(
+             child: Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             const SizedBox(width: 30),
+          Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            height: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              //  const SizedBox(width: 10),
 
-              Column(
-                children: [
-                  Image.asset("assets/mxplayer.jpeg"),const SizedBox(height: 1,),
-                 const Text('My Videos',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                 const  Text('23 Videos'),
+                Column(
+                  children: [
+                    Image.asset("assets/mxplayer.jpeg"),const SizedBox(height: 1,),
+                   const Text('My Videos',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
+                   const  Text('23 Videos'),
 
 
-                ],
+                  ],
 
-              ),
+                ),
               
-             const SizedBox(width: 50),
-            
-           
-             const Expanded(
-                child:  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        Text('See More',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                        ),
-                      ],
-                      ),
-                )
-              ),
-            
-            ],
+                              GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Forgot()),
+                                );
+                              },
+                              child: const Text(
+                                "See More",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,                           
+                                ),
+                              ),
+                            )
+
+
+
+              ],
+            ),
           ),
-        ),
       ],
     ),
   ),
-),
          const SizedBox(height: 30),
-          Container(
-        child: Center(
-           child: Column(
+          Center(
+             child: Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             const SizedBox(width: 30),
-              Column(
-                children: [
-                  Image.asset("assets/receipes1.jpeg"),const SizedBox(height: 1,),
-                const  Text('My Recipes',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                  const Text('34 Recipes'),
+          Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            height: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              //  const SizedBox(width: 30),
+                Column(
+                  children: [
+                    Image.asset("assets/receipes1.jpeg"),const SizedBox(height: 1,),
+                  const  Text('My Recipes',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
+                    const Text('34 Recipes'),
 
 
-                ],
+                  ],
 
-              ),
+                ),
+                
+              GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Forgot()),
+                                );
+                              },
+                              child: const Text(
+                                "See More",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,                           
+                                ),
+                              ),
+                            )
               
-             const SizedBox(width: 100),
-            
-           
-             const Expanded(
-                child:  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                        Text('See More',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                        ),
-                      ],
-                      ),
-                )
-              ),
-            
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     ),
   ),
-),
          const SizedBox(height: 30),
-          Container(
-        child: Center(
-           child: Column(
+          Center(
+             child: Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          height: 120,
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             const SizedBox(width: 30),
+          Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            height: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              //  const SizedBox(width: 30),
 
-              Column(
-                children: [
-                  Image.asset("assets/peoples.jpeg"),const SizedBox(height: 1,),
-                 const Text('My customers',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                   const Text('23 peoples'),
+                Column(
+                  children: [
+                    Image.asset("assets/peoples.jpeg"),const SizedBox(height: 1,),
+                   const Text('My customers',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
+                     const Text('23 peoples'),
 
 
-                ],
+                  ],
 
-              ),
+                ),
+                
+               GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Forgot()),
+                                );
+                              },
+                              child: const Text(
+                                "See More",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,                           
+                                ),
+                              ),
+                            )
               
-             const SizedBox(width: 80),
-            
-           
-             const Expanded(
-                child:  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                        Text('See More',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                        ),
-                      ],
-                      ),
-                )
-              ),
-            
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     ),
   ),
-),
          const SizedBox(height: 30),
          
 
 
 
 
-          Container(
-        child: Center(
-           child: Column(
+          Center(
+             child: Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             const SizedBox(width: 30),
-              Column(
-                children: [
-                  Image.asset("assets/calendar.jpeg"),const SizedBox(height: 1,),
-                const  Text('View Schedule',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                  const Text('23 Payment'),
+          Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            height: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              //  const SizedBox(width: 30),
+                Column(
+                  children: [
+                    Image.asset("assets/calendar.jpeg"),const SizedBox(height: 1,),
+                  const  Text('View Schedule',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
+                    const Text('23 Payment'),
 
 
-                ],
+                  ],
 
-              ),
+                ),
+                
+                GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Forgot()),
+                                );
+                              },
+                              child: const Text(
+                                "See More",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,                           
+                                ),
+                              ),
+                            )
               
-             const SizedBox(width: 80),
-            
-           
-             const Expanded(
-                child:  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        Text('See More',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                        ),
-                      ],
-                      ),
-                )
-              ),
-            
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     ),
   ),
-),
          const SizedBox(height: 30),
          
 
@@ -318,57 +297,51 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
 
 
    
-          Container(
-        child: Center(
-           child: Column(
+          Center(
+             child: Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-             const SizedBox(width: 30),
-              Column(
-                children: [
-                  Image.asset("assets/payment.jpg"),const SizedBox(height: 1,),
-                  const Text('Payment',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
-                   const Text('23 Payment'),
+          Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            height: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              //  const SizedBox(width: 30),
+                Column(
+                  children: [
+                    Image.asset("assets/payment.jpg"),const SizedBox(height: 1,),
+                    const Text('Payment',style:TextStyle(fontWeight: FontWeight.bold)),const SizedBox(height: 8,),
+                     const Text('23 Payment'),
 
 
-                ],
+                  ],
 
-              ),
+                ),
+                
+                 GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Forgot()),
+                                );
+                              },
+                              child: const Text(
+                                "See More",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,                           
+                                ),
+                              ),
+                            )
               
-              const SizedBox(width: 100),
-            
-           
-              const Expanded(
-                child:  Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                        Text('See More',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                        ),
-                      ],
-                      ),
-                )
-              ),
-            
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     ),
   ),
-),
 
          
           ],
@@ -376,7 +349,7 @@ backgroundColor: const Color.fromARGB(248, 246, 246, 246),
        ),
      ),
    ),
-       bottomNavigationBar: const Bottomnavbar(backgroundColor:Colors.red),
+       bottomNavigationBar: const Bottomnavbar(),
 
     );
    
