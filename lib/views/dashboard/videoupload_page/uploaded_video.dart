@@ -1,6 +1,7 @@
 import 'package:chef_frontend/common_widget/videoplayer.dart';
 import 'package:chef_frontend/service/get_api/GETproductcategory.dart';
 import 'package:chef_frontend/service/imageupload/formfiled.dart';
+import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -128,19 +129,38 @@ int maxWordLimit = 100;
 
   final ApiService _apiService = ApiService();
 
-  Future<void> _pickVideoFromGallery(BuildContext context) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickVideo(source: ImageSource.gallery);
+  // Future<void> _pickVideoFromGallery(BuildContext context) async {
+  //   final picker = ImagePicker();
+  //   final pickedFile = await picker.pickVideo(source: ImageSource.gallery);
+
+  //   if (pickedFile != null) {
+  //     Navigator.of(context).push(
+  //       MaterialPageRoute(
+  //         builder: (context) => VideoPlayerScreen(videoPath: pickedFile.path),
+  //       ),
+  //     );
+  //   }
+  // }
+
+
+ final YourApiService _apiServicee = YourApiService();
+  final picker = ImagePicker();
+  XFile? pickedFile;
+
+  Future<void> _pickVideoFromGallery() async {
+    pickedFile = await picker.pickVideo(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => VideoPlayerScreen(videoPath: pickedFile.path),
+      String uploadResult = await _apiServicee.uploadVideo(pickedFile!.path);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(uploadResult),
         ),
       );
     }
   }
 
+  
   @override
   void initState() {
     super.initState();
@@ -601,7 +621,7 @@ int maxWordLimit = 100;
                     child: Center(
                       child: GestureDetector(
                         onTap: () {
-                          _pickVideoFromGallery(context);
+                          _pickVideoFromGallery();
                         },
                         child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,

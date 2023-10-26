@@ -1,3 +1,4 @@
+import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:dio/dio.dart';
 
 class YourApiService {
@@ -11,7 +12,7 @@ class YourApiService {
       });
 
       final response = await _dio.post(
-        'http://192.168.0.114:4000/ypc-authentication-micro-service/upload',
+        'http://192.168.1.12:4000/ypc-authentication-micro-service/uploadVideolocal',
         data: formData, 
       );
 
@@ -24,4 +25,43 @@ class YourApiService {
       return 'Error uploading image: $error';
     }
   }
+
+
+// 
+
+
+Future<String> uploadVideo(String videoPath) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'video': await MultipartFile.fromFile(videoPath),
+      });
+print('pathaaaa$videoPath');
+
+ Options options = Options(headers: Kheader);
+
+
+      final response = await _dio.post(
+        'http://192.168.1.12:4000/ypc-authentication-micro-service/uploadVideolocal',
+        options: options,
+        
+        data: formData, 
+      );
+      print('forrrrrm dataaaaaa$formData');
+
+      if (response.statusCode == 200) {
+        return 'Video uploaded successfully';
+      } else {
+        return 'Video upload failed. Status code: ${response.statusCode}';
+      }
+    } catch (error) {
+      return 'Error uploading video: $error';
+    }
+  }
+
+
+
+
+
+
+  
 }

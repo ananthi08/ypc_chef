@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Bottomnavbar extends StatelessWidget {
   const Bottomnavbar({
-    super.key, required MaterialColor backgroundColor,
+    super.key, 
+    // required MaterialColor backgroundColor,
   });
 
   @override
