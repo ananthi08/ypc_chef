@@ -803,7 +803,8 @@ int maxWordLimit = 100;
                       height: 10,
                     ),
                      SizedBox(
-                      width: 340, // <-- TextField width
+                      //  width: 340, 
+                      width: MediaQuery.of(context).size.width, // <-- TextField width
                       height: 110, // <-- TextField height
                       child:
                        TextField(

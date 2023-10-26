@@ -3,7 +3,7 @@ import 'package:chef_frontend/views/auth/signin/resetpassword_view.dart';
 import 'package:chef_frontend/views/auth/signin/signin_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
-import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
+import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
 import 'package:chef_frontend/views/my_videos/my_videos_page_1.dart';
 import 'package:flutter/material.dart';

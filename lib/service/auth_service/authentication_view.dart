@@ -132,6 +132,7 @@ class SignupApi {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           var chefId = jsonDecode(response.body)['chefId'];
           await prefs.setString("chefId", "$chefId");
+          print('cheffffffffffcdcdffffffid$chefId');
 
           chefId = prefs.getString("chefId");
         // ................userId   end

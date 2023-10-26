@@ -75,6 +75,7 @@ class GETchefDetails {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? chefId = prefs.getString("chefId");
+          print('cheffffffffffffffffid$chefId');
 
       String baseUrl = '$KbaseUrl/chef/$chefId/details';
           // print('dfgdgdgduserid........$chefId');
