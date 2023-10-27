@@ -7,6 +7,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UploadVideo extends StatefulWidget {
   static String route = '/chef/upload';
@@ -99,6 +100,11 @@ int maxWordLimit = 100;
     }
 
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+String videoUrl = prefs.getString('filePath') ?? '';
+
+      // ignore: use_build_context_synchronously
       await formdatas.dataload(
         productname: _productnameController.text,
         diettype: _dietTypeController.text,
@@ -107,7 +113,7 @@ int maxWordLimit = 100;
         national: nationalController.text,
         productserve: productserveController.text,
         steps: descriptionController.text,
-
+        videoUrl:videoUrl,
         ingredients: ingredientsJson,
         context: context,
       );

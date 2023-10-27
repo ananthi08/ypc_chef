@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       
-      home: const UploadVideo(),
-  //  initialRoute: Firstpage.route,
-  //     routes: routes,
+      // home: const UploadVideo(),
+   initialRoute: Firstpage.route,
+      routes: routes,
    
     );
   }

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:chef_frontend/constants/httperrorhandling.dart';
 import 'package:chef_frontend/model/VU_datamodel/datamodel.dart';
+import 'package:chef_frontend/views/my_videos/my_videos_page_1.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:chef_frontend/constants/global_variable.dart';
@@ -19,6 +20,8 @@ class FormfieldApi {
     required String national,
     required String productserve,
     required String steps,
+    required String videoUrl,
+
 
     required List<Map<String, dynamic>> ingredients,
     required BuildContext context,
@@ -28,8 +31,8 @@ class FormfieldApi {
       String? chefId = prefs.getString("chefId");
       chefId = prefs.getString("chefId");
 
-      String baseUrl = '$KbaseUrl/ypc/chef/upload/1';
-      // String baseUrl = '$KbaseUrl/ypc/chef/upload/$chefId';
+      // String baseUrl = '$KbaseUrl/ypc/chef/upload/1';
+      String baseUrl = '$KbaseUrl/ypc/chef/upload/$chefId';
 
       Videodata uploadvideodata = Videodata(
         productname: productname,
@@ -40,10 +43,13 @@ class FormfieldApi {
         productserve: productserve,
         ingredients: ingredients,
         steps: steps,
+        videoUrl: videoUrl,
+
+
 
       );
 
-    print('stepsss................$steps');
+    print('videourllllllllllll ................$videoUrl');
       String jsonBody = jsonEncode(uploadvideodata);
     http.Response response = await http.post(
         Uri.parse(baseUrl),
@@ -58,6 +64,12 @@ class FormfieldApi {
         context: context,
         response: response,
         onSuccess: () async {
+
+             Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Myvideospage()),
+                  
+                  );
           print("All successful, uploaded data");
         },
       );

@@ -2,7 +2,7 @@
 import 'dart:math';
 
 import 'package:chef_frontend/common_widget/token_manager.dart';
-import 'package:chef_frontend/service/GET_services/getting_userDetails.dart';
+import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboard_editprofile_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/first_page_view.dart';

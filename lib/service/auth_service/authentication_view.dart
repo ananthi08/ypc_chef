@@ -340,50 +340,6 @@ void sendotpwith_mobilenumber({
 
 // ..............................
 
-// verify mob num otp
-
-
-//  void verifysendotpwmobilenumbeith_r({
-//     required String otp,
-// required String mobileNumber,
-//     // required String OTP,
-//     required context,
-//   }) async {
-//     try {
-//       String baseUrl = '$KbaseUrl/user/send/otp';
-
-//       // Replace with your backend API endpoint
-//       VerifyOTP verifyotp = VerifyOTP(
-//         otp: otp,
-//         mobileNumber:mobileNumber
-//       );
-//       final response = await http.post(
-//         Uri.parse(baseUrl),
-//         headers: Kheader,
-//         body: verifyotp.toJson(),
-//       );
-//       print(response.body);
-//       httpErroHandle(
-//         context: context,
-//         response: response,
-//         onSuccess: () async {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//               builder: (context) => Dashboard(),
-//             ),
-//           );
-//         },
-//       );
-//     } catch (e) {
-//       print("Error: $e");
-//       showCustomSnackBar(
-//         context: context,
-//         text: "An error occurred: $e",
-//       );
-//     }
-//   }
-
 
 // .......... // verify mob num otp
   String? otp = '';
