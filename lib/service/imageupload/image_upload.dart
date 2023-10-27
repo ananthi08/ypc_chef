@@ -17,7 +17,7 @@ class YourApiService {
  Options options = Options(headers: Kheader);
 
       final response = await _dio.post(
-        'http://192.168.0.130:4000/ypc-authentication-micro-service/uploadimage',
+        'http://192.168.1.12:4000/ypc-authentication-micro-service/uploadimage',
         options: options,
 
         data: formData, 
@@ -48,7 +48,7 @@ print('pathaaaa$videoPath');
 
 
       final response = await _dio.post(
-        'http://192.168.0.130:4000/ypc-authentication-micro-service/uploadVideolocal',
+        'http://192.168.1.12:4000/ypc-authentication-micro-service/uploadVideolocal',
         options: options,
         
         data: formData, 

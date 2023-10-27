@@ -1,8 +1,9 @@
-String KbaseUrl = "http://192.168.0.130:4000/ypc-chef-micro-service";
+String KbaseUrl = "http://192.168.1.12:4000/ypc-chef-micro-service";
 
 
+String node = "http://192.168.1.12:4000/uploads/";
 
-String getbaseUrl = "http://192.168.0.130:4000/ypc-authentication-micro-service";
+String getbaseUrl = "http://192.168.1.12:4000/ypc-authentication-micro-service";
 
 
 Map<String, String> Kheader = {
@@ -11,7 +12,7 @@ Map<String, String> Kheader = {
       "auth-key" :"DA2C5T3MCWVJDKMIZ6VO",
     };
 // for sessiontoken
-String ksessionUrl = "http://192.168.0.130:4000/ypc-chef-micro-service";
+String ksessionUrl = "http://192.168.1.12:4000/ypc-chef-micro-service";
 
 
 
