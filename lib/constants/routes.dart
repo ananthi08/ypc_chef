@@ -5,7 +5,8 @@ import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardpro
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
-import 'package:chef_frontend/views/my_videos/my_videos_page_1.dart';
+import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
+import 'package:chef_frontend/views/dashboard/my_videos/video_page2.dart';
 import 'package:flutter/material.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
@@ -17,6 +18,8 @@ Map<String, Widget Function(BuildContext)> routes = {
   Forgot.route: (context) => const Forgot(),
   Reset.route: (context) => const Reset(),
   Myvideospage.route: (context) => const Myvideospage(),
+  Myvideospage2.route: (context) => const Myvideospage2(),
+
 
 
 };

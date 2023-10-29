@@ -1,7 +1,8 @@
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
+import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
-import 'package:chef_frontend/views/my_videos/my_videos_page_1.dart';
+import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:flutter/material.dart';
 
 class Dashboardview extends StatefulWidget {
@@ -13,6 +14,30 @@ class Dashboardview extends StatefulWidget {
 }
 
 class _DashboardviewState extends State<Dashboardview> {
+
+
+
+ final GETchefDetails fetchall_videos = GETchefDetails();
+List<Map<String, dynamic>> videos = [];
+Set<String> videoUrls = {}; // Set to store unique video URLs
+
+Future<void> fetchAndDisplayVideos() async {
+  try {
+    final fetchedVideos = await fetchall_videos.fethallvideos();
+    if (fetchedVideos != null) {
+      setState(() {
+        videos = fetchedVideos;
+        // Extract and store unique video URLs
+        videoUrls = Set<String>.from(videos.map((video) => video['videoUrl']));
+        print('tooooooooooooooootal$videos');
+      });
+    }
+  } catch (e) {
+    print('Error fetching and displaying videos: $e');
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +112,7 @@ class _DashboardviewState extends State<Dashboardview> {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                const Text('23 Videos'),
+                                Text('${videoUrls.length} Videos'),
                               ],
                             ),
 

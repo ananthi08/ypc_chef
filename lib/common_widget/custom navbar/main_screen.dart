@@ -31,14 +31,7 @@ class _MainScreenState extends State<MainScreen> {
         page: const Feed(),
         navKey: messageNavKey,
       ),
-      // NavModel(
-      //   page: const TabPage(tab: 3),
-      //   navKey: notificationNavKey,
-      // ),
-      // NavModel(
-      //   page: const TabPage(tab: 4),
-      //   navKey: profileNavKey,
-      // ),
+    
     ];
   }
 

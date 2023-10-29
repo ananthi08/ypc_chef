@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:chef_frontend/constants/httperrorhandling.dart';
 import 'package:chef_frontend/model/VU_datamodel/datamodel.dart';
-import 'package:chef_frontend/views/my_videos/my_videos_page_1.dart';
+import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:chef_frontend/constants/global_variable.dart';

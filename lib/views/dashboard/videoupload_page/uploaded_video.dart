@@ -125,7 +125,7 @@ String videoUrl = prefs.getString('filePath') ?? '';
       print('Error submitting form data: $e');
     }
   }
-
+bool videoUploaded = false;
   bool isText1Selected = true;
 
   String MainCategory = 'Main Dish';
@@ -153,18 +153,26 @@ String videoUrl = prefs.getString('filePath') ?? '';
   final picker = ImagePicker();
   XFile? pickedFile;
 
-  Future<void> _pickVideoFromGallery() async {
-    pickedFile = await picker.pickVideo(source: ImageSource.gallery);
+Future<void> _pickVideoFromGallery() async {
+  pickedFile = await picker.pickVideo(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
-      String uploadResult = await _apiServicee.uploadVideo(pickedFile!.path);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(uploadResult),
-        ),
-      );
+  if (pickedFile != null) {
+    String uploadResult = await _apiServicee.uploadVideo(pickedFile!);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(uploadResult),
+      ),
+    );
+    
+    if (uploadResult == 'Video uploaded successfully') {
+     
+      setState(() {
+        videoUploaded = true;
+      });
     }
   }
+}
+
 
   
   @override
@@ -174,6 +182,9 @@ String videoUrl = prefs.getString('filePath') ?? '';
     fetchInternationaldata();
     nameControllers.add(TextEditingController());
     quantityControllers.add(TextEditingController());
+
+
+    
   }
 
 // fetchservecategory
@@ -615,32 +626,47 @@ String videoUrl = prefs.getString('filePath') ?? '';
                 // product serve category end
 
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: screenWidth,
-                  height: 80,
-                  child: DottedBorder(
-                    color: Colors.grey,
-                    strokeWidth: 2,
-                    dashPattern: const [8, 8],
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(10),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          _pickVideoFromGallery();
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.cloud_upload),
-                            SizedBox(height: 8),
-                            Text('Upload Video'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+
+
+
+              SizedBox(
+  width: screenWidth,
+  height: 80,
+  child: DottedBorder(
+    color: Colors.grey,
+    strokeWidth: 2,
+    dashPattern: const [8, 8],
+    borderType: BorderType.RRect,
+    radius: const Radius.circular(10),
+    child: Center(
+      child: GestureDetector(
+        onTap: () {
+          if (videoUploaded) {
+           
+          } else {
+            _pickVideoFromGallery();
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (videoUploaded)
+              Text('Video Uploaded successfully!') 
+              
+            else
+              Icon(Icons.cloud_upload),  
+            SizedBox(height: 8),
+            if (!videoUploaded)
+              Text('Upload Video') 
+          ],
+        ),
+      ),
+    ),
+  ),
+),
+
+
+                
                 const SizedBox(height: 20),
                 const SizedBox(height: 6),
 
