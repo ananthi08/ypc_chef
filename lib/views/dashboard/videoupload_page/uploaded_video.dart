@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/videoplayer.dart';
 import 'package:chef_frontend/service/get_api/GETproductcategory.dart';
 import 'package:chef_frontend/service/imageupload/formfiled.dart';
@@ -163,7 +164,7 @@ Future<void> _pickVideoFromGallery() async {
         content: Text(uploadResult),
       ),
     );
-    
+    print("dsdsdsadasdasdas");
     if (uploadResult == 'Video uploaded successfully') {
      
       setState(() {
@@ -312,7 +313,7 @@ Future<void> _pickVideoFromGallery() async {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Veg'
-                              ? const Color.fromARGB(255, 35, 140, 1)
+                              ? CustomColor.myGreenColor
                               : Colors.transparent,
                           child: Center(
                             child: Text(
@@ -339,7 +340,7 @@ Future<void> _pickVideoFromGallery() async {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Non-Veg'
-                              ? const Color.fromARGB(255, 183, 0, 0)
+                              ? CustomColor.myGreenColor
                               : Colors.transparent,
                           child: Center(
                             child: Text(

@@ -6,6 +6,7 @@ import 'package:chef_frontend/views/dashboard/feed/FEED.dart';
 import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:chef_frontend/views/dashboard/my_videos/video_page2.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 class Myvideospage extends StatefulWidget {
@@ -111,9 +112,9 @@ class _MyvideospageState extends State<Myvideospage> {
                   ],
                 ),
               ),
-                const SizedBox(
-                              height: 10,
-                            ),
+              const SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -139,7 +140,7 @@ class _MyvideospageState extends State<Myvideospage> {
                               // } else {
                               //   videoController.play();
                               // }
-
+                              print("sxsdscxdscxsdcs");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -162,9 +163,23 @@ class _MyvideospageState extends State<Myvideospage> {
                             ),
                           );
                         } else {
-                          return const Card(
-                            child: Center(
-                              child: CircularProgressIndicator(),
+                          // return const Card(
+                          //   child: Center(
+                          //     child: CircularProgressIndicator(),
+                          //   ),
+                          // );
+
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Card(
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Container(
+                                  color: Colors
+                                      .grey, // Customize the skeleton loader appearance
+                                ),
+                              ),
                             ),
                           );
                         }

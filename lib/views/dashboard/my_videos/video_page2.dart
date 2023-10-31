@@ -8,7 +8,7 @@ import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.da
 import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-
+import 'package:shimmer/shimmer.dart';
 class Myvideospage2 extends StatefulWidget {
   static String route = '/chef/videos2';
 
@@ -193,17 +193,46 @@ class _Myvideospage2State extends State<Myvideospage2> {
                             ),
                           );
                         } else {
-                          return const Card(
-                            child: Center(
-                              child: CircularProgressIndicator(),
+
+
+                          // return const Card(
+                          //   child: Center(
+                          //     child: CircularProgressIndicator(),
+                          //   ),
+                          // );
+  return Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+highlightColor: Colors.grey[100]!,
+
+                        child: Container(
+                          width: 391.13,
+                          height: 194,
+                          margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
+                          child: Card(
+                            child: AspectRatio(
+                              aspectRatio: 5 / 6,
+                              child: Container(
+                                color: Colors.grey, // Customize the skeleton loader appearance
+                              ),
                             ),
-                          );
+                          ),
+                        ),
+                      );
+
                         }
+
+
+
+
                       },
                     );
                   },
                 ),
               ),
+
+
+
+
             ],
           ),
         ),

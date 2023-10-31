@@ -21,6 +21,16 @@ class _DashboardviewState extends State<Dashboardview> {
 List<Map<String, dynamic>> videos = [];
 Set<String> videoUrls = {}; // Set to store unique video URLs
 
+
+@override
+  void initState() {
+    super.initState();
+
+    fetchAndDisplayVideos();
+    
+  }
+
+
 Future<void> fetchAndDisplayVideos() async {
   try {
     final fetchedVideos = await fetchall_videos.fethallvideos();

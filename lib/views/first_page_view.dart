@@ -1,9 +1,11 @@
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/views/auth/signin/signin_view.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Firstpage extends StatelessWidget {
   static String route = '/';
-  const Firstpage({super.key});
+  const Firstpage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,62 +13,44 @@ class Firstpage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/chef.jpg'),
-              fit: BoxFit.contain,
-            ),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: screenWidth * 0.4,
-              height: screenHeight * 0.06,
-              margin: EdgeInsets.only(bottom: screenHeight * 0.02),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Signin()),
-                  
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.transparent,
-                  onPrimary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(screenHeight * 0.0125),
-                  ),
-                  padding: const EdgeInsets.all(0),
-                  elevation: 0,
-                ),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromRGBO(255, 38, 0, 0.4),
-                        Color.fromRGBO(247, 177, 0, 0.475),
-                      ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                width: screenWidth * 1,
+                height: screenHeight * 1,
+                color: const Color.fromARGB(31, 255, 255, 255),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/Animation - 1698662925528 (1).json',
+                      height: 500,
+                      width: 300,
+                      animate: true,
                     ),
-                    borderRadius: BorderRadius.circular(screenHeight * 0.0125),
-                  ),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 26, 3, 236),
-                        fontSize: screenWidth * 0.04,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        backgroundColor: CustomColor.myGreenColor,
+                        minimumSize: const Size(200, 50),
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Signin()),
+                        );
+                      },
+                      child: const Text('Get started'),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),

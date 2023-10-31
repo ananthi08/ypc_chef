@@ -42,7 +42,7 @@ class YourApiService {
 // 
 
 // /////////video upload
- final String uploadUrl = 'http://192.168.29.223:4000/ypc-authentication-micro-service/uploadVideolocal';
+ final String uploadUrl = UploadVideoLocal;
 
   Future<String> uploadVideo(XFile videoFile) async {
     try {
