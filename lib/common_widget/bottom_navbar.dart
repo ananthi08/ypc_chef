@@ -12,7 +12,7 @@ class Bottomnavbar extends StatelessWidget {
       data: NavigationBarThemeData(
           indicatorColor: Colors.blue.shade100,
           labelTextStyle: MaterialStateProperty.all(
-            TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           )),
       child: NavigationBar(destinations:const [
         NavigationDestination(
