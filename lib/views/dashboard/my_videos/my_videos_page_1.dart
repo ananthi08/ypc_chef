@@ -73,17 +73,39 @@ class _MyvideospageState extends State<Myvideospage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Dashboardview(),
-                          ),
-                        );
-                      },
+                    Center(
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Dashboardview(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
+
+
+      //                                  Center(
+      //   child: GestureDetector(
+      //     onTap: () {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => const Dashboardview(),
+      //         ),
+      //       );
+      //     },
+      //     child: SvgPicture.asset(
+      //       'assets/Group 124.svg', 
+      //       width: 100, 
+      //       height: 40,
+      //       color: Colors.black, 
+      //     ),
+      //   ),
+      // ),
                     Center(
                       child: Container(
                         width: 300,

@@ -1,6 +1,8 @@
+import 'package:chef_frontend/common_widget/DMsans_text/dmsanstext.dart';
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
+import 'package:chef_frontend/views/dashboard/calender/calender.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
 import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,8 @@ Future<void> fetchAndDisplayVideos() async {
                           color: Colors.black,
                           fontSize: 34,
                           fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic),
+                          fontFamily: 'DMSans'),
+                     
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -106,7 +109,7 @@ Future<void> fetchAndDisplayVideos() async {
                             borderRadius: BorderRadius.circular(16)),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //  const SizedBox(width: 10),
 
@@ -138,7 +141,7 @@ Future<void> fetchAndDisplayVideos() async {
                                 "See More",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             )
@@ -159,7 +162,7 @@ Future<void> fetchAndDisplayVideos() async {
                             borderRadius: BorderRadius.circular(16)),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //  const SizedBox(width: 30),
                             Column(
@@ -190,7 +193,7 @@ Future<void> fetchAndDisplayVideos() async {
                                 "See More",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             )
@@ -211,7 +214,7 @@ Future<void> fetchAndDisplayVideos() async {
                             borderRadius: BorderRadius.circular(16)),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //  const SizedBox(width: 30),
 
@@ -241,9 +244,9 @@ Future<void> fetchAndDisplayVideos() async {
                               },
                               child: const Text(
                                 "See More",
-                                style: TextStyle(
+                               style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             )
@@ -264,7 +267,7 @@ Future<void> fetchAndDisplayVideos() async {
                             borderRadius: BorderRadius.circular(16)),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //  const SizedBox(width: 30),
                             Column(
@@ -285,17 +288,18 @@ Future<void> fetchAndDisplayVideos() async {
 
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Forgot()),
-                                );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CalendarView(),
+                                ),
+                              );
                               },
                               child: const Text(
                                 "See More",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             )
@@ -316,7 +320,7 @@ Future<void> fetchAndDisplayVideos() async {
                             borderRadius: BorderRadius.circular(16)),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //  const SizedBox(width: 30),
                             Column(
@@ -347,7 +351,7 @@ Future<void> fetchAndDisplayVideos() async {
                                 "See More",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             )

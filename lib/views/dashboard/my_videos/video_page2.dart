@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/commentbox/cmd_box.dart';
 import 'package:chef_frontend/common_widget/custom%20navbar/nav_model.dart';
 import 'package:chef_frontend/common_widget/likebutton.dart';
 import 'package:chef_frontend/constants/global_variable.dart';
@@ -9,6 +10,7 @@ import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:shimmer/shimmer.dart';
+
 class Myvideospage2 extends StatefulWidget {
   static String route = '/chef/videos2';
 
@@ -23,7 +25,7 @@ class _Myvideospage2State extends State<Myvideospage2> {
   final messageNavKey = GlobalKey<NavigatorState>();
   int selectedTab = 0;
   List<NavModel> items = [];
-
+  bool isCommentBoxVisible = false;
   @override
   void initState() {
     super.initState();
@@ -72,16 +74,30 @@ class _Myvideospage2State extends State<Myvideospage2> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Myvideospage(),
-                          ),
-                        );
-                      },
+                    // IconButton(
+                    //   icon: const Icon(Icons.arrow_back),
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const Myvideospage(),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+
+                    Center(
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Myvideospage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     Center(
                       child: Container(
@@ -159,30 +175,70 @@ class _Myvideospage2State extends State<Myvideospage2> {
                                     Row(
                                       children: [
                                         LikeButton(videoUrl),
-                                       const Text(
+                                        const Text(
                                           'Likes',
                                           style: TextStyle(
                                             fontSize: 16,
                                           ),
                                         ),
-                                     const   SizedBox(width: 25),
-                                        IconButton(
-                                          icon:const Icon(Icons.insert_comment_sharp),
-                                          onPressed: () {},
-                                        ),
-                                      const  Text(
-                                          'Comments',
-                                          style: TextStyle(
-                                            fontSize: 16,
+                                        const SizedBox(width: 25),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              isCommentBoxVisible =
+                                                  !isCommentBoxVisible;
+                                            });
+                                          },
+                                          child: const Row(
+                                            children: [
+                                              Icon(Icons.insert_comment_sharp),
+                                              Text(
+                                                'Comments',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  const  Spacer(),
+                                    const Spacer(),
                                     viewsCount(),
                                   ],
                                 ),
-                              )
+                              ),
+                        AnimatedContainer(
+  duration: const Duration(milliseconds: 300),
+  height: isCommentBoxVisible ? 200 : 0,
+  padding: const EdgeInsets.all(16),
+  child: isCommentBoxVisible
+      ? Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Write a comment...',
+                contentPadding: const EdgeInsets.all(10),
+                border: OutlineInputBorder( 
+                  borderRadius: BorderRadius.circular(10), 
+                  borderSide: const BorderSide(
+                    color: Colors.grey, 
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10), 
+            ElevatedButton(
+              onPressed: () {
+                print("");
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        )
+      : const SizedBox(),
+),
+
                             ],
                           );
                         } else if (snapshot.hasError) {
@@ -193,46 +249,36 @@ class _Myvideospage2State extends State<Myvideospage2> {
                             ),
                           );
                         } else {
-
-
                           // return const Card(
                           //   child: Center(
                           //     child: CircularProgressIndicator(),
                           //   ),
                           // );
-  return Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-highlightColor: Colors.grey[100]!,
-
-                        child: Container(
-                          width: 391.13,
-                          height: 194,
-                          margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
-                          child: Card(
-                            child: AspectRatio(
-                              aspectRatio: 5 / 6,
-                              child: Container(
-                                color: Colors.grey, // Customize the skeleton loader appearance
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              width: 391.13,
+                              height: 194,
+                              margin: const EdgeInsets.only(
+                                  top: 10, left: 18, right: 18),
+                              child: Card(
+                                child: AspectRatio(
+                                  aspectRatio: 5 / 6,
+                                  child: Container(
+                                    color: Colors
+                                        .grey, // Customize the skeleton loader appearance
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      );
-
+                          );
                         }
-
-
-
-
                       },
                     );
                   },
                 ),
               ),
-
-
-
-
             ],
           ),
         ),
@@ -265,7 +311,6 @@ highlightColor: Colors.grey[100]!,
             color: Colors.green,
           ),
         ),
-        
       ),
       // bottomNavigationBar: ,
     );

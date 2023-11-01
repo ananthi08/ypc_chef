@@ -340,7 +340,7 @@ Future<void> _pickVideoFromGallery() async {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Non-Veg'
-                              ? CustomColor.myGreenColor
+                              ? Color.fromARGB(255, 157, 10, 0)
                               : Colors.transparent,
                           child: Center(
                             child: Text(
@@ -655,7 +655,8 @@ Future<void> _pickVideoFromGallery() async {
               Text('Video Uploaded successfully!') 
               
             else
-              Icon(Icons.cloud_upload),  
+              Icon(Icons.cloud_upload,
+              ),  
             SizedBox(height: 8),
             if (!videoUploaded)
               Text('Upload Video') 

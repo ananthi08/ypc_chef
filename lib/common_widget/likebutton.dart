@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class LikeButton extends StatefulWidget {
   final String videoUrl;
 
-  LikeButton(this.videoUrl);
+    LikeButton(this.videoUrl);
 
   @override
   _LikeButtonState createState() => _LikeButtonState();
