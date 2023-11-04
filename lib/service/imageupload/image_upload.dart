@@ -22,7 +22,7 @@ class YourApiService {
  Options options = Options(headers: Kheader);
 
       final response = await _dio.post(
-        'http://192.168.1.12:4000/ypc-authentication-micro-service/uploadimage',
+        'http://192.168.0.146:4000/ypc-authentication-micro-service/uploadimage',
         options: options,
 
         data: formData, 

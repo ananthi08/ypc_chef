@@ -86,26 +86,6 @@ class _MyvideospageState extends State<Myvideospage> {
                         },
                       ),
                     ),
-
-
-      //                                  Center(
-      //   child: GestureDetector(
-      //     onTap: () {
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute(
-      //           builder: (context) => const Dashboardview(),
-      //         ),
-      //       );
-      //     },
-      //     child: SvgPicture.asset(
-      //       'assets/Group 124.svg', 
-      //       width: 100, 
-      //       height: 40,
-      //       color: Colors.black, 
-      //     ),
-      //   ),
-      // ),
                     Center(
                       child: Container(
                         width: 300,
@@ -185,12 +165,7 @@ class _MyvideospageState extends State<Myvideospage> {
                             ),
                           );
                         } else {
-                          // return const Card(
-                          //   child: Center(
-                          //     child: CircularProgressIndicator(),
-                          //   ),
-                          // );
-
+                    
                           return Shimmer.fromColors(
                             baseColor: Colors.grey[300]!,
                             highlightColor: Colors.grey[100]!,

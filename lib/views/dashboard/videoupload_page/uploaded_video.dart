@@ -27,7 +27,6 @@ class Ingredient {
 }
 
 class _UploadVideoState extends State<UploadVideo> {
-  
   //for product serve category
   String selectedDropdownValue = 'Select';
   List<String> dropdownItems = [];
@@ -50,8 +49,8 @@ class _UploadVideoState extends State<UploadVideo> {
   final TextEditingController nationalController = TextEditingController();
   final TextEditingController productserveController = TextEditingController();
   String? selectedCategory;
-TextEditingController descriptionController = TextEditingController();
-int maxWordLimit = 100;
+  TextEditingController descriptionController = TextEditingController();
+  int maxWordLimit = 100;
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   FormfieldApi formdatas = FormfieldApi();
@@ -103,7 +102,7 @@ int maxWordLimit = 100;
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
-String videoUrl = prefs.getString('filePath') ?? '';
+      String videoUrl = prefs.getString('filePath') ?? '';
 
       // ignore: use_build_context_synchronously
       await formdatas.dataload(
@@ -114,7 +113,7 @@ String videoUrl = prefs.getString('filePath') ?? '';
         national: nationalController.text,
         productserve: productserveController.text,
         steps: descriptionController.text,
-        videoUrl:videoUrl,
+        videoUrl: videoUrl,
         ingredients: ingredientsJson,
         context: context,
       );
@@ -126,7 +125,8 @@ String videoUrl = prefs.getString('filePath') ?? '';
       print('Error submitting form data: $e');
     }
   }
-bool videoUploaded = false;
+
+  bool videoUploaded = false;
   bool isText1Selected = true;
 
   String MainCategory = 'Main Dish';
@@ -149,33 +149,29 @@ bool videoUploaded = false;
   //   }
   // }
 
-
- final YourApiService _apiServicee = YourApiService();
+  final YourApiService _apiServicee = YourApiService();
   final picker = ImagePicker();
   XFile? pickedFile;
 
-Future<void> _pickVideoFromGallery() async {
-  pickedFile = await picker.pickVideo(source: ImageSource.gallery);
+  Future<void> _pickVideoFromGallery() async {
+    pickedFile = await picker.pickVideo(source: ImageSource.gallery);
 
-  if (pickedFile != null) {
-    String uploadResult = await _apiServicee.uploadVideo(pickedFile!);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(uploadResult),
-      ),
-    );
-    print("dsdsdsadasdasdas");
-    if (uploadResult == 'Video uploaded successfully') {
-     
-      setState(() {
-        videoUploaded = true;
-      });
+    if (pickedFile != null) {
+      String uploadResult = await _apiServicee.uploadVideo(pickedFile!);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(uploadResult),
+        ),
+      );
+      print("dsdsdsadasdasdas");
+      if (uploadResult == 'Video uploaded successfully') {
+        setState(() {
+          videoUploaded = true;
+        });
+      }
     }
   }
-}
 
-
-  
   @override
   void initState() {
     super.initState();
@@ -183,9 +179,6 @@ Future<void> _pickVideoFromGallery() async {
     fetchInternationaldata();
     nameControllers.add(TextEditingController());
     quantityControllers.add(TextEditingController());
-
-
-    
   }
 
 // fetchservecategory
@@ -331,10 +324,9 @@ Future<void> _pickVideoFromGallery() async {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            selectedDietType =
-                                'Non-Veg'; 
-                            _dietTypeController.text =
-                                selectedDietType;                          print("Non-Veg is selected");
+                            selectedDietType = 'Non-Veg';
+                            _dietTypeController.text = selectedDietType;
+                            print("Non-Veg is selected");
                           });
                         },
                         child: Container(
@@ -628,213 +620,203 @@ Future<void> _pickVideoFromGallery() async {
 
                 const SizedBox(height: 20),
 
+                SizedBox(
+                  width: screenWidth,
+                  height: 80,
+                  child: DottedBorder(
+                    color: Colors.grey,
+                    strokeWidth: 2,
+                    dashPattern: const [8, 8],
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(10),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          if (videoUploaded) {
+                          } else {
+                            _pickVideoFromGallery();
+                          }
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (videoUploaded)
+                              Text('Video Uploaded successfully!')
+                            else
+                              Icon(
+                                Icons.cloud_upload,
+                              ),
+                            SizedBox(height: 8),
+                            if (!videoUploaded) Text('Upload Video')
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
-
-              SizedBox(
-  width: screenWidth,
-  height: 80,
-  child: DottedBorder(
-    color: Colors.grey,
-    strokeWidth: 2,
-    dashPattern: const [8, 8],
-    borderType: BorderType.RRect,
-    radius: const Radius.circular(10),
-    child: Center(
-      child: GestureDetector(
-        onTap: () {
-          if (videoUploaded) {
-           
-          } else {
-            _pickVideoFromGallery();
-          }
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (videoUploaded)
-              Text('Video Uploaded successfully!') 
-              
-            else
-              Icon(Icons.cloud_upload,
-              ),  
-            SizedBox(height: 8),
-            if (!videoUploaded)
-              Text('Upload Video') 
-          ],
-        ),
-      ),
-    ),
-  ),
-),
-
-
-                
                 const SizedBox(height: 20),
                 const SizedBox(height: 6),
 
                 Column(
                   children: [
                     const SizedBox(height: 6),
-                   Column(
-  children: [
-    Row(
-      children: [
-        const Expanded(
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Ingredients',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {
-                addIngredientRow();
-              },
-              child: const Text(
-                'Add +',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 157, 10, 0),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-    const SizedBox(height: 6),
-    Column(
-      children: [
-        Container(
-          height: 70,
-          width: 500,
-          color: Colors.grey.shade400,
-          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    color: const Color.fromARGB(
-                        255, 255, 255, 255),
-                    child: Center(
-                      child: TextField(
-                        controller: nameControllers[0],
-                        onChanged: (value) {
-                          if (ingredients.isNotEmpty) {
-                            ingredients[0].name = value;
-                          }
-                        },
-                        decoration: const InputDecoration(
-                          hintText: 'Enter Ingredient name',
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Ingredients',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    addIngredientRow();
+                                  },
+                                  child: const Text(
+                                    'Add +',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color.fromARGB(255, 157, 10, 0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.white,
-                    child: TextField(
-                      controller: quantityControllers[0],
-                      onChanged: (value) {
-                        if (ingredients.isNotEmpty) {
-                          ingredients[0].quantity = value;
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Qnty',
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ),
-    for (var i = 1; i < ingredients.length; i++)
-      Dismissible(
-        key: Key('ingredient_$i'),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          setState(() {
-            ingredients.removeAt(i);
-            nameControllers.removeAt(i);
-            quantityControllers.removeAt(i);
-          });
-        },
-        background: Container(
-          color: Colors.red,
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 16),
-          child: Icon(Icons.delete, color: Colors.white),
-        ),
-        child: Container(
-          height: 70,
-          width: 500,
-          color: Colors.grey.shade400,
-          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: TextField(
-                        controller: nameControllers[i],
-                        decoration: const InputDecoration(
-                          hintText: 'Enter Ingredient name',
+                        const SizedBox(height: 6),
+                        Column(
+                          children: [
+                            Container(
+                              height: 70,
+                              width: 500,
+                              color: Colors.grey.shade400,
+                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 6,
+                                      child: Container(
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255),
+                                        child: Center(
+                                          child: TextField(
+                                            controller: nameControllers[0],
+                                            onChanged: (value) {
+                                              if (ingredients.isNotEmpty) {
+                                                ingredients[0].name = value;
+                                              }
+                                            },
+                                            decoration: const InputDecoration(
+                                              hintText: 'Enter Ingredient name',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: TextField(
+                                          controller: quantityControllers[0],
+                                          onChanged: (value) {
+                                            if (ingredients.isNotEmpty) {
+                                              ingredients[0].quantity = value;
+                                            }
+                                          },
+                                          decoration: const InputDecoration(
+                                            hintText: 'Qnty',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                        for (var i = 1; i < ingredients.length; i++)
+                          Dismissible(
+                            key: Key('ingredient_$i'),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (direction) {
+                              setState(() {
+                                ingredients.removeAt(i);
+                                nameControllers.removeAt(i);
+                                quantityControllers.removeAt(i);
+                              });
+                            },
+                            background: Container(
+                              color: Colors.red,
+                              alignment: Alignment.centerRight,
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Icon(Icons.delete, color: Colors.white),
+                            ),
+                            child: Container(
+                              height: 70,
+                              width: 500,
+                              color: Colors.grey.shade400,
+                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 6,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: Center(
+                                          child: TextField(
+                                            controller: nameControllers[i],
+                                            decoration: const InputDecoration(
+                                              hintText: 'Enter Ingredient name',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 7,
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: TextField(
+                                          controller: quantityControllers[i],
+                                          decoration: const InputDecoration(
+                                            hintText: 'Qnty',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.white,
-                    child: TextField(
-                      controller: quantityControllers[i],
-                      decoration: const InputDecoration(
-                        hintText: 'Qnty',
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-  ],
-),
-
                     const SizedBox(
                       height: 10,
                     ),
-
-
-
                     const Column(
                       children: [
                         Row(
@@ -856,19 +838,20 @@ Future<void> _pickVideoFromGallery() async {
                     const SizedBox(
                       height: 10,
                     ),
-                     SizedBox(
-                      //  width: 340, 
-                      width: MediaQuery.of(context).size.width, // <-- TextField width
+                    SizedBox(
+                      //  width: 340,
+                      width: MediaQuery.of(context)
+                          .size
+                          .width, // <-- TextField width
                       height: 110, // <-- TextField height
-                      child:
-                       TextField(
+                      child: TextField(
                         controller: descriptionController,
                         maxLines: null,
                         expands: true,
                         keyboardType: TextInputType.multiline,
-                        decoration:const InputDecoration(
+                        decoration: const InputDecoration(
                           filled: true,
-                           hintText: 'Enter steps to be followed',
+                          hintText: 'Enter steps to be followed',
                         ),
                       ),
                     ),

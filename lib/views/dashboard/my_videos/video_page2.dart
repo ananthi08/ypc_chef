@@ -208,37 +208,38 @@ class _Myvideospage2State extends State<Myvideospage2> {
                                   ],
                                 ),
                               ),
-                        AnimatedContainer(
-  duration: const Duration(milliseconds: 300),
-  height: isCommentBoxVisible ? 200 : 0,
-  padding: const EdgeInsets.all(16),
-  child: isCommentBoxVisible
-      ? Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Write a comment...',
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder( 
-                  borderRadius: BorderRadius.circular(10), 
-                  borderSide: const BorderSide(
-                    color: Colors.grey, 
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10), 
-            ElevatedButton(
-              onPressed: () {
-                print("");
-              },
-              child: const Text('Submit'),
-            ),
-          ],
-        )
-      : const SizedBox(),
-),
-
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                height: isCommentBoxVisible ? 200 : 0,
+                                padding: const EdgeInsets.all(16),
+                                child: isCommentBoxVisible
+                                    ? Column(
+                                        children: [
+                                          TextField(
+                                            decoration: InputDecoration(
+                                              hintText: 'Write a comment...',
+                                              contentPadding:
+                                                  const EdgeInsets.all(10),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              print("");
+                                            },
+                                            child: const Text('Submit'),
+                                          ),
+                                        ],
+                                      )
+                                    : const SizedBox(),
+                              ),
                             ],
                           );
                         } else if (snapshot.hasError) {
@@ -278,6 +279,8 @@ class _Myvideospage2State extends State<Myvideospage2> {
                     );
                   },
                 ),
+         
+              
               ),
             ],
           ),
