@@ -58,7 +58,7 @@ class _MobileNumberState extends State<MobileNumber> {
                 const Headtextdualcolor(
                     mainaxisalignment: MainAxisAlignment.center,
                     text1: "Sign",
-                    text2: "in",
+                    text2: "In",
                     paddingHorizontal: 30),
                 const SizedBox(
                   height: 20,
@@ -145,7 +145,7 @@ class _MobileNumberState extends State<MobileNumber> {
                         // );
                       },
                       child: const Text(
-                        "Sign up",
+                        "Sign Up",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
