@@ -307,7 +307,7 @@ class _UploadVideoState extends State<UploadVideo> {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Veg'
-                              ? CustomColor.myGreenColor
+                              ?  CustomColor.myRedColor
                               : Colors.transparent,
                           child: Center(
                             child: Text(
@@ -333,7 +333,7 @@ class _UploadVideoState extends State<UploadVideo> {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Non-Veg'
-                              ? Color.fromARGB(255, 157, 10, 0)
+                              ? const Color.fromARGB(255, 157, 10, 0)
                               : Colors.transparent,
                           child: Center(
                             child: Text(
@@ -642,13 +642,13 @@ class _UploadVideoState extends State<UploadVideo> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (videoUploaded)
-                              Text('Video Uploaded successfully!')
+                              const Text('Video Uploaded successfully!')
                             else
-                              Icon(
+                              const Icon(
                                 Icons.cloud_upload,
                               ),
-                            SizedBox(height: 8),
-                            if (!videoUploaded) Text('Upload Video')
+                            const SizedBox(height: 8),
+                            if (!videoUploaded) const Text('Upload Video')
                           ],
                         ),
                       ),
@@ -689,7 +689,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                     'Add +',
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color: Color.fromARGB(255, 157, 10, 0),
+                                      color:  CustomColor.myRedColor,
                                     ),
                                   ),
                                 ),
@@ -765,10 +765,10 @@ class _UploadVideoState extends State<UploadVideo> {
                               });
                             },
                             background: Container(
-                              color: Colors.red,
+                              color:  CustomColor.myRedColor,
                               alignment: Alignment.centerRight,
                               padding: const EdgeInsets.only(right: 16),
-                              child: Icon(Icons.delete, color: Colors.white),
+                              child: const Icon(Icons.delete, color: Colors.white),
                             ),
                             child: Container(
                               height: 70,
@@ -863,7 +863,7 @@ class _UploadVideoState extends State<UploadVideo> {
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        backgroundColor: const Color(0xFFA51C05),
+                        backgroundColor: CustomColor.myRedColor,
                         minimumSize: const Size(175, 50),
                       ),
                       onPressed: () {

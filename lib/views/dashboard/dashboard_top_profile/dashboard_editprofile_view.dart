@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
@@ -145,7 +146,7 @@ Future<void> selectImage() async {
                       " Edit Profile",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(168, 28, 5, 1),
+                          color: CustomColor.myRedColor,
                           fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
@@ -327,9 +328,9 @@ Future<void> selectImage() async {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Container(
@@ -387,7 +388,7 @@ Future<void> selectImage() async {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)), backgroundColor: const Color(0xFFA51C05),
+                                      borderRadius: BorderRadius.circular(10)), backgroundColor:CustomColor.myRedColor,
                                   minimumSize:const Size(310, 45),
                                 ),
                                 onPressed: () {},

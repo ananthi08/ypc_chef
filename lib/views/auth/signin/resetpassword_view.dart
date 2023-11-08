@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +55,9 @@ class Reset extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       RichText(
-                        text: TextSpan(
+                        text: const TextSpan(
                           children: <TextSpan>[
-                            const TextSpan(
+                            TextSpan(
                               text: 'Reset',
                               style: TextStyle(
                                 fontSize: 13.0,
@@ -69,7 +70,7 @@ class Reset extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.red.shade700,
+                                color: CustomColor.myRedColor,
                               ),
                             ),
                           ],
@@ -130,7 +131,7 @@ class Reset extends StatelessWidget {
                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               borderSide: const BorderSide(
                                 color: Colors.transparent,
                               ),
@@ -144,7 +145,7 @@ class Reset extends StatelessWidget {
                               borderSide: const BorderSide(
                                 color: Colors.black12,
                               ),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             filled: true,
                           ),
@@ -165,7 +166,7 @@ class Reset extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              primary: const Color(0xFFA51C05),
+                              primary: CustomColor.myRedColor,
                               minimumSize: const Size(180, 40),
                             ),
                             onPressed: () {

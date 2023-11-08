@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:chef_frontend/common_widget/dual_color_widget.dart';
 import 'package:chef_frontend/views/auth/signinnn%20bloc/loginwithmobilenumber/MobileNumberBloc.dart';
@@ -94,7 +95,7 @@ class _MobileNumberState extends State<MobileNumber> {
                           width: mediaQuery.size.width / 2,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFF3E4D52),
+                              primary: CustomColor.myRedColor,
                               onPrimary: Colors.white,                             
                             ),
                             onPressed: () {
@@ -148,7 +149,7 @@ class _MobileNumberState extends State<MobileNumber> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color:  Color(0xFF3E4D52),
+                          color: CustomColor.myRedColor,
                         ),
                       ),
                     ),

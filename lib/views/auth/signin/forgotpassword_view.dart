@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class Forgot extends StatelessWidget {
                       "Forgot your Password ?",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color:  Color(0xFF3E4D52),
+                          color: CustomColor.myRedColor,
                           fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
@@ -98,7 +99,7 @@ class Forgot extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
-                    primary: const Color(0xFF3E4D52),
+                    primary: CustomColor.myRedColor,
                     minimumSize: const Size(200, 40),
                   ),
                   onPressed: () {

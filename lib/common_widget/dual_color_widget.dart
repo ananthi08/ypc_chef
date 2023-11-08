@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -64,28 +65,28 @@ class Headtextdualcolor extends StatelessWidget {
         children: [
           Text(
             text1,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Text(
             text2,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color:  Color(0xFF3E4D52),
+              color: CustomColor.myRedColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Text(
             text3 ?? '',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),

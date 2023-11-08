@@ -1,6 +1,7 @@
 // import 'package:chef_frontend/common_widget/token_manager.dart';
 import 'dart:math';
 
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/token_manager.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboard_editprofile_view.dart';
@@ -77,7 +78,7 @@ class _ProfilepageState extends State<Profilepage> {
               "Profile",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3E4D52),
+                  color: CustomColor.myRedColor,
                   fontSize: 20),
               textAlign: TextAlign.center,
             ),
@@ -110,7 +111,7 @@ class _ProfilepageState extends State<Profilepage> {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)),
-                primary: const Color(0xFF3E4D52),
+                primary: CustomColor.myRedColor,
                 minimumSize: const Size(200, 40),
               ),
               onPressed: () {
@@ -136,7 +137,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Account",
                     style: TextStyle(
-                      color: Color(0xFF3E4D52),
+                      color: CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -258,7 +259,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Support & About",
                     style: TextStyle(
-                      color:Color(0xFF3E4D52),
+                      color:CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -377,7 +378,7 @@ class _ProfilepageState extends State<Profilepage> {
                   child: Text(
                     "Actions",
                     style: TextStyle(
-                      color:Color(0xFF3E4D52),
+                      color:CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -505,7 +506,7 @@ class _ProfilepageState extends State<Profilepage> {
         ),
       ),
       bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
+        data: NavigationBarThemeData(backgroundColor: Colors.white,
           labelTextStyle: MaterialStateProperty.all(
             const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),

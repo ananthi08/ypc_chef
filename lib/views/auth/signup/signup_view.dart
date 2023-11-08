@@ -1,4 +1,5 @@
 
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
 import 'package:chef_frontend/views/auth/signin/signin_view.dart';
@@ -123,7 +124,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 currentStep: currentStep,
                                 size: 8,
                                 padding: 0,
-                                selectedColor: const Color(0xFF3E4D52),
+                                selectedColor: CustomColor.myRedColor,
                                 unselectedColor: Colors.grey.shade300,
                               ),
                             ),
@@ -150,7 +151,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 style: GoogleFonts.dmSans(
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
-                                  color:const Color(0xFF3E4D52),
+                                  color:CustomColor.myRedColor,
                                 ),
                               ),
                             ],
@@ -452,7 +453,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 width: mediaQuery.size.width,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary:const Color(0xFF3E4D52),
+                                    primary:CustomColor.myRedColor,
                                     onPrimary: Colors.white,
                                   ),
                                   onPressed: () {

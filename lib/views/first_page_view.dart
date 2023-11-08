@@ -22,12 +22,12 @@ class Firstpage extends StatelessWidget {
                 height: screenHeight * 1,
                 color: const Color.fromARGB(31, 255, 255, 255),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Lottie.asset(
                       'assets/Animation - 1698662925528 (1).json',
-                      height: 500,
-                      width: 300,
+                      height: 600,
+                      width: 800,
                       animate: true,
                     ),
                     ElevatedButton(
@@ -35,7 +35,8 @@ class Firstpage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        backgroundColor: CustomColor.myGreenColor,
+                        backgroundColor: CustomColor.myRedColor,
+                        onPrimary: Colors.white,
                         minimumSize: const Size(200, 50),
                       ),
                       onPressed: () {
@@ -45,8 +46,8 @@ class Firstpage extends StatelessWidget {
                               builder: (context) => const Signin()),
                         );
                       },
-                      child: const Text('Get started'),
-                    ),
+                      child:  const Text('Get started'),
+                    )
                   ],
                 ),
               ),

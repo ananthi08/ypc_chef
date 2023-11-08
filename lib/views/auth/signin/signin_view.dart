@@ -1,4 +1,5 @@
 // import 'dart:developer';
+import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/otp_inputfield.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
@@ -199,7 +200,7 @@ class _SigninState extends State<Signin> {
                           style:  GoogleFonts.dmSans(
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFF3E4D52),
+                            color: CustomColor.myRedColor,
                           ),
                         ),
                       ],
@@ -232,7 +233,7 @@ class _SigninState extends State<Signin> {
                        Text(
                         'User Email',
                         style:  GoogleFonts.dmSans(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: const Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
@@ -258,7 +259,7 @@ class _SigninState extends State<Signin> {
                        Text(
                         'Password',
                         style:  GoogleFonts.dmSans(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: const Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
@@ -323,7 +324,7 @@ class _SigninState extends State<Signin> {
                               child:  Text(
                                 'Forgot Password?',
                                 style:  GoogleFonts.dmSans(
-                                  color: const Color(0xFF3E4D52),
+                                  color: CustomColor.myRedColor,
                                   fontSize: 12,
                                 ),
                               ),
@@ -341,7 +342,7 @@ class _SigninState extends State<Signin> {
                           child:  Text(
                             'or',
                             style:  GoogleFonts.dmSans(
-                              color: const Color(0xFF3E4D52),
+                              color:CustomColor.myRedColor,
                               fontSize: 12,
                             ),
                           ),
@@ -364,7 +365,7 @@ class _SigninState extends State<Signin> {
                                 child:  Text(
                                   'Continue With Mobile Number',
                                   style:  GoogleFonts.dmSans(
-                                    color:const Color(0xFF3E4D52),
+                                    color:CustomColor.myRedColor,
                                     fontSize: 12,
                                   ),
                                 ),
@@ -411,7 +412,7 @@ class _SigninState extends State<Signin> {
                     width: 200,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary:const Color(0xFF3E4D52),
+                        primary:CustomColor.myRedColor,
                         onPrimary: Colors.white,
                       ),
                       onPressed: () {
@@ -447,7 +448,7 @@ class _SigninState extends State<Signin> {
                           style:  GoogleFonts.dmSans(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color:const Color(0xFF3E4D52),
+                            color:CustomColor.myRedColor,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
