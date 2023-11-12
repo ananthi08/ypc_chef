@@ -7,11 +7,11 @@ class Videodata {
   String international;
   String national;
   String productserve;
-  String steps;
   String videoUrl;
 
 
   List<Map<String, dynamic>> ingredients;
+  List<Map<String, dynamic>> steps;
 
   Videodata({
     required this.productname,
@@ -50,11 +50,9 @@ class Videodata {
       category: map['category'] as String,
       international: map['international'] as String,
       national: map['national'] as String,
-      steps: map['steps'] as String,
       videoUrl: map['videoUrl'] as String,
-
-
       ingredients: List<Map<String, dynamic>>.from(map['ingredients']),
+      steps: List<Map<String, dynamic>>.from(map['steps']),
       productserve: map['productserve'] as String,
     );
   }

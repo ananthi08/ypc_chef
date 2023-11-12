@@ -19,7 +19,7 @@ class FormfieldApi {
     required String international,
     required String national,
     required String productserve,
-    required String steps,
+    required List<Map<String, dynamic>> steps,
     required String videoUrl,
 
 
