@@ -1,4 +1,4 @@
-import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
+import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

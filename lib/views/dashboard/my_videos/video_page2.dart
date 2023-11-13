@@ -1,5 +1,5 @@
 import 'package:chef_frontend/common_widget/commentbox/cmd_box.dart';
-import 'package:chef_frontend/common_widget/custom%20navbar/nav_model.dart';
+import 'package:chef_frontend/common_widget/custom_navbar/nav_model.dart';
 import 'package:chef_frontend/common_widget/likebutton.dart';
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';

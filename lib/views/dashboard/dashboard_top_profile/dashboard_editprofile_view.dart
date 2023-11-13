@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
+import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';

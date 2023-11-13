@@ -1,6 +1,6 @@
 
-import 'package:chef_frontend/common_widget/custom%20navbar/nav_bar.dart';
-import 'package:chef_frontend/common_widget/custom%20navbar/nav_model.dart';
+import 'package:chef_frontend/common_widget/custom_navbar/nav_bar.dart';
+import 'package:chef_frontend/common_widget/custom_navbar/nav_model.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/dashboard/feed/FEED.dart';
 import 'package:flutter/material.dart';

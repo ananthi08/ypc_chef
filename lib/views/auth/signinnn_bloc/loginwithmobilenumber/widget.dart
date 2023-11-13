@@ -1,7 +1,7 @@
-import 'package:chef_frontend/common_widget/custom%20GREEN/customgreen.dart';
+import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:chef_frontend/common_widget/dual_color_widget.dart';
-import 'package:chef_frontend/views/auth/signinnn%20bloc/loginwithmobilenumber/MobileNumberBloc.dart';
+import 'package:chef_frontend/views/auth/signinnn_bloc/loginwithmobilenumber/MobileNumberBloc.dart';
 import 'package:flutter/material.dart';
 class MobileNumber extends StatefulWidget {
   static String route = '/chef/send otp';
