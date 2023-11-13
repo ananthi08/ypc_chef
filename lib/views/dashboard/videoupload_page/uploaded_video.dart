@@ -35,6 +35,14 @@ class Steps {
 }
 
 class _UploadVideoState extends State<UploadVideo> {
+      int _counter = 0;
+
+   void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
   //for product serve category
   String selectedDropdownValue = 'Select';
   List<String> dropdownItems = [];
@@ -82,6 +90,7 @@ class _UploadVideoState extends State<UploadVideo> {
         ingredients[0].name = nameController.text;
         ingredients[0].quantity = quantityController.text;
       }
+
     });
   }
 
@@ -93,6 +102,7 @@ void stepsRow() {
 
       stepControllers.add(stepController);
       stepdesControllers.add(stepdesController);
+      _incrementCounter();
 
       steps.add(NewSteps('', ''));
 
@@ -133,7 +143,7 @@ void stepsRow() {
     } else {
       for (int i = 0; i < steps.length; i++) {
         stepsJson.add({
-          'steps': stepControllers[i].text,
+          'steps': "${i+1}",
           'stepsdescription': stepdesControllers[i].text,
         });
       }
@@ -873,10 +883,11 @@ void stepsRow() {
                            Row(
                           children: [
                             const Expanded(
+                              flex: 9,
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Steps',
+                                  'Click the add button to Enter the Steps',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color.fromARGB(255, 0, 0, 0),
@@ -885,6 +896,7 @@ void stepsRow() {
                               ),
                             ),
                             Expanded(
+                              flex: 3,
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: GestureDetector(
@@ -904,62 +916,63 @@ void stepsRow() {
                           ],
                         ),
                         const SizedBox(height: 6),
-                        Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 500,
-                              color: Colors.grey.shade400,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        child: Center(
-                                          child: TextField(
-                                            controller: stepControllers[0],
-                                            onChanged: (value) {
-                                              if (steps.isNotEmpty) {
-                                                steps[0].steps = value;
-                                              }
-                                            },
-                                            decoration: const InputDecoration(
-                                              hintText: 'steps',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      flex: 6,
-                                      child: Container(
-                                        color: Colors.white,
-                                        child: TextField(
-                                          controller: stepdesControllers[0],
-                                          onChanged: (value) {
-                                            if (steps.isNotEmpty) {
-                                              steps[0].stepsdescription = value;
-                                            }
-                                          },
-                                          decoration: const InputDecoration(
-                                            hintText: 'Steps description',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        for (var i = 1; i < steps.length; i++)
+                        // Column(
+                        //   children: [
+                        //     Container(
+                        //       height: 70,
+                        //       width: 500,
+                        //       color: Colors.grey.shade400,
+                        //       margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(10.0),
+                        //         child: Row(
+                        //           children: [
+                        //             Text('Click the add button to Enter the Steps'),
+                        //             Expanded(
+                        //               flex: 2,
+                        //               child: Container(
+                        //                 color: const Color.fromARGB(
+                        //                     255, 255, 255, 255),
+                        //                 child: Center(
+                        //                   child: TextField(
+                        //                     controller: stepControllers[0],
+                        //                     onChanged: (value) {
+                        //                       if (steps.isNotEmpty) {
+                        //                         steps[0].steps = value;
+                        //                       }
+                        //                     },
+                        //                     decoration: const InputDecoration(
+                        //                       hintText: 'Step 0',
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             const SizedBox(width: 10),
+                        //             Expanded(
+                        //               flex: 6,
+                        //               child: Container(
+                        //                 color: Colors.white,
+                        //                 child: TextField(
+                        //                   controller: stepdesControllers[0],
+                        //                   onChanged: (value) {
+                        //                     if (steps.isNotEmpty) {
+                        //                       steps[0].stepsdescription = value;
+                        //                     }
+                        //                   },
+                        //                   decoration: const InputDecoration(
+                        //                     hintText: 'Steps description',
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        for (var i = 0; i < steps.length; i++)
                           Dismissible(
                             key: Key('steps_$i'),
                             direction: DismissDirection.endToStart,
@@ -989,13 +1002,19 @@ void stepsRow() {
                                       flex: 2,
                                       child: Container(
                                         color: Colors.white,
-                                        child: Center(
-                                          child: TextField(
-                                            controller: stepControllers[i],
-                                            decoration: const InputDecoration(
-                                              hintText: 'steps',
-                                            ),
-                                          ),
+                                        // child: Center(
+                                        //   child: TextField(
+                                        //     controller: stepControllers[i],
+                                        //     decoration: const InputDecoration(
+                                        //       hintText: 'steps',
+                                        //     ),
+                                        //   ),
+                                        // ),
+
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(14.0),
+                                          
+                                          child: Opacity(opacity: 0.6,child: Text('Steps ${i +1}')),
                                         ),
                                       ),
                                     ),
@@ -1006,10 +1025,13 @@ void stepsRow() {
                                       flex: 6,
                                       child: Container(
                                         color: Colors.white,
-                                        child: TextField(
-                                          controller: stepdesControllers[i],
-                                          decoration: const InputDecoration(
-                                            hintText: 'Steps Description',
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: TextField(
+                                            controller: stepdesControllers[i],
+                                            decoration: const InputDecoration(
+                                              hintText: 'Steps Description',
+                                            ),
                                           ),
                                         ),
                                       ),
