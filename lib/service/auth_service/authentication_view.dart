@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:developer';
 import 'package:chef_frontend/constants/global_variable.dart';
@@ -21,17 +23,22 @@ class SignupApi {
     required String password,
     required String confirmpassword,
     required String mobilenumber,
+    required String mobileCode,
+
     required context,
   }) async {
     try {
-      String baseUrl = '$KbaseUrl/chef/register';
+      String baseUrl = '$kbaseUrl/chef/register';
+    var test = mobileCode.isEmpty ? '91': mobileCode; 
 
       // Replace with your backend API endpoint
       Signup signupbody = Signup(
         email: email,
         password: password,
         userName: name,
-        mobileNumber: mobilenumber,
+        // mobileNumber: mobilenumber,
+        mobileNumber: "+$test $mobilenumber",
+
       );
       // print("$mobilenumber");
   
@@ -39,7 +46,7 @@ class SignupApi {
       
       http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: signupbody.toJson(),
         // body:encryptedData,
       );
@@ -96,7 +103,7 @@ class SignupApi {
     required context,
   }) async {
     try {
-      String baseUrl = '$KbaseUrl/chef/login';
+      String baseUrl = '$kbaseUrl/chef/login';
 
     
       Signinn signinbody = Signinn(
@@ -113,7 +120,7 @@ class SignupApi {
 
       final response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: signinbody.toJson(),
         // body: encryptedData,
 
@@ -163,7 +170,7 @@ class SignupApi {
 
       final sessionTokenResponse = await http.get(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
       );
       String? sessionToken;
       httpErroHandle(
@@ -198,7 +205,7 @@ class SignupApi {
     try {
       log("comming  hehre erererere");
 
-      String baseUrl = '$KbaseUrl/chef/reset/password';
+      String baseUrl = '$kbaseUrl/chef/reset/password';
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? email = prefs.getString("email");
@@ -213,7 +220,7 @@ class SignupApi {
       print("$email");
       http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: reset.toJson(),
       );
       httpErroHandle(
@@ -245,7 +252,7 @@ class SignupApi {
     required context,
   }) async {
     try {
-      String baseUrl = '$KbaseUrl/chef/verify/email';
+      String baseUrl = '$kbaseUrl/chef/verify/email';
 
       // Replace with your backend API endpoint
       Verifyemail verify = Verifyemail(
@@ -255,7 +262,7 @@ class SignupApi {
       print("$email");
       http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: verify.toJson(),
       );
       log("${response.statusCode}");
@@ -292,14 +299,14 @@ void sendotpwith_mobilenumber({
   required context,
 }) async {
   try {
-    String baseUrl = '$KbaseUrl/chef/send/otp';
+    String baseUrl = '$kbaseUrl/chef/send/otp';
 
     sendOtP sendingotp = sendOtP(
       mobileNumber: mobileNumber,
     );
     final response = await http.post(
       Uri.parse(baseUrl),
-      headers: Kheader,
+      headers: kHeader,
       body: sendingotp.toJson(),
     );
     print(response.body);
@@ -363,7 +370,7 @@ void sendotpwith_mobilenumber({
 
     if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
+        String baseUrl = '$kbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTP verifyRequest = VerifyOTP(
           // token: 'token',
@@ -377,7 +384,7 @@ void sendotpwith_mobilenumber({
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: verifyRequest.toJson(),
       );
         print('Response: ${response.body}');
@@ -430,7 +437,7 @@ String otpp = '';
 
     if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
+        String baseUrl = '$kbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTPRequest verifyRequest = VerifyOTPRequest(
           // token: 'token',
@@ -444,7 +451,7 @@ String otpp = '';
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: verifyRequest.toJson(),
       );
         print('Response: ${response.body}');

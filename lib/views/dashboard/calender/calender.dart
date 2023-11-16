@@ -36,7 +36,7 @@ class _CalendarViewState extends State<CalendarView> {
 
 _addDateBar(){
   return Container(
-            margin:  EdgeInsets.only(top: 20, left: 20),
+            margin:  const EdgeInsets.only(top: 20, left: 20),
             child: DatePicker(
               DateTime.now(),
               height:100,
@@ -112,7 +112,7 @@ _addDateBar(){
                   
                   ),
                 
-                  Text("Today", 
+                  const Text("Today", 
                   style: dmSansBoldTextStyle ,
                   ),
                 
@@ -120,7 +120,7 @@ _addDateBar(){
                 ),
               ),
         
-             MyButton(label: "+ Add Task", onTap: ()=>Get.to(AddTaskPage()))
+             MyButton(label: "+ Add Task", onTap: ()=>Get.to(const AddTaskPage()))
         
         
         

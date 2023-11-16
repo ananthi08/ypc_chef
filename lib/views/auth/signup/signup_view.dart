@@ -1,4 +1,6 @@
 
+// ignore_for_file: avoid_print
+
 import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
@@ -49,8 +51,8 @@ class _AccountCreateState extends State<AccountCreate> {
 // creating instance for using the class in service file
 //mobile numer variable
 
-  String? mobileCode;
-  String? mobileNumber;
+  String mobileCode='';
+  String mobileNumber='';
   SignupApi register = SignupApi();
   press() async {
     register.signup(
@@ -58,7 +60,9 @@ class _AccountCreateState extends State<AccountCreate> {
         email: emailIdController.text,
         password: passwordController.text,
         confirmpassword: confirmPasswordController.text,
-        mobilenumber: "+$mobileCode $mobileNumber",
+        mobilenumber: mobileNumber,
+        mobileCode: mobileCode,
+
         context: context);
 
     print("+$mobileCode $mobileNumber");
@@ -200,6 +204,7 @@ class _AccountCreateState extends State<AccountCreate> {
 
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
+                              // ignore: avoid_unnecessary_containers
                               child: Container(
                                 child: Text(
                                   'User Name',

@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:chef_frontend/constants/httperrorhandling.dart';
@@ -31,8 +33,8 @@ class FormfieldApi {
       String? chefId = prefs.getString("chefId");
       chefId = prefs.getString("chefId");
 
-      // String baseUrl = '$KbaseUrl/ypc/chef/upload/1';
-      String baseUrl = '$KbaseUrl/ypc/chef/upload/$chefId';
+      // String baseUrl = '$kbaseUrl/ypc/chef/upload/1';
+      String baseUrl = '$kbaseUrl/ypc/chef/upload/$chefId';
 
       Videodata uploadvideodata = Videodata(
         productname: productname,
@@ -53,7 +55,7 @@ class FormfieldApi {
       String jsonBody = jsonEncode(uploadvideodata);
     http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: jsonBody,
 
         

@@ -11,11 +11,11 @@ class GETchefDetails {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? chefId = prefs.getString("chefId");
-      String baseUrl = '$KbaseUrl/chef/$chefId/details';
+      String baseUrl = '$kbaseUrl/chef/$chefId/details';
 
       final response = await http.get(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
       );
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = jsonDecode(response.body);
@@ -50,12 +50,12 @@ class GETchefDetails {
   Future<List<Map<String, dynamic>>?> fethallvideos() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? chefId = prefs.getString("chefId");
-  String baseUrl = '$KbaseUrl/ypc/chef/allvideos/$chefId';
+  String baseUrl = '$kbaseUrl/ypc/chef/allvideos/$chefId';
 
   try {
     final response = await http.get(
       Uri.parse(baseUrl),
-      headers: Kheader,
+      headers: kHeader,
     );
 
     if (response.statusCode == 200) {

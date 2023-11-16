@@ -1,4 +1,6 @@
 // import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/otp_inputfield.dart';
 import 'package:chef_frontend/constants/validation.dart';

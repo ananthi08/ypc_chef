@@ -1,6 +1,8 @@
 import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
 import 'package:chef_frontend/views/auth/signin/resetpassword_view.dart';
 import 'package:chef_frontend/views/auth/signin/signin_view.dart';
+import 'package:chef_frontend/views/auth/signinnn_bloc/loginwithmobilenumber/widget.dart';
+import 'package:chef_frontend/views/auth/signup/signup_view.dart';
 import 'package:chef_frontend/views/dashboard/calender/add_task_bar.dart';
 import 'package:chef_frontend/views/dashboard/calender/calender.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
@@ -23,6 +25,9 @@ Map<String, Widget Function(BuildContext)> routes = {
   Myvideospage2.route: (context) => const Myvideospage2(),
   CalendarView.route: (context) => const CalendarView(),
   AddTaskPage.route: (context) => const AddTaskPage(),
+  AccountCreate.route: (context) => const AccountCreate(),
+  MobileNumber.route: (context) => const MobileNumber(),
+
 
 
 

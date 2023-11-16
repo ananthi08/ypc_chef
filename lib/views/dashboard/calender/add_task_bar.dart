@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:chef_frontend/views/dashboard/calender/calendar_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,15 +28,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
           child: Column(
           children: [
 
-            Text("Add Task",
+            const Text("Add Task",
            
             ),
 
-   MyInputField(title: 'Title', hint: 'Enter your title'),
-   MyInputField(title: 'Note', hint: 'Enter your note'),
+   const MyInputField(title: 'Title', hint: 'Enter your title'),
+   const MyInputField(title: 'Note', hint: 'Enter your note'),
   MyInputField(title: 'Date', hint: DateFormat.yMd().format(_selectedDate),
   widget: IconButton(
-    icon: Icon(Icons.calendar_today_outlined),
+    icon: const Icon(Icons.calendar_today_outlined),
     color: Colors.grey,
     onPressed:(){
    _getDateFromUser() ;
@@ -48,19 +50,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
         hint: _startTime ,
         widget: IconButton(onPressed: (){
 
-        }, icon: Icon(
+        }, icon: const Icon(
           Icons.access_time_rounded,
           color: Colors.grey,
         )),
       )),
-      SizedBox(width: 12,),
+      const SizedBox(width: 12,),
         Expanded(
         child: MyInputField(
         title: "End Date",
         hint: _endTime ,
         widget: IconButton(onPressed: (){
 
-        }, icon: Icon(
+        }, icon: const Icon(
           Icons.access_time_rounded,
           color: Colors.grey,
         )),
@@ -83,7 +85,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         onTap: () {
            Get.back();
         },
-        child: Icon(Icons.arrow_back,
+        child: const Icon(Icons.arrow_back,
         size: 20,
         color: Colors.brown,
         ),

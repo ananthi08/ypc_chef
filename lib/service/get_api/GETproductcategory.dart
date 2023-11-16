@@ -10,7 +10,7 @@ class ApiService {
     try {
       final response = await http.get(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
       );
 
       if (response.statusCode == 200) {
@@ -38,7 +38,7 @@ class ApiService {
     try {
       final response = await http.get(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
       );
 
       if (response.statusCode == 200) {
@@ -63,7 +63,7 @@ Future<List<Map<String, dynamic>>?> fetchnationalcuisine(List<int> selectedCuisi
  
     final response = await http.post(
       Uri.parse(baseUrl),
-      headers: Kheader,
+      headers: kHeader,
       body: jsonEncode({"internationalCuisineId": selectedCuisineIds}),
     );
 print('selecteeedidszz $selectedCuisineIds');

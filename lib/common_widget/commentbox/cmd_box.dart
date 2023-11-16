@@ -20,7 +20,7 @@ class _CommentButtonState extends State<CommentButton> {
       onTap: () {
         widget.onCommentButtonTapped(widget.videoUrl);
       },
-      child: Row(
+      child: const Row(
         children: [
           Icon(Icons.insert_comment_sharp),
           Text(

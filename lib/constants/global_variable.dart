@@ -1,12 +1,12 @@
-String KbaseUrl = "http://192.168.0.146:4000/ypc-chef-micro-service";
+String kbaseUrl = "http://192.168.0.146:4000/ypc-chef-micro-service";
 
-String UploadVideoLocal ="http://192.168.0.146:4000/ypc-authentication-micro-service/uploadVideolocal";
+String uploadVideoLocal ="http://192.168.0.146:4000/ypc-authentication-micro-service/uploadVideoLocal";
 String node = "http://192.168.0.146:4000/uploads/";
 
 String getbaseUrl = "http://192.168.0.146:4000/ypc-authentication-micro-service";
 
 
-Map<String, String> Kheader = {
+Map<String, String> kHeader = {
       'Content-Type': 'application/json; charset=UTF-8',
       "application-name" :"ypc.chef",
       "auth-key" :"DA2C5T3MCWVJDKMIZ6VO",

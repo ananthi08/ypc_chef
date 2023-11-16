@@ -1,10 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:chef_frontend/common_widget/dual_color_widget.dart';
 import 'package:chef_frontend/views/auth/signinnn_bloc/loginwithmobilenumber/MobileNumberBloc.dart';
+import 'package:chef_frontend/views/auth/signup/signup_view.dart';
 import 'package:flutter/material.dart';
 class MobileNumber extends StatefulWidget {
-  static String route = '/chef/send otp';
+  static String route = '/chef/send_otp';
 
   const MobileNumber({Key? key});
 
@@ -103,11 +106,11 @@ class _MobileNumberState extends State<MobileNumber> {
                             },
                             child: StreamBuilder<bool>(
                               stream: mobileNumberBloc.loadingStream,
-                              initialData: false,
+                              // initialData: false,
                               builder: (context, snapshot) {
                                 final isLoading = snapshot.data ?? false;
-                                return isLoading
-                                    ? const CircularProgressIndicator()
+                                   return isLoading
+                                    ? const CircularProgressIndicator(color:Colors.white,)
                                     : const Text('Verify',
                                         style: TextStyle(fontSize: 20),
                                       );
@@ -137,12 +140,12 @@ class _MobileNumberState extends State<MobileNumber> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => AccountCreate(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AccountCreate(),
+                          ),
+                        );
                       },
                       child: const Text(
                         "Sign Up",

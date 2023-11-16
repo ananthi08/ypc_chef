@@ -32,7 +32,7 @@ class _OTPFieldState extends State<OTPField> {
     String? mobileNumber = prefs.getString("mobileNumber");
     if (loginId != null) {
       try {
-        String baseUrl = '$KbaseUrl/chef/session/verify/$loginId/mobile';
+        String baseUrl = '$kbaseUrl/chef/session/verify/$loginId/mobile';
 
         VerifyOTPRequest verifyRequest = VerifyOTPRequest(
           // token: 'token',
@@ -46,7 +46,7 @@ class _OTPFieldState extends State<OTPField> {
 
         http.Response response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: verifyRequest.toJson(),
       );
         print('Response: ${response.body}');

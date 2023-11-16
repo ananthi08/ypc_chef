@@ -1,10 +1,7 @@
-import 'package:chef_frontend/common_widget/custom%20navbar/main_screen.dart';
+// import 'package:chef_frontend/common_widget/custom%20navbar/main_screen.dart';
 import 'package:chef_frontend/constants/routes.dart';
 import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
-import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
-import 'package:chef_frontend/views/demovideo.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
-import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 // import 'package:chef_frontend/views/first_page_view.dart';
 // import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 // import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
@@ -36,7 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       
-      // home: const Myvideospage2(),
+      // home: const AccountCreate(),
    initialRoute: Firstpage.route,
       routes: routes,
    

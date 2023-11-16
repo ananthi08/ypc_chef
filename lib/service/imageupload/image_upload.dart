@@ -19,7 +19,7 @@ class YourApiService {
   
       });
       print('imageeeeeeeee nameeeeeee$imageName');
- Options options = Options(headers: Kheader);
+ Options options = Options(headers: kHeader);
 
       final response = await _dio.post(
         'http://192.168.0.146:4000/ypc-authentication-micro-service/uploadimage',
@@ -42,12 +42,12 @@ class YourApiService {
 // 
 
 // /////////video upload
- final String uploadUrl = UploadVideoLocal;
+ final String uploadUrl = uploadVideoLocal;
 
   Future<String> uploadVideo(XFile videoFile) async {
     try {
       var request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
-      request.headers.addAll(Kheader);
+      request.headers.addAll(kHeader);
 
       // Create a MultipartFile from the video file
       var videoStream = http.ByteStream(videoFile.openRead());

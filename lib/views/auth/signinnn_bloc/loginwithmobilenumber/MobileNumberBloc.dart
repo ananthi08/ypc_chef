@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -26,18 +28,18 @@ class MobileNumberBloc {
     _loadingController.sink.add(true);
 
     try {
-      String baseUrl = '$KbaseUrl/chef/send/otp';
+      String baseUrl = '$kbaseUrl/chef/send/otp';
       sendOtP sendingotp = sendOtP(
         mobileNumber: mobileNumber,
       );
 
       final response = await http.post(
         Uri.parse(baseUrl),
-        headers: Kheader,
+        headers: kHeader,
         body: sendingotp.toJson(),
       );
-   print('wqwqwqwqwqwqw$response');
-      // ignore: use_build_context_synchronously
+       print('wqwqwqwqwqwqw$response');
+     
       httpErroHandle(
         context: context,
         response: response,
@@ -55,7 +57,6 @@ print('hi fgmobnnumberrndzzz$mobileNumber');
 
           loginId = prefs.getString("loginId");
           print('hi frndzzz$loginId');
-          // ignore: use_build_context_synchronously
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -67,13 +68,14 @@ print('hi fgmobnnumberrndzzz$mobileNumber');
     } catch (e) {
       print("Error: $e");
       showCustomSnackBar(
-        context: context,
+        context: context, 
         text: "An error occurred: $e",
       );
 
-      // Hide loading indicator on error
-      _loadingController.sink.add(false);
+      
     }
+      // Hide loading indicator on error
+    _loadingController.sink.add(false);
   }
 }
 

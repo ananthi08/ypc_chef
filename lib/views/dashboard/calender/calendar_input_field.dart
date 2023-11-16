@@ -19,7 +19,7 @@ class MyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,12 +28,12 @@ class MyInputField extends StatelessWidget {
           ),
           Container(
             height: 52,
-            margin: EdgeInsets.only(top: 8),
-            padding: EdgeInsets.only(left: 14),
+            margin: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(left: 14),
             // color: Colors.grey,
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: Color.fromARGB(255, 10, 9, 9), width: 1.0),
+                    color: const Color.fromARGB(255, 10, 9, 9), width: 1.0),
                 borderRadius: BorderRadius.circular(12)),
             child:
              Row(children: [
@@ -44,7 +44,7 @@ class MyInputField extends StatelessWidget {
                 cursorColor:
                     Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
                 controller: controller,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
                 decoration: InputDecoration(
                   hintText: hint,
                   focusedBorder: UnderlineInputBorder(

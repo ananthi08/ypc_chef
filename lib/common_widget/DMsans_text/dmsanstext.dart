@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
  TextStyle dmSansTextStyle =const TextStyle(
@@ -7,9 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
   fontSize: 16.0,
 );
 
-final TextStyle dmSansBoldTextStyle = TextStyle(
+const TextStyle dmSansBoldTextStyle = TextStyle(
   fontFamily: 'DMSans',
-    color:Colors.black,
+    color:Colors.black, 
   fontWeight: FontWeight.bold,
   fontSize: 34,
 );
