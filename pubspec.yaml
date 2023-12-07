@@ -94,6 +94,7 @@ flutter:
   assets:
 
   - assets/
+  - assets/customer2.svg
   - assets/dashboard/
 
   

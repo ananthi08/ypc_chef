@@ -8,6 +8,7 @@ import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -405,7 +406,59 @@ Future<void> selectImage() async {
             ],
           ),
         ),
-        //  bottomNavigationBar:const MyButtomNavBar()
+       bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color:const Color.fromARGB(255, 240, 240, 240),
+
+
+      child: Container(
+
+        height: 50,
+
+        child: Row(
+          
+          mainAxisAlignment:MainAxisAlignment.spaceAround,
+          children: 
+        [
+// for home
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, Dashboardview.route);
+          },
+          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+// for cart
+            IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+// for mail
+          IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+              IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.mail,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+
+
+        ],
+        ),
+
+
+      ),
+      
+      
+       ),
       ),
     );
   }

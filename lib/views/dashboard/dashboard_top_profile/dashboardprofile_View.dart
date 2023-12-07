@@ -505,20 +505,58 @@ class _ProfilepageState extends State<Profilepage> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(backgroundColor: Colors.white,
-          labelTextStyle: MaterialStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+   bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color:const Color.fromARGB(255, 240, 240, 240),
+
+
+      child: Container(
+
+        height: 50,
+
+        child: Row(
+          
+          mainAxisAlignment:MainAxisAlignment.spaceAround,
+          children: 
+        [
+// for home
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, Dashboardview.route);
+          },
+          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
           ),
+
+// for cart
+            IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+// for mail
+          IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+              IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.mail,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+
+
+        ],
         ),
-        child: NavigationBar(destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(
-              icon: Icon(Icons.category_sharp), label: 'Category'),
-          NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
-          NavigationDestination(icon: Icon(Icons.feed), label: 'Feed'),
-        ]),
+
+
       ),
-    );
+      
+   )
+       );
   }
 }

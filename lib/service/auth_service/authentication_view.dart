@@ -65,13 +65,13 @@ class SignupApi {
           // print("heloo frnd $token");
 // USER TOKEN  END
 
-          //  .....userId...........start
-          var userId = jsonDecode(response.body)['userId'];
-          await prefs.setString("userId", "$userId");
+          //  .....chefId...........start
+          var chefId = jsonDecode(response.body)['chefId'];
+          await prefs.setString("chefId", "$chefId");
 
-          userId = prefs.getString("userId");
+          chefId = prefs.getString("chefId");
 
-          print("heloo frnd $userId");
+          print("heloo frnd $chefId");
 // ................userId   end
 
  // Save mobilenumber in local storage

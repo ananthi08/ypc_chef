@@ -13,7 +13,7 @@ class GETchefDetails {
       String? chefId = prefs.getString("chefId");
       String baseUrl = '$kbaseUrl/chef/$chefId/details';
 
-      final response = await http.get(
+print("chefIdchefIdchefId$chefId") ;     final response = await http.get(
         Uri.parse(baseUrl),
         headers: kHeader,
       );
@@ -47,10 +47,16 @@ class GETchefDetails {
 
 
 
-  Future<List<Map<String, dynamic>>?> fethallvideos() async {
+  Future<List<Map<String, dynamic>>?>   fethallvideos() async {
+
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  
   String? chefId = prefs.getString("chefId");
+  // String baseUrl = '$kbaseUrl/ypc/chef/allvideos/1';
   String baseUrl = '$kbaseUrl/ypc/chef/allvideos/$chefId';
+
 
   try {
     final response = await http.get(

@@ -74,17 +74,7 @@ class _Myvideospage2State extends State<Myvideospage2> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // IconButton(
-                    //   icon: const Icon(Icons.arrow_back),
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const Myvideospage(),
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
+               
 
                     Center(
                       child: IconButton(
@@ -101,7 +91,7 @@ class _Myvideospage2State extends State<Myvideospage2> {
                     ),
                     Center(
                       child: Container(
-                        width: 300,
+                       width: MediaQuery.of(context).size.width * 0.8,
                         margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,

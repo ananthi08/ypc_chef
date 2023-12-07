@@ -4,6 +4,7 @@ import 'package:chef_frontend/service/get_api/GETproductcategory.dart';
 import 'package:chef_frontend/service/imageupload/formfiled.dart';
 import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,14 +36,15 @@ class Steps {
 }
 
 class _UploadVideoState extends State<UploadVideo> {
-      int _counter = 0;
+  int _counter = 0;
 
-   void _incrementCounter() {
+  void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
 
+  bool isButtonEnabled = false;
   //for product serve category
   String selectedDropdownValue = 'Select';
   List<String> dropdownItems = [];
@@ -72,9 +74,8 @@ class _UploadVideoState extends State<UploadVideo> {
   FormfieldApi formdatas = FormfieldApi();
   final List<NewIngredient> ingredients = [];
   final List<NewSteps> steps = [];
-  
-  // get stepdesControllers => null;
 
+  // get stepdesControllers => null;
 
   void addIngredientRow() {
     setState(() {
@@ -90,12 +91,10 @@ class _UploadVideoState extends State<UploadVideo> {
         ingredients[0].name = nameController.text;
         ingredients[0].quantity = quantityController.text;
       }
-
     });
   }
 
-
-void stepsRow() {
+  void stepsRow() {
     setState(() {
       TextEditingController stepController = TextEditingController();
       TextEditingController stepdesController = TextEditingController();
@@ -108,14 +107,15 @@ void stepsRow() {
 
       if (steps.isEmpty) {
         steps[0].steps = stepController.text;
-        steps[0].stepsdescription= stepdesController.text;
+        steps[0].stepsdescription = stepdesController.text;
       }
     });
   }
+
   List<TextEditingController> nameControllers = [];
   List<TextEditingController> quantityControllers = [];
   List<TextEditingController> stepControllers = [];
-  List<TextEditingController> stepdesControllers= [];
+  List<TextEditingController> stepdesControllers = [];
   void press() async {
     String category = selectedCategory ?? "";
 
@@ -135,7 +135,7 @@ void stepsRow() {
       }
     }
     List<Map<String, dynamic>> stepsJson = [];
-       if (steps.isEmpty) {
+    if (steps.isEmpty) {
       stepsJson.add({
         'steps': stepControllers[0].text,
         'stepsdescription': stepdesControllers[0].text,
@@ -143,14 +143,11 @@ void stepsRow() {
     } else {
       for (int i = 0; i < steps.length; i++) {
         stepsJson.add({
-          'steps': "${i+1}",
+          'steps': "${i + 1}",
           'stepsdescription': stepdesControllers[i].text,
         });
       }
     }
-
-
-
 
     if (_sideCategoryController.text.isNotEmpty) {
       category = _sideCategoryController.text;
@@ -175,12 +172,6 @@ void stepsRow() {
         ingredients: ingredientsJson,
         context: context,
       );
-
-      print('Form data submitted successfully');
-      print('Selected category: $category');
-      print('Ingredients: $ingredientsJson');
-      print('steps: $stepsJson');
-
     } catch (e) {
       print('Error submitting form data: $e');
     }
@@ -191,7 +182,7 @@ void stepsRow() {
 
   String MainCategory = 'Main Dish';
   String SideCategory = 'Side Dish';
-  // String selectedCategory = 'Veg';
+
   String selectedDietType = 'Veg';
 
   final ApiService _apiService = ApiService();
@@ -239,8 +230,8 @@ void stepsRow() {
     fetchInternationaldata();
     nameControllers.add(TextEditingController());
     quantityControllers.add(TextEditingController());
-     stepControllers.add(TextEditingController());
-     stepdesControllers.add(TextEditingController());
+    stepControllers.add(TextEditingController());
+    stepdesControllers.add(TextEditingController());
   }
 
 // fetchservecategory
@@ -368,7 +359,7 @@ void stepsRow() {
                         child: Container(
                           width: screenWidth * 0.4,
                           color: selectedDietType == 'Veg'
-                              ?  CustomColor.myRedColor
+                              ? CustomColor.myRedColor
                               : Colors.transparent,
                           child: Center(
                             child: Text(
@@ -422,6 +413,7 @@ void stepsRow() {
                 ),
                 const SizedBox(height: 5),
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: _productnameController,
                   decoration: InputDecoration(
                     hintText: "Enter Product Name",
@@ -750,7 +742,7 @@ void stepsRow() {
                                     'Add +',
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color:  CustomColor.myRedColor,
+                                      color: CustomColor.myRedColor,
                                     ),
                                   ),
                                 ),
@@ -826,10 +818,11 @@ void stepsRow() {
                               });
                             },
                             background: Container(
-                              color:  CustomColor.myRedColor,
+                              color: CustomColor.myRedColor,
                               alignment: Alignment.centerRight,
                               padding: const EdgeInsets.only(right: 16),
-                              child: const Icon(Icons.delete, color: Colors.white),
+                              child:
+                                  const Icon(Icons.delete, color: Colors.white),
                             ),
                             child: Container(
                               height: 70,
@@ -874,13 +867,10 @@ void stepsRow() {
                               ),
                             ),
                           ),
-
-
-
-
-                           const SizedBox(height: 40,),
-
-                           Row(
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
                           children: [
                             const Expanded(
                               flex: 9,
@@ -907,7 +897,7 @@ void stepsRow() {
                                     'Add +',
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color:  CustomColor.myRedColor,
+                                      color: CustomColor.myRedColor,
                                     ),
                                   ),
                                 ),
@@ -916,62 +906,6 @@ void stepsRow() {
                           ],
                         ),
                         const SizedBox(height: 6),
-                        // Column(
-                        //   children: [
-                        //     Container(
-                        //       height: 70,
-                        //       width: 500,
-                        //       color: Colors.grey.shade400,
-                        //       margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.all(10.0),
-                        //         child: Row(
-                        //           children: [
-                        //             Text('Click the add button to Enter the Steps'),
-                        //             Expanded(
-                        //               flex: 2,
-                        //               child: Container(
-                        //                 color: const Color.fromARGB(
-                        //                     255, 255, 255, 255),
-                        //                 child: Center(
-                        //                   child: TextField(
-                        //                     controller: stepControllers[0],
-                        //                     onChanged: (value) {
-                        //                       if (steps.isNotEmpty) {
-                        //                         steps[0].steps = value;
-                        //                       }
-                        //                     },
-                        //                     decoration: const InputDecoration(
-                        //                       hintText: 'Step 0',
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //             const SizedBox(width: 10),
-                        //             Expanded(
-                        //               flex: 6,
-                        //               child: Container(
-                        //                 color: Colors.white,
-                        //                 child: TextField(
-                        //                   controller: stepdesControllers[0],
-                        //                   onChanged: (value) {
-                        //                     if (steps.isNotEmpty) {
-                        //                       steps[0].stepsdescription = value;
-                        //                     }
-                        //                   },
-                        //                   decoration: const InputDecoration(
-                        //                     hintText: 'Steps description',
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                         for (var i = 0; i < steps.length; i++)
                           Dismissible(
                             key: Key('steps_$i'),
@@ -984,10 +918,11 @@ void stepsRow() {
                               });
                             },
                             background: Container(
-                              color:  CustomColor.myRedColor,
+                              color: CustomColor.myRedColor,
                               alignment: Alignment.centerRight,
                               padding: const EdgeInsets.only(right: 16),
-                              child: const Icon(Icons.delete, color: Colors.white),
+                              child:
+                                  const Icon(Icons.delete, color: Colors.white),
                             ),
                             child: Container(
                               height: 70,
@@ -1002,19 +937,11 @@ void stepsRow() {
                                       flex: 2,
                                       child: Container(
                                         color: Colors.white,
-                                        // child: Center(
-                                        //   child: TextField(
-                                        //     controller: stepControllers[i],
-                                        //     decoration: const InputDecoration(
-                                        //       hintText: 'steps',
-                                        //     ),
-                                        //   ),
-                                        // ),
-
                                         child: Padding(
                                           padding: const EdgeInsets.all(14.0),
-                                          
-                                          child: Opacity(opacity: 0.6,child: Text('Steps ${i +1}')),
+                                          child: Opacity(
+                                              opacity: 0.6,
+                                              child: Text('Steps ${i + 1}')),
                                         ),
                                       ),
                                     ),
@@ -1041,79 +968,33 @@ void stepsRow() {
                               ),
                             ),
                           ),
-
-
-
-
-
-
-
                       ],
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-
-
-                    
-                    // const Column(
-                    //   children: [
-                    //     Row(
-                    //       children: [
-                    //         Align(
-                    //           alignment: Alignment.centerLeft,
-                    //           child: Text(
-                    //             'Steps',
-                    //             style: TextStyle(
-                    //                 fontSize: 15,
-                    //                 color: Color.fromARGB(255, 0, 0, 0),
-                    //                 fontWeight: FontWeight.normal),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ],
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    // SizedBox(
-                    //   //  width: 340,
-                    //   width: MediaQuery.of(context)
-                    //       .size
-                    //       .width, // <-- TextField width
-                    //   height: 110, // <-- TextField height
-                    //   child: TextField(
-                    //     controller: descriptionController,
-                    //     maxLines: null,
-                    //     expands: true,
-                    //     keyboardType: TextInputType.multiline,
-                    //     decoration: const InputDecoration(
-                    //       filled: true,
-                    //       hintText: 'Enter steps to be followed',
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor: CustomColor.myRedColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: isButtonEnabled
+                            ? CustomColor.myRedColor
+                            : Colors.grey,
                         minimumSize: const Size(175, 50),
                       ),
-                      onPressed: () {
-                        // if (_formKey.currentState!.validate()) {
-                        press();
-                        //     }
-                      },
+                      onPressed: isButtonEnabled
+                          ? () {
+                              if (_formKey.currentState!.validate()) {
+                                press();
+                              }
+                            }
+                          : null,
                       child: const Text(
                         'Upload',
                         style: TextStyle(color: Colors.white),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ],
@@ -1121,6 +1002,87 @@ void stepsRow() {
           ),
         ),
       ),
+      
+
+
+// floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+//       floatingActionButton: Container(
+//         margin: const EdgeInsets.only(top: 3),
+//         height: 50,
+//         width: 50,
+//         child: FloatingActionButton(
+//           backgroundColor: Colors.white,
+//           elevation: 0,
+//           onPressed: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                 builder: (context) => const UploadVideo(),
+//               ),
+//             );
+//           },
+//           shape: RoundedRectangleBorder(
+//             side: const BorderSide(
+//               width: 3,
+//               color: Color.fromARGB(255, 169, 169, 169),
+//             ),
+//             borderRadius: BorderRadius.circular(100),
+//           ),
+//           child: const Icon(
+//             Icons.add,
+//             color: Color.fromARGB(255, 173, 20, 0),
+//           ),
+//         ),
+//       ),
+      bottomNavigationBar: BottomAppBar(
+        // shape: CircularNotchedRectangle(),
+        color:const Color.fromARGB(255, 240, 240, 240),
+      
+
+
+      child: Container(
+
+        height: 50,
+
+        child: Row(
+          
+          mainAxisAlignment:MainAxisAlignment.spaceAround,
+          children: 
+        [
+// for home
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, Dashboardview.route);
+          },
+          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+// for cart
+            IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
+          ),
+// fornotification
+          IconButton(onPressed: (){
+            
+          }, 
+          
+          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+          ),
+
+        
+
+
+        ],
+        ),
+
+
+      ),
+      
+      
+       ),
+
     );
   }
 }
@@ -1138,7 +1100,6 @@ class NewIngredient {
     };
   }
 }
-
 
 class NewSteps {
   String steps;
