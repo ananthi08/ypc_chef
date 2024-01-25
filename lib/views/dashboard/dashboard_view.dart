@@ -1,5 +1,6 @@
 // import 'package:chef_frontend/common_widget/DMsans_text/dmsanstext.dart';
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
+import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
 import 'package:chef_frontend/views/dashboard/calender/calender.dart';
@@ -18,45 +19,65 @@ class Dashboardview extends StatefulWidget {
 }
 
 class _DashboardviewState extends State<Dashboardview> {
+  final GETchefDetails fetchall_videos = GETchefDetails();
+  List<Map<String, dynamic>> videos = [];
+  Set<String> videoUrls = {}; // Set to store unique video URLs
 
-
-
- final GETchefDetails fetchall_videos = GETchefDetails();
-List<Map<String, dynamic>> videos = [];
-Set<String> videoUrls = {}; // Set to store unique video URLs
-
-
-@override
+  @override
   void initState() {
     super.initState();
-
+    getUserId();
     fetchAndDisplayVideos();
-    
   }
 
+  late String userId = '';
+  late String userName = '';
+  late String email = '';
+  final GETchefDetails _chefDetails = GETchefDetails();
 
-Future<void> fetchAndDisplayVideos() async {
-  try {
-    final fetchedVideos = await fetchall_videos.fethallvideos();
-    if (fetchedVideos != null) {
-      setState(() {
-        videos = fetchedVideos;
-        // Extract and store unique video URLs
-        videoUrls = Set<String>.from(videos.map((video) => video['videoUrl']));
-        // print('tooooooooooooooootal$videos');
-      });
+  String imageUrl = '';
+  Future<void> getUserId() async {
+    try {
+      final chefDetails = await _chefDetails
+          .getchefDetails(context: context, selectedCuisineIds: []);
+      if (chefDetails != null) {
+        setState(() {
+          userId = chefDetails['id'] ?? '';
+          userName = chefDetails['userName'] ?? '';
+          email = chefDetails['email'] ?? '';
+          imageUrl = chefDetails['imageUrl'] ?? '';
+        });
+        // print(chefDetails);
+        // log(email);
+      }
+    } catch (e) {
+      print("Error fetching user details: $e");
     }
-  } catch (e) {
-    print('Error fetching and displaying videos: $e');
   }
-}
 
- double height = 0.0;
+  Future<void> fetchAndDisplayVideos() async {
+    try {
+      final fetchedVideos = await fetchall_videos.fethallvideos();
+      if (fetchedVideos != null) {
+        setState(() {
+          videos = fetchedVideos;
+          // Extract and store unique video URLs
+          videoUrls =
+              Set<String>.from(videos.map((video) => video['videoUrl']));
+          // print('tooooooooooooooootal$videos');
+        });
+      }
+    } catch (e) {
+      print('Error fetching and displaying videos: $e');
+    }
+  }
+
+  double height = 0.0;
   double width = 0.0;
 
   @override
   Widget build(BuildContext context) {
-     height = MediaQuery.of(context).size.height;
+    height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
 //  theme: new ThemeData(scaffoldBackgroundColor: const Color(#FFEFEF)),
@@ -78,16 +99,19 @@ Future<void> fetchAndDisplayVideos() async {
                           fontSize: 34,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'DMSans'),
-                     
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Column(
                         children: [
                           IconButton(
-                            icon: const Icon(
-                              Icons.account_circle_rounded,
-                              size: 40,
+                            icon: CircleAvatar(
+                              radius: 20,
+                              backgroundImage: imageUrl.isNotEmpty
+                                  ? NetworkImage('$node$imageUrl')
+                                  : const NetworkImage(
+                                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
+                              backgroundColor: Colors.black,
                             ),
                             color: Colors.black87,
                             onPressed: () async {
@@ -105,277 +129,229 @@ Future<void> fetchAndDisplayVideos() async {
                   ],
                 ),
                 const SizedBox(height: 30),
-
-
-
-               Center(
-  child: Column(
-    children: [
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Myvideospage()),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset("assets/mxplayer.jpeg"),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  const Text('My Videos',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text('${videoUrls.length} Videos'),
-                ],
-              ),
-              const Text(
-                "See More",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-
-
-
-                const SizedBox(height: 30),
-           
-               Center(
-  child: Column(
-    children: [
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CustomersPage()),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset("assets/peoples.jpeg"),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  const Text(
-                    'My Customers',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text('23 people'),
-                ],
-              ),
-              const Text(
-                "See More",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-                const SizedBox(height: 30),
-
-
-
-                    Center(
-  child: Column(
-    children: [
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CustomersPage()),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset("assets/peoples.jpeg"),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  const Text(
-                    'My Followers',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text('23 people'),
-                ],
-              ),
-              const Text(
-                "See More",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-                // Center(
-                //   child: Column(
-                //     children: [
-                //       Container(
-                //         padding: const EdgeInsets.all(17),
-                //         decoration: BoxDecoration(
-                //             color: Colors.white,
-                //             borderRadius: BorderRadius.circular(16)),
-                //         height: 120,
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             //  const SizedBox(width: 30),
-                //             Column(
-                //               children: [
-                //                 Image.asset("assets/calendar.jpeg"),
-                //                 const SizedBox(
-                //                   height: 1,
-                //                 ),
-                //                 const Text('View Schedule',
-                //                     style:
-                //                         TextStyle(fontWeight: FontWeight.bold)),
-                //                 const SizedBox(
-                //                   height: 8,
-                //                 ),
-                //                 const Text('23 Payment'),
-                //               ],
-                //             ),
-
-                //             GestureDetector(
-                //               onTap: () {
-                //               Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(
-                //                   builder: (context) => const CalendarView(),
-                //                 ),
-                //               );
-                //               },
-                //               child: const Text(
-                //                 "See More",
-                //                 style: TextStyle(
-                //                   fontSize: 16,
-                //                   fontWeight: FontWeight.bold,
-                //                 ),
-                //               ),
-                //             )
-                //           ],
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                const SizedBox(height: 30),
-
-                
                 Center(
-  child: Column(
-    children: [
-      GestureDetector(
-        onTap: () {
-       
-        },
-        child: Container(
-          padding: const EdgeInsets.all(17),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          height: 120,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.asset("assets/payment.jpg"),
-                  const SizedBox(
-                    height: 1,
+                  child: Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Align items to the start
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Myvideospage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(17),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          height: 120,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset("assets/mxplayer.jpeg"),
+                                    const SizedBox(
+                                      height: 1,
+                                    ),
+                                    const Text(
+                                      'My Videos',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'DMSans'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                '${videoUrls.length} Videos',
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                    fontFamily: 'DMSans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  const Text(
-                    'Payment',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text('23 Payment'),
-                ],
-              ),
-              const Text(
-                "See More",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  ),
-),
+                const SizedBox(height: 30),
+                Center(
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CustomersPage()),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(17),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          height: 120,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset("assets/peoples.jpeg"),
+                                    const SizedBox(
+                                      height: 1,
+                                    ),
+                                    const Text(
+                                      'My Followers',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'DMSans'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Text(
+                                '23 people',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                    fontFamily: 'DMSans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CustomersPage()),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(17),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          height: 120,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset("assets/calendar.jpeg"),
+                                    const SizedBox(
+                                      height: 1,
+                                    ),
+                                    const Text(
+                                      'View Schedule',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'DMSans'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Text(
+                                '5 Tasks',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                    fontFamily: 'DMSans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(17),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          height: 120,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset("assets/payment.jpg"),
+                                    const SizedBox(
+                                      height: 1,
+                                    ),
+                                    const Text(
+                                      'Payment',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'DMSans'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Text(
+                                '23 Payment',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                    fontFamily: 'DMSans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
 
-
-      
-     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         margin: const EdgeInsets.only(top: 3),
         height: 50,
@@ -405,59 +381,49 @@ Future<void> fetchAndDisplayVideos() async {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        color:const Color.fromARGB(255, 240, 240, 240),
-
-
-      child: Container(
-
-        height: 50,
-
-        child: Row(
-          
-          mainAxisAlignment:MainAxisAlignment.spaceAround,
-          children: 
-        [
+        shape: const CircularNotchedRectangle(),
+        color: const Color.fromARGB(255, 240, 240, 240),
+        // ignore: sized_box_for_whitespace
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
 // for home
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, Dashboardview.route);
-          },
-          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
-          ),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Dashboardview.route);
+                  },
+                  icon: const Icon(
+                    Icons.home_filled,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
 
 // for cart
-            IconButton(onPressed: (){
-            
-          }, 
-          
-          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
-          ),
+              // IconButton(
+              //     onPressed: () {},
+              //     icon:const Icon(
+              //       Icons.shopping_cart_checkout,
+              //       color: Color.fromARGB(255, 173, 20, 0),
+              //     )),
 // for mail
-          IconButton(onPressed: (){
-            
-          }, 
-          
-          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.notifications_active,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
+
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.mail,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
+            ],
           ),
-
-              IconButton(onPressed: (){
-            
-          }, 
-          
-          icon: Icon(Icons.mail,color: Color.fromARGB(255, 173, 20, 0),)
-          ),
-
-
-
-        ],
         ),
-
-
       ),
-      
-      
-       ),
-
     );
   }
 }

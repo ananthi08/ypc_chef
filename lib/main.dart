@@ -1,42 +1,48 @@
-// import 'package:chef_frontend/common_widget/custom%20navbar/main_screen.dart';
 import 'package:chef_frontend/constants/routes.dart';
 import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
-// import 'package:chef_frontend/views/first_page_view.dart';
-// import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
-// import 'package:chef_frontend/views/dashboard/uploaded_video.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? chefId = prefs.getString("chefId");
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<SelectedDataModel>(create: (context) => SelectedDataModel()),
       ],
-      child: const MyApp(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor:const Color.fromARGB(255, 191, 13, 0)),
+          useMaterial3: true,
+        ),
+        initialRoute: chefId != null ? Dashboardview.route : Firstpage.route,
+        routes: routes,
+      ),
     ),
   );
 }
 
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 191, 13, 0)),
         useMaterial3: true,
       ),
-      
-      // home: const AccountCreate(),
-   initialRoute: Firstpage.route,
+      initialRoute: Firstpage.route,
       routes: routes,
-   
     );
   }
 }

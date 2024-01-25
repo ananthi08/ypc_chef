@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/videoplayer.dart';
 import 'package:chef_frontend/service/get_api/GETproductcategory.dart';
@@ -26,6 +29,8 @@ class Ingredient {
   String quantity;
 
   Ingredient(this.name, this.quantity);
+
+  static fromJson(i) {}
 }
 
 class Steps {
@@ -157,6 +162,7 @@ class _UploadVideoState extends State<UploadVideo> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String videoUrl = prefs.getString('filePath') ?? '';
+      String? thumblineImage = uploadedImagePath;
 
       // ignore: use_build_context_synchronously
       await formdatas.dataload(
@@ -169,6 +175,7 @@ class _UploadVideoState extends State<UploadVideo> {
         // steps: descriptionController.text,
         steps: stepsJson,
         videoUrl: videoUrl,
+        thumblineImageUrl: thumblineImage,
         ingredients: ingredientsJson,
         context: context,
       );
@@ -178,6 +185,8 @@ class _UploadVideoState extends State<UploadVideo> {
   }
 
   bool videoUploaded = false;
+  bool thumblineUploaded = false;
+
   bool isText1Selected = true;
 
   String MainCategory = 'Main Dish';
@@ -186,19 +195,6 @@ class _UploadVideoState extends State<UploadVideo> {
   String selectedDietType = 'Veg';
 
   final ApiService _apiService = ApiService();
-
-  // Future<void> _pickVideoFromGallery(BuildContext context) async {
-  //   final picker = ImagePicker();
-  //   final pickedFile = await picker.pickVideo(source: ImageSource.gallery);
-
-  //   if (pickedFile != null) {
-  //     Navigator.of(context).push(
-  //       MaterialPageRoute(
-  //         builder: (context) => VideoPlayerScreen(videoPath: pickedFile.path),
-  //       ),
-  //     );
-  //   }
-  // }
 
   final YourApiService _apiServicee = YourApiService();
   final picker = ImagePicker();
@@ -214,9 +210,11 @@ class _UploadVideoState extends State<UploadVideo> {
           content: Text(uploadResult),
         ),
       );
-      print("dsdsdsadasdasdas");
+      // print("dsdsdsadasdasdas");
       if (uploadResult == 'Video uploaded successfully') {
+        // selectImage();
         setState(() {
+          print('uploadResultuploadResultuploadResult$uploadResult');
           videoUploaded = true;
         });
       }
@@ -318,6 +316,64 @@ class _UploadVideoState extends State<UploadVideo> {
     }
   }
 
+// ...................................................thumbline uploader
+
+  Uint8List? _image;
+  File? selectedImage;
+
+  File? selectedIMage;
+  //Gallery
+  Future<void> _pickImageFromGallery() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (returnImage != null && returnImage.path != null) {
+      setState(() {
+        selectedImage = File(returnImage.path!);
+
+        uploadImage();
+      });
+    }
+  }
+
+  String? uploadedImagePath;
+
+  Future<void> uploadImage() async {
+    YourApiService apiService = YourApiService();
+    try {
+      final response = await apiService.upi(selectedImage);
+      if (response.isNotEmpty) {
+        setState(() {
+          Navigator.of(context).pop();
+
+          print('Image uploaded successfully. Response: $response');
+          thumblineUploaded = true;
+          uploadedImagePath = response;
+        });
+      } else {
+        print('Image upload failed. Response is empty.');
+      }
+    } catch (error) {
+      print('Error uploading image: $error');
+    }
+  }
+
+//Camera
+  Future _pickImageFromCamera() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (returnImage == null) return;
+    setState(() {
+      selectedIMage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+      // selectImage();
+    });
+    Navigator.of(context).pop();
+  }
+
+//
+
+  // .............end of thumbline uploader........................
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -439,12 +495,12 @@ class _UploadVideoState extends State<UploadVideo> {
                 ),
 
                 Container(
-                  height: 70,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Color.fromARGB(255, 217, 217, 217),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
@@ -473,12 +529,12 @@ class _UploadVideoState extends State<UploadVideo> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 13,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
                       ),
                       Expanded(
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Color.fromARGB(255, 217, 217, 217),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
@@ -494,6 +550,40 @@ class _UploadVideoState extends State<UploadVideo> {
                               ),
                               Radio<String>(
                                 value: 'Side',
+                                groupValue: selectedCategory,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedCategory = value;
+                                    print(
+                                        "Selected product category Value: $selectedCategory");
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 217, 217, 217),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Text(
+                                'Others',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Radio<String>(
+                                value: 'Other',
                                 groupValue: selectedCategory,
                                 onChanged: (value) {
                                   setState(() {
@@ -708,6 +798,55 @@ class _UploadVideoState extends State<UploadVideo> {
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 20),
+
+                SizedBox(
+                  width: screenWidth,
+                  height: 80,
+                  child: DottedBorder(
+                    color: Colors.grey,
+                    strokeWidth: 2,
+                    dashPattern: const [8, 8],
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(10),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          if (thumblineUploaded) {
+                          } else {
+                            showImagePickerOption(context);
+                            // selectImage();
+                          }
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (thumblineUploaded)
+                              Container(
+                                width: screenWidth,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(uploadedImagePath!),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              )
+                            else
+                              const Icon(
+                                Icons.file_upload_outlined,
+                              ),
+                            const SizedBox(height: 8),
+                            if (!thumblineUploaded)
+                              const Text('Upload Thumbline Image ')
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+//1706169197803.jpg
 
                 const SizedBox(height: 20),
                 const SizedBox(height: 6),
@@ -953,7 +1092,8 @@ class _UploadVideoState extends State<UploadVideo> {
                                       child: Container(
                                         color: Colors.white,
                                         child: Padding(
-                                          padding: EdgeInsets.only(left: 10),
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
                                           child: TextField(
                                             controller: stepdesControllers[i],
                                             decoration: const InputDecoration(
@@ -983,13 +1123,15 @@ class _UploadVideoState extends State<UploadVideo> {
                             : Colors.grey,
                         minimumSize: const Size(175, 50),
                       ),
-                      onPressed: isButtonEnabled
-                          ? () {
-                              if (_formKey.currentState!.validate()) {
-                                press();
-                              }
-                            }
-                          : null,
+                      onPressed:
+                          // isButtonEnabled
+                          //     ?
+                          () {
+                        // if (_formKey.currentState!.validate()) {
+                        press();
+                        // }
+                      },
+                      // : null,
                       child: const Text(
                         'Upload',
                         style: TextStyle(color: Colors.white),
@@ -1002,88 +1144,99 @@ class _UploadVideoState extends State<UploadVideo> {
           ),
         ),
       ),
-      
-
-
-// floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-//       floatingActionButton: Container(
-//         margin: const EdgeInsets.only(top: 3),
-//         height: 50,
-//         width: 50,
-//         child: FloatingActionButton(
-//           backgroundColor: Colors.white,
-//           elevation: 0,
-//           onPressed: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) => const UploadVideo(),
-//               ),
-//             );
-//           },
-//           shape: RoundedRectangleBorder(
-//             side: const BorderSide(
-//               width: 3,
-//               color: Color.fromARGB(255, 169, 169, 169),
-//             ),
-//             borderRadius: BorderRadius.circular(100),
-//           ),
-//           child: const Icon(
-//             Icons.add,
-//             color: Color.fromARGB(255, 173, 20, 0),
-//           ),
-//         ),
-//       ),
       bottomNavigationBar: BottomAppBar(
         // shape: CircularNotchedRectangle(),
-        color:const Color.fromARGB(255, 240, 240, 240),
-      
+        color: const Color.fromARGB(255, 240, 240, 240),
 
-
-      child: Container(
-
-        height: 50,
-
-        child: Row(
-          
-          mainAxisAlignment:MainAxisAlignment.spaceAround,
-          children: 
-        [
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
 // for home
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, Dashboardview.route);
-          },
-          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
-          ),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Dashboardview.route);
+                  },
+                  icon: Icon(
+                    Icons.home_filled,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
 
 // for cart
-            IconButton(onPressed: (){
-            
-          }, 
-          
-          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
-          ),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.shopping_cart_checkout,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
 // fornotification
-          IconButton(onPressed: (){
-            
-          }, 
-          
-          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.notifications_active,
+                    color: Color.fromARGB(255, 173, 20, 0),
+                  )),
+            ],
           ),
-
-        
-
-
-        ],
         ),
-
-
       ),
-      
-      
-       ),
-
     );
+  }
+
+  void showImagePickerOption(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.blue[100],
+        context: context,
+        builder: (builder) {
+          return Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4.5,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromGallery();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.image,
+                              size: 70,
+                            ),
+                            Text("Gallery")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromCamera();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 70,
+                            ),
+                            Text("Camera")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 

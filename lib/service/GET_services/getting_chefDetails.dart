@@ -27,11 +27,12 @@ print("chefIdchefIdchefId$chefId") ;     final response = await http.get(
           String id = chef['id'].toString();
           String email = chef['email'].toString();
           String userName = chef['userName'].toString();
-
+             String imageUrl = chef['imageUrl'].toString();
           return {
             'id': id,
             'userName': userName,
             'email': email,
+             'imageUrl':imageUrl,
           };
         } else {
           print('User data not found in the response');

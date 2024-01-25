@@ -20,3 +20,15 @@ class TokenManager {
     print( "Your user token from tokenmanager is : $_tokenKey");
   }
 }
+
+
+class ChefIdUsage {
+
+  static const String chefId = 'chefId';
+    static Future<void> clearchefId() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(chefId);
+    print( "Your  chefId from tokenmanager is : $chefId");
+  }
+
+}

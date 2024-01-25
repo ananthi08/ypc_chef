@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/common_widget/token_manager.dart';
+import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboard_editprofile_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
@@ -28,7 +29,7 @@ class _ProfilepageState extends State<Profilepage> {
     super.initState();
     getUserId();
   }
-
+ String imageUrl = '';
   Future<void> getUserId() async {
     try {
       final chefDetails = await _chefDetails
@@ -38,6 +39,8 @@ class _ProfilepageState extends State<Profilepage> {
           userId = chefDetails['id'] ?? '';
           userName = chefDetails['userName'] ?? '';
           email = chefDetails['email'] ?? '';
+          imageUrl = chefDetails['imageUrl'] ?? '';
+
         });
       // print(chefDetails);
           // log(email);
@@ -85,8 +88,30 @@ class _ProfilepageState extends State<Profilepage> {
             const SizedBox(
               height: 20,
             ),
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/chef_logo.png"),
+
+              Stack(
+              children: [
+                Container(
+                  decoration:const BoxDecoration(
+                    shape: BoxShape.circle,
+              
+                  ),
+                  child:  CircleAvatar(
+                              radius: 20,
+                              backgroundImage: imageUrl.isNotEmpty
+                                  ? NetworkImage('$node$imageUrl')
+                                  : const NetworkImage(
+                                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
+                       
+                            ),
+                  // CircleAvatar(
+                
+                  //   backgroundImage: NetworkImage('$node$imageUrl'),
+                  //   radius: 30.0,
+                  // ),
+                ),
+              ],
+              
             ),
             Text(
               userName,
@@ -470,6 +495,7 @@ class _ProfilepageState extends State<Profilepage> {
                           GestureDetector(
                              onTap: () async {
                       await TokenManager.clearUserToken();
+                      await ChefIdUsage.clearchefId();
                       // ignore: use_build_context_synchronously
                       Navigator.push(
                         context,

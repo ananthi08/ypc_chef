@@ -1,11 +1,12 @@
 import 'package:chef_frontend/common_widget/custom_navbar/nav_model.dart';
-import 'package:chef_frontend/constants/global_variable.dart';
+import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/dashboard/feed/FEED.dart';
 import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:chef_frontend/views/dashboard/my_videos/video_page2.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
@@ -79,6 +80,33 @@ class _MyvideospageState extends State<Myvideospage> {
         .toList();
   }
 
+  List<Map<String, dynamic>> getFilteredVideoss(bool lightValue) {
+    return videos
+        .where((video) => video['adminApproved'] == (lightValue ? 1 : 0))
+        .toList();
+  }
+
+  bool light1 = true;
+
+  final MaterialStateProperty<Icon?> thumbIcon =
+      MaterialStateProperty.resolveWith<Icon?>(
+    (Set<MaterialState> states) {
+      if (states.contains(MaterialState.selected)) {
+        return const Icon(Icons.check);
+      }
+      return const Icon(Icons.close);
+    },
+  );
+
+  String selectedFilter = 'All';
+  List<Map<String, dynamic>> getSortedVideoss(String filter) {
+    if (filter == 'All') {
+      return videos;
+    } else {
+      return videos.where((video) => video['productType'] == filter).toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,40 +122,35 @@ class _MyvideospageState extends State<Myvideospage> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     height: 110,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Center(
-                          child: IconButton(
-                            icon: const Icon(Icons.arrow_back),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Dashboardview(),
-                                ),
-                              );
-                            },
-                          ),
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboardview(),
+                              ),
+                            );
+                          },
                         ),
-                        Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/mxplayer.jpeg"),
-                                const SizedBox(height: 10),
-                                const Text(
-                                  'My Videos',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/mxplayer.jpeg"),
+                              const SizedBox(width: 15),
+                              const Text(
+                                'My Videos',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(height: 8),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -173,9 +196,33 @@ class _MyvideospageState extends State<Myvideospage> {
                                 return ListTile(
                                   title: Text(getFilteredVideos(
                                       searchController.text)[index]['text']),
-                                  onTap: () {
+                                  onTap: () async {
                                     print(
                                         'Selected: ${getFilteredVideos(searchController.text)[index]['text']}');
+
+                                    print(
+                                        '${getFilteredVideos(searchController.text)[index]['videoUrl']}');
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    prefs.setString(
+                                        'videoUrl',
+                                        getFilteredVideos(
+                                                searchController.text)[index]
+                                            ['videoUrl']);
+
+                                    String? selectedVideoUrl =
+                                        prefs.getString('videoUrl');
+                                    if (selectedVideoUrl != null) {
+                                      print(
+                                          "Selected video URL: $selectedVideoUrl");
+                                    } else {
+                                      print(
+                                          "No selected video URL found in shared preferences.");
+                                    }
+
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.pushNamed(
+                                        context, Myvideospage2.route);
                                   },
                                 );
                               },
@@ -184,49 +231,116 @@ class _MyvideospageState extends State<Myvideospage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
 
+// this is for toggle approved & not-approved
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    // IconButton(
+                    //   icon: Icon(Icons.sort),
+                    //   // onPressed: () {
+                    //   //   setState(() {
+
+                    //   //   });
+                    //   // },
+
+                    //   onPressed: () {
+                    //     showDialog(
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return AlertDialog(
+                    //           title: const Text('Sort By'),
+                    //           content: Column(
+                    //             mainAxisSize: MainAxisSize.min,
+                    //             children: [
+                    //               ListTile(
+                    //                 title: const Text('All'),
+                    //                 onTap: () {
+                    //                   setState(() {
+                    //                     selectedFilter = 'All';
+                    //                   });
+                    //                   Navigator.pop(context);
+                    //                 },
+                    //               ),
+                    //               ListTile(
+                    //                 title: const Text('Veg'),
+                    //                 onTap: () {
+                    //                   setState(() {
+                    //                     selectedFilter = 'Veg';
+                    //                   });
+                    //                   Navigator.pop(context);
+                    //                 },
+                    //               ),
+                    //               ListTile(
+                    //                 title: const Text('Non-veg'),
+                    //                 onTap: () {
+                    //                   setState(() {
+                    //                     selectedFilter = 'Non-veg';
+                    //                   });
+                    //                   Navigator.pop(context);
+                    //                 },
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Switch(
+                          thumbIcon: thumbIcon,
+                          value: light1,
+                          onChanged: (bool value) {
+                            setState(() {
+                              light1 = value;
+                              print('light1light1light1$light1');
+                            });
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+// ///////////////////////////////////////////
+
               //  Expanded(
               // child:
+
               Expanded(
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
-                                             Align(
-  alignment: Alignment.centerLeft,
-  child: Container(
-    padding: const EdgeInsets.all(8.0),
-    decoration: BoxDecoration(
-      color: Colors.green,
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child:const Text(
-      "Approved Videos",
-      style: TextStyle(
-        color: Colors.white, 
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ),
-),
                       GridView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3, childAspectRatio: 2 / 2),
-                        itemCount: videos.length,
+                        // itemCount: videos.length,
+
+                        itemCount: getFilteredVideoss(light1).length,
+                        // itemCount: getSortedVideoss(selectedFilter).length,
+
                         itemBuilder: (context, index) {
-                          final videoUrl = videos[index]['videoUrl'];
+                          // final videoUrl = videos[index]['videoUrl'];
+                          final videoUrl =
+                              getFilteredVideoss(light1)[index]['videoUrl'];
                           final adminApproved = videos[index]['adminApproved'];
                           final videoController =
                               VideoPlayerController.networkUrl(
                             Uri.parse(
                                 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
                           );
+                          // (adminApproved == 0 && light1 ) ;
 
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -236,69 +350,118 @@ class _MyvideospageState extends State<Myvideospage> {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
                                     return GestureDetector(
-                                      onTap: () {
-                                        print("sxsdscxdscxsdcs");
+                                      onTap: () async {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        prefs.setString('videoUrl', videoUrl);
+
+                                        String? selectedVideoUrl =
+                                            prefs.getString('videoUrl');
+                                        if (selectedVideoUrl != null) {
+                                          print(
+                                              "Selected video URL: $selectedVideoUrl");
+                                        } else {
+                                          print(
+                                              "No selected video URL found in shared preferences.");
+                                        }
+
+                                        // ignore: use_build_context_synchronously
                                         Navigator.pushNamed(
                                             context, Myvideospage2.route);
                                       },
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            flex: 4,
+                                            flex: 6,
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
                                               child: Container(
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20)),
-                                                  child: VideoPlayer(
-                                                      videoController)),
-                                            ),
-                                          ),
-
-                                          Expanded(
-                                            child: Text(
-                                              videos[index]['text'],
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: VideoPlayer(
+                                                    videoController),
                                               ),
                                             ),
                                           ),
-                                          // ),
-                                          const Expanded(
-                                            flex: 1,
-
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text('Review:'),
-                                                Icon(Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 8.0),
-                                                Icon(Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 8.0),
-                                                Icon(Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 8.0),
-                                                Icon(Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 8.0),
-                                                Icon(Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 8.0),
-                                              ],
-                                              // ),
-                                            ),
-                                            // ],
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                          // ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  videos[index]['text'],
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 13.0,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                // Food type icon
+                                                if (videos[index]
+                                                        ['productType'] ==
+                                                    'Veg')
+                                                  const CustomSVGImage(
+                                                    path: "assets/veg.svg",
+                                                    height: 15,
+                                                    bordercolor: Colors.black,
+                                                  )
+                                                else if (videos[index]
+                                                        ['productType'] ==
+                                                    'Non-veg')
+                                                  const CustomSVGImage(
+                                                    path: "assets/nonveg.svg",
+                                                    height: 15,
+                                                    bordercolor: Colors.black,
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Likes: ${videos[index]['likes'] ?? '0'}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 13.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Cuisines: ${videos[index]['nationalCuisine'] ?? ''}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 13.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
@@ -343,6 +506,20 @@ class _MyvideospageState extends State<Myvideospage> {
                                               ],
                                             ),
                                           ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  color: Colors.grey,
+                                                  width: 80.0,
+                                                  height: 20.0,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
@@ -351,321 +528,14 @@ class _MyvideospageState extends State<Myvideospage> {
                                 // },
                                 ),
                           );
+                          //  }
                         },
-                      ),
-                      // ),
-
-                      // ///////////this is not approved
-
-                      // GridView.builder(
-                      //   shrinkWrap: true,
-                      //   physics: NeverScrollableScrollPhysics(),
-                      //   gridDelegate:
-                      //       const SliverGridDelegateWithFixedCrossAxisCount(
-                      //     crossAxisCount: 3,
-                      //   ),
-                      //   itemCount: videos.length,
-                      //   itemBuilder: (context, index) {
-                      //     final videoUrl = videos[index]['videoUrl'];
-                      //     final adminApproved = videos[index]['adminApproved'];
-                      //     final videoController =
-                      //         VideoPlayerController.networkUrl(
-                      //       Uri.parse(
-                      //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
-                      //     );
-
-                      //     // Check if the video is admin approved
-                      //     if (adminApproved == 1) {
-                      //       return FutureBuilder(
-                      //         future: videoController.initialize(),
-                      //         builder: (context, snapshot) {
-                      //           if (snapshot.connectionState ==
-                      //               ConnectionState.done) {
-                      //             return GestureDetector(
-                      //               onTap: () {
-                      //                 print("sxsdscxdscxsdcs");
-                      //                 Navigator.pushNamed(
-                      //                     context, Myvideospage2.route);
-                      //               },
-                      //               child: Column(
-                      //                 children: [
-                      //                   Card(
-                      //                     shape: RoundedRectangleBorder(
-                      //                       borderRadius:
-                      //                           BorderRadius.circular(20.0),
-                      //                     ),
-                      //                     child: AspectRatio(
-                      //                       aspectRatio: 16 / 9,
-                      //                       child: VideoPlayer(videoController),
-                      //                     ),
-                      //                   ),
-                      //                   Padding(
-                      //                     padding: const EdgeInsets.all(8.0),
-                      //                     child: Text(
-                      //                       videos[index]['text'],
-                      //                       style: const TextStyle(
-                      //                         fontWeight: FontWeight.bold,
-                      //                         fontSize: 13.0,
-                      //                       ),
-                      //                     ),
-                      //                   ),
-                      //                   const Padding(
-                      //                     padding: EdgeInsets.all(8.0),
-                      //                     child: Row(
-                      //                       mainAxisAlignment:
-                      //                           MainAxisAlignment.center,
-                      //                       children: [
-                      //                         Text('Review:'),
-                      //                         Icon(Icons.star,
-                      //                             color: Colors.amber,
-                      //                             size: 8.0),
-                      //                         Icon(Icons.star,
-                      //                             color: Colors.amber,
-                      //                             size: 8.0),
-                      //                         Icon(Icons.star,
-                      //                             color: Colors.amber,
-                      //                             size: 8.0),
-                      //                         Icon(Icons.star,
-                      //                             color: Colors.amber,
-                      //                             size: 8.0),
-                      //                         Icon(Icons.star,
-                      //                             color: Colors.amber,
-                      //                             size: 8.0),
-                      //                       ],
-                      //                     ),
-                      //                   ),
-                      //                 ],
-                      //               ),
-                      //             );
-                      //           } else if (snapshot.hasError) {
-                      //             return const Card(
-                      //               child: Center(
-                      //                 child: Text('Video Playback Error'),
-                      //               ),
-                      //             );
-                      //           } else {
-                      //             return Shimmer.fromColors(
-                      //               baseColor: Colors.grey[300]!,
-                      //               highlightColor: Colors.grey[100]!,
-                      //               child: Column(
-                      //                 children: [
-                      //                   Card(
-                      //                     child: AspectRatio(
-                      //                       aspectRatio: 16 / 9,
-                      //                       child: Container(
-                      //                         color: Colors.grey,
-                      //                       ),
-                      //                     ),
-                      //                   ),
-                      //                   Padding(
-                      //                     padding: const EdgeInsets.all(8.0),
-                      //                     child: Container(
-                      //                       color: Colors.grey,
-                      //                       height: 20.0,
-                      //                     ),
-                      //                   ),
-                      //                   Padding(
-                      //                     padding: const EdgeInsets.all(8.0),
-                      //                     child: Row(
-                      //                       mainAxisAlignment:
-                      //                           MainAxisAlignment.center,
-                      //                       children: [
-                      //                         Container(
-                      //                           color: Colors.grey,
-                      //                           width: 80.0,
-                      //                           height: 20.0,
-                      //                         ),
-                      //                       ],
-                      //                     ),
-                      //                   ),
-                      //                 ],
-                      //               ),
-                      //             );
-                      //           }
-                      //         },
-                      //       );
-                      //     } else {
-                      //       return const Card(
-                      //         child: Center(
-                      //           child: Text('Video not approved'),
-                      //         ),
-                      //       );
-                      //     }
-                      //   },
-                      // ),
-
-                      Column(
-                        children: [
-                         Align(
-  alignment: Alignment.centerLeft,
-  child: Container(
-    padding: const EdgeInsets.all(8.0),
-    decoration: BoxDecoration(
-      color: Colors.red,
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: Text(
-      "Not-Approved Videos",
-      style: TextStyle(
-        color: Colors.white, 
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ),
-),
-
-                          GridView.builder(
-                          
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              childAspectRatio: 2 / 2,
-                            ),
-                            itemCount: videos.length,
-                            itemBuilder: (context, index) {
-                              final videoUrl = videos[index]['videoUrl'];
-                              final adminApproved = videos[index]['adminApproved'];
-                              final videoController =
-                                  VideoPlayerController.networkUrl(
-                                Uri.parse(
-                                    'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
-                              );
-                          
-                              // Check if adminApproved is equal to 1
-                              if (adminApproved == 1) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FutureBuilder(
-                                    future: videoController.initialize(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            print("sxsdscxdscxsdcs");
-                                            // Navigator.pushNamed(
-                                            //     context, Myvideospage2.route);
-                                          },
-                                          child: Column(
-                                            children: [
-                                              Expanded(
-                                                flex: 4,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(20),
-                                                  ),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(20),
-                                                    ),
-                                                    child: VideoPlayer(
-                                                        videoController),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  videos[index]['text'],
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 13.0,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Expanded(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text('Review:'),
-                                                    Icon(Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 8.0),
-                                                    Icon(Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 8.0),
-                                                    Icon(Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 8.0),
-                                                    Icon(Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 8.0),
-                                                    Icon(Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 8.0),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        return const Card(
-                                          child: Center(
-                                            child: Text('Video Playback Error'),
-                                          ),
-                                        );
-                                      } else {
-                                        return Shimmer.fromColors(
-                                          baseColor: Colors.grey[300]!,
-                                          highlightColor: Colors.grey[100]!,
-                                          child: Column(
-                                            children: [
-                                              Card(
-                                                child: AspectRatio(
-                                                  aspectRatio: 16 / 9,
-                                                  child: Container(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Container(
-                                                  color: Colors.grey,
-                                                  height: 20.0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      color: Colors.grey,
-                                                      width: 80.0,
-                                                      height: 20.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                );
-                              } else {
-                                return const Card(
-                                  child: Center(
-                                    child: Text('Video not approved'),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        ],
                       ),
                     ],
                   ),
                 ),
-              ),
+              )
+
 // ),
             ],
           ),
@@ -719,12 +589,12 @@ class _MyvideospageState extends State<Myvideospage> {
                   )),
 
 // for cart
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.shopping_cart_checkout,
-                    color: Color.fromARGB(255, 173, 20, 0),
-                  )),
+              // IconButton(
+              //     onPressed: () {},
+              //     icon: const Icon(
+              //       Icons.shopping_cart_checkout,
+              //       color: Color.fromARGB(255, 173, 20, 0),
+              //     )),
 // for mail
               IconButton(
                   onPressed: () {},

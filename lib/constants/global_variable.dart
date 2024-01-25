@@ -1,7 +1,14 @@
+
+// my home - 192.168.29.223
+// home5g -  192.168.0.146
+
+
 String kbaseUrl = "http://192.168.0.146:4000/ypc-chef-micro-service";
 
 String uploadVideoLocal ="http://192.168.0.146:4000/ypc-authentication-micro-service/uploadVideoLocal";
-String node = "http://192.168.0.146:4000/uploads/";
+String uploadthumblineimageLocal ="http://192.168.0.146:4000/ypc-authentication-micro-service/uploadImage";
+
+String node = "http://192.168.0.146:4000/uploadimage/";
 
 String getbaseUrl = "http://192.168.0.146:4000/ypc-authentication-micro-service";
 

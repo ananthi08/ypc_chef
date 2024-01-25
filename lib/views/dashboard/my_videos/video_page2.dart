@@ -1,311 +1,359 @@
-import 'package:chef_frontend/common_widget/commentbox/cmd_box.dart';
-import 'package:chef_frontend/common_widget/custom_navbar/nav_model.dart';
-import 'package:chef_frontend/common_widget/likebutton.dart';
-import 'package:chef_frontend/constants/global_variable.dart';
-import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
-import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
-import 'package:chef_frontend/views/dashboard/feed/FEED.dart';
-import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
-import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
+import 'package:chef_frontend/service/post_api/product_detail_model.dart';
+import 'package:chef_frontend/service/post_api/selectedvideo.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Myvideospage2 extends StatefulWidget {
-  static String route = '/chef/videos2';
 
-  const Myvideospage2({Key? key}) : super(key: key);
+
+    static String route = '/user/videopage2';
+  const Myvideospage2({super.key});
 
   @override
   State<Myvideospage2> createState() => _Myvideospage2State();
 }
 
+
+
+
+ 
 class _Myvideospage2State extends State<Myvideospage2> {
-  final homeNavKey = GlobalKey<NavigatorState>();
-  final messageNavKey = GlobalKey<NavigatorState>();
-  int selectedTab = 0;
-  List<NavModel> items = [];
-  bool isCommentBoxVisible = false;
-  @override
+
+  VideoPlayerController? videoController;
+  ProductDetail? productDetail; 
+  bool isVideoLoading = true;
+   @override
   void initState() {
     super.initState();
-    fetchAndDisplayVideos();
-    items = [
-      NavModel(
-        page: const Dashboardview(),
-        navKey: homeNavKey,
-      ),
-      NavModel(
-        page: const Feed(),
-        navKey: messageNavKey,
-      ),
-    ];
+    fetchVideoDetails();
+  
   }
 
-  final GETchefDetails fetchall_videos = GETchefDetails();
-  List<Map<String, dynamic>> videos = [];
+  final GetVideoByUrl videoService = GetVideoByUrl();
+  ChewieController? chewieController;
 
-  Future<void> fetchAndDisplayVideos() async {
-    try {
-      final fetchedVideos = await fetchall_videos.fethallvideos();
-      if (fetchedVideos != null) {
+Future<void> fetchVideoDetails() async {
+  try {
+    // Fetch video details using the service
+    productDetail = await videoService.selectedVideoUrl();
+// print("videoUrlvideoUrlvideoUrlvideoUrlvideoUrl ${productDetail?.steps.length}");
+
+
+    if (productDetail != null) {
+   
+      final String videoUrl = productDetail!.videoUrl;
+      if (videoUrl != null && videoUrl.isNotEmpty) {
+        // Initialize VideoPlayerController
+        // videoController = VideoPlayerController.networkUrl(
+        //   Uri.parse(videoUrl),
+        // );
+
+         videoController = VideoPlayerController.networkUrl(Uri.parse(
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+              );
+
+        await videoController!.initialize();
+
         setState(() {
-          videos = fetchedVideos;
+          isVideoLoading = false;
+          chewieController = ChewieController(
+            videoPlayerController: videoController!,
+            aspectRatio: 16 / 9,
+            autoPlay: false,
+            looping: false,
+            allowMuting: true,
+            showControlsOnInitialize: true,
+            deviceOrientationsAfterFullScreen: [
+              DeviceOrientation.portraitUp,
+            ],
+            cupertinoProgressColors: ChewieProgressColors(
+              playedColor: const Color.fromARGB(255, 190, 13, 0),
+              bufferedColor: const Color.fromARGB(255, 211, 211, 211),
+              handleColor: Colors.blue,
+            ),
+            materialProgressColors: ChewieProgressColors(
+              playedColor: Colors.red,
+              bufferedColor: const Color.fromARGB(255, 225, 225, 225),
+              backgroundColor: Colors.grey,
+            ),
+            placeholder: Container(
+              color: const Color.fromARGB(255, 255, 255, 255),
+            ),
+            showControls: true,
+            showOptions: false,
+          );
+        });
+      } else {
+        print("No valid video URL found.");
+        setState(() {
+          isVideoLoading = false;
         });
       }
-    } catch (e) {
-      print('Error fetching and displaying videos: $e');
+    } else {
+      print("No video details found.");
+      setState(() {
+        isVideoLoading = false;
+      });
     }
+  } catch (e) {
+    print("Error fetching video details: $e");
+    setState(() {
+      isVideoLoading = false;
+    });
   }
+}
+
+
+  @override
+  void dispose() {
+    videoController?.dispose();
+    chewieController?.dispose();
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(248, 246, 246, 246),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (chewieController != null) {
+                if (videoController!.value.isPlaying) {
+                  chewieController!.pause();
+                } else {
+                  chewieController!.play();
+                }
+              }
+            },
+            child: chewieController != null
+                ? Container(
+                    width: screenWidth,
+                    height: isPortrait
+                        ? screenWidth * 335 / 428
+                        : screenHeight * 0.6,
+                    child: Chewie(controller: chewieController!),
+                  )
+                : const CircularProgressIndicator(),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(
+                            isPortrait ? screenWidth * 0.05 : 16.0),
+                        child: Text(
+                          productDetail?.text ?? '',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                color: Color.fromARGB(255, 255, 255, 255),
-                height: 130,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-               
+                  // Divider
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            color: const Color.fromARGB(255, 202, 202, 202),
+                            height: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
-                    Center(
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Myvideospage(),
-                            ),
-                          );
-                        },
+                 
+
+              
+
+                  Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Text(
+                      productDetail?.description ?? 'No description found',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
                       ),
                     ),
-                    Center(
-                      child: Container(
-                       width: MediaQuery.of(context).size.width * 0.8,
-                        margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/mxplayer.jpeg"),
-                            const SizedBox(
-                              height: 10,
+                  ),
+
+                  // Divider
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            color: const Color.fromARGB(255, 202, 202, 202),
+                            height: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: 10,
+                  ),
+
+                  // Ingredient
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Ingredients",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'dmsans',
                             ),
-                            const Text(
-                              'My Videos',
-                              style: TextStyle(
-                                fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Ingredient Rows
+                  ...List<Widget>.generate(
+                    productDetail?.ingredients.length ?? 0,
+                    (index) {
+                      final ingredient = productDetail?.ingredients[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                   
+                            Text(
+                              ingredient?.name ?? '',
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black,
                               ),
                             ),
-                            const SizedBox(
-                              height: 8,
+                            SizedBox(
+                              width: screenWidth * 0.18,
+                              child: Text(
+                                ingredient?.quantity ?? '',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: videos.length,
-                  itemBuilder: (context, index) {
-                    final videoUrl = videos[index]['videoUrl'];
-                    final videoController = VideoPlayerController.networkUrl(
-                        // Uri.parse('$node$videoUrl'));
-                        Uri.parse(
-                            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'));
+                      );
+                    },
+                  ),
 
-                    return FutureBuilder(
-                      future: videoController.initialize(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  if (videoController.value.isPlaying) {
-                                    videoController.pause();
-                                  } else {
-                                    videoController.play();
-                                  }
-                                  print('Tapped video URL: $videoUrl');
-                                },
-                                child: Container(
-                                  width: 391.13,
-                                  height: 194,
-                                  margin: const EdgeInsets.only(
-                                      top: 10, left: 18, right: 18),
-                                  child: Card(
-                                    child: AspectRatio(
-                                      aspectRatio: 5 / 6,
-                                      child: VideoPlayer(videoController),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 35, right: 25),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        LikeButton(videoUrl),
-                                        const Text(
-                                          'Likes',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 25),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isCommentBoxVisible =
-                                                  !isCommentBoxVisible;
-                                            });
-                                          },
-                                          child: const Row(
-                                            children: [
-                                              Icon(Icons.insert_comment_sharp),
-                                              Text(
-                                                'Comments',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    viewsCount(),
-                                  ],
-                                ),
-                              ),
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
-                                height: isCommentBoxVisible ? 200 : 0,
-                                padding: const EdgeInsets.all(16),
-                                child: isCommentBoxVisible
-                                    ? Column(
-                                        children: [
-                                          TextField(
-                                            decoration: InputDecoration(
-                                              hintText: 'Write a comment...',
-                                              contentPadding:
-                                                  const EdgeInsets.all(10),
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              print("");
-                                            },
-                                            child: const Text('Submit'),
-                                          ),
-                                        ],
-                                      )
-                                    : const SizedBox(),
-                              ),
-                            ],
-                          );
-                        } else if (snapshot.hasError) {
-                          print('Error initializing video: ${snapshot.error}');
-                          return const Card(
-                            child: Center(
-                              child: Text('Video Playback Error'),
+                const SizedBox(
+                    height: 10,
+                  ),
+
+                  // steps
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Steps",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'dmsans',
                             ),
-                          );
-                        } else {
-                          // return const Card(
-                          //   child: Center(
-                          //     child: CircularProgressIndicator(),
-                          //   ),
-                          // );
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: Container(
-                              width: 391.13,
-                              height: 194,
-                              margin: const EdgeInsets.only(
-                                  top: 10, left: 18, right: 18),
-                              child: Card(
-                                child: AspectRatio(
-                                  aspectRatio: 5 / 6,
-                                  child: Container(
-                                    color: Colors
-                                        .grey, // Customize the skeleton loader appearance
-                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Ingredient Rows
+                  ...List<Widget>.generate(
+                    productDetail?.steps.length ?? 0,
+                    (index) {
+                      final step = productDetail?.steps[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                   
+
+
+                         SizedBox(
+                              width: screenWidth * 0.18,
+                         child:   Text(
+                              step?.stepNo ?? '',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                         ),
+                            SizedBox(
+                              width: screenWidth * 0.18,
+                              child: 
+                              Text(
+                                step?.stepDescription ?? '',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-         
-              
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+
+
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(top: 10),
-        height: 64,
-        width: 64,
-        child: FloatingActionButton(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const UploadVideo(),
-              ),
-            );
-          },
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(
-              width: 3,
-              color: Color.fromARGB(255, 169, 169, 169),
             ),
-            borderRadius: BorderRadius.circular(100),
           ),
-          child: const Icon(
-            Icons.add,
-            color: Colors.green,
-          ),
-        ),
+        ],
       ),
-      // bottomNavigationBar: ,
     );
   }
 }

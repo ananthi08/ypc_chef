@@ -21,6 +21,8 @@ class FormfieldApi {
     required String international,
     required String national,
     required String productserve,
+    required String? thumblineImageUrl,
+
     required List<Map<String, dynamic>> steps,
     required String videoUrl,
 
@@ -32,7 +34,7 @@ class FormfieldApi {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? chefId = prefs.getString("chefId");
       chefId = prefs.getString("chefId");
-
+// print('cchefIdchefIdchefIdhefId$chefId');
       // String baseUrl = '$kbaseUrl/ypc/chef/upload/1';
       String baseUrl = '$kbaseUrl/ypc/chef/upload/$chefId';
 
@@ -46,12 +48,13 @@ class FormfieldApi {
         ingredients: ingredients,
         steps: steps,
         videoUrl: videoUrl,
+        thumblineImageUrl:thumblineImageUrl,
 
 
 
       );
 
-    print('videourllllllllllll ................$videoUrl');
+    print('thumblineImageUrlthumblineImageUrl.....$thumblineImageUrl');
       String jsonBody = jsonEncode(uploadvideodata);
     http.Response response = await http.post(
         Uri.parse(baseUrl),

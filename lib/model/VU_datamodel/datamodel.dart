@@ -8,6 +8,9 @@ class Videodata {
   String national;
   String productserve;
   String videoUrl;
+  String? thumblineImageUrl;
+
+  
 
 
   List<Map<String, dynamic>> ingredients;
@@ -23,6 +26,8 @@ class Videodata {
     required this.ingredients,
     required this.steps,
     required this.videoUrl,
+    required this.thumblineImageUrl,
+
 
 
   });
@@ -38,6 +43,8 @@ class Videodata {
       'ingredients': ingredients,
       'steps': steps,
       'videoUrl': videoUrl,
+      'thumblineImageUrl': thumblineImageUrl,
+
 
 
     };
@@ -54,6 +61,8 @@ class Videodata {
       ingredients: List<Map<String, dynamic>>.from(map['ingredients']),
       steps: List<Map<String, dynamic>>.from(map['steps']),
       productserve: map['productserve'] as String,
+      thumblineImageUrl: map['thumblineImageUrl'] as String,
+
     );
   }
 }
