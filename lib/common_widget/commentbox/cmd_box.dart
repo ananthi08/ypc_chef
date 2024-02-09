@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommentButton extends StatefulWidget {
   final String videoUrl;
@@ -20,12 +21,12 @@ class _CommentButtonState extends State<CommentButton> {
       onTap: () {
         widget.onCommentButtonTapped(widget.videoUrl);
       },
-      child: const Row(
+      child:  Row(
         children: [
-          Icon(Icons.insert_comment_sharp),
+          const Icon(Icons.insert_comment_sharp),
           Text(
             'Comments',
-            style: TextStyle(
+            style: GoogleFonts.dmSans(
               fontSize: 16,
             ),
           ),

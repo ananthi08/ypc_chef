@@ -10,6 +10,7 @@ import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:provider/provider.dart';
@@ -420,7 +421,7 @@ class _UploadVideoState extends State<UploadVideo> {
                           child: Center(
                             child: Text(
                               'Veg',
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 18,
                                 color: selectedDietType == 'Veg'
                                     ? Colors.white
@@ -446,7 +447,7 @@ class _UploadVideoState extends State<UploadVideo> {
                           child: Center(
                             child: Text(
                               'Non-Veg',
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 18,
                                 color: selectedDietType == 'Non-Veg'
                                     ? Colors.white
@@ -460,11 +461,11 @@ class _UploadVideoState extends State<UploadVideo> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                 Text(
                   'Product Name',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -473,7 +474,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   controller: _productnameController,
                   decoration: InputDecoration(
                     hintText: "Enter Product Name",
-                    hintStyle: TextStyle(
+                    hintStyle: GoogleFonts.dmSans(
                       fontSize: 15,
                       color: Colors.grey.shade400,
                     ),
@@ -486,11 +487,11 @@ class _UploadVideoState extends State<UploadVideo> {
                 ),
 
                 const SizedBox(height: 15),
-                const Text(
+                 Text(
                   'Product Category',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
 
@@ -500,7 +501,7 @@ class _UploadVideoState extends State<UploadVideo> {
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 217, 217, 217),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
@@ -509,7 +510,7 @@ class _UploadVideoState extends State<UploadVideo> {
                             children: [
                               Text(
                                 MainCategory,
-                                style: const TextStyle(
+                                style:  GoogleFonts.dmSans(
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
@@ -534,7 +535,7 @@ class _UploadVideoState extends State<UploadVideo> {
                       ),
                       Expanded(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 217, 217, 217),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
@@ -543,7 +544,7 @@ class _UploadVideoState extends State<UploadVideo> {
                             children: [
                               Text(
                                 SideCategory,
-                                style: const TextStyle(
+                                style:  GoogleFonts.dmSans(
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
@@ -568,16 +569,16 @@ class _UploadVideoState extends State<UploadVideo> {
                       ),
                       Expanded(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 217, 217, 217),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Text(
+                               Text(
                                 'Others',
-                                style: TextStyle(
+                                style: GoogleFonts.dmSans(
                                   fontSize: 18,
                                   color: Colors.black,
                                 ),
@@ -602,11 +603,11 @@ class _UploadVideoState extends State<UploadVideo> {
                 ),
 
                 const SizedBox(height: 15),
-                const Text(
+                 Text(
                   'InterNational Cuisine',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -671,11 +672,11 @@ class _UploadVideoState extends State<UploadVideo> {
 // end of international category
                 const SizedBox(height: 5),
                 // start of national category
-                const Text(
+                 Text(
                   'National Cuisine',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -717,11 +718,11 @@ class _UploadVideoState extends State<UploadVideo> {
                 // end of national category
                 const SizedBox(height: 5),
 
-                const Text(
+                 Text(
                   'Product Serve Category',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -858,14 +859,14 @@ class _UploadVideoState extends State<UploadVideo> {
                       children: [
                         Row(
                           children: [
-                            const Expanded(
+                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Ingredients',
-                                  style: TextStyle(
+                                  style: GoogleFonts.dmSans(
                                     fontSize: 15,
-                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                               ),
@@ -877,9 +878,9 @@ class _UploadVideoState extends State<UploadVideo> {
                                   onTap: () {
                                     addIngredientRow();
                                   },
-                                  child: const Text(
+                                  child:  Text(
                                     'Add +',
-                                    style: TextStyle(
+                                    style: GoogleFonts.dmSans(
                                       fontSize: 15,
                                       color: CustomColor.myRedColor,
                                     ),
@@ -1011,15 +1012,15 @@ class _UploadVideoState extends State<UploadVideo> {
                         ),
                         Row(
                           children: [
-                            const Expanded(
+                             Expanded(
                               flex: 9,
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Click the add button to Enter the Steps',
-                                  style: TextStyle(
+                                  style: GoogleFonts.dmSans(
                                     fontSize: 15,
-                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
                               ),
@@ -1032,9 +1033,9 @@ class _UploadVideoState extends State<UploadVideo> {
                                   onTap: () {
                                     stepsRow();
                                   },
-                                  child: const Text(
+                                  child:  Text(
                                     'Add +',
-                                    style: TextStyle(
+                                    style: GoogleFonts.dmSans(
                                       fontSize: 15,
                                       color: CustomColor.myRedColor,
                                     ),
@@ -1132,9 +1133,9 @@ class _UploadVideoState extends State<UploadVideo> {
                         // }
                       },
                       // : null,
-                      child: const Text(
+                      child:  Text(
                         'Upload',
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.dmSans(color: Colors.white),
                       ),
                     )
                   ],
@@ -1158,7 +1159,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   onPressed: () {
                     Navigator.pushNamed(context, Dashboardview.route);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.home_filled,
                     color: Color.fromARGB(255, 173, 20, 0),
                   )),
@@ -1166,14 +1167,14 @@ class _UploadVideoState extends State<UploadVideo> {
 // for cart
               IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.shopping_cart_checkout,
                     color: Color.fromARGB(255, 173, 20, 0),
                   )),
 // fornotification
               IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.notifications_active,
                     color: Color.fromARGB(255, 173, 20, 0),
                   )),

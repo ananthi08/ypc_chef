@@ -2,6 +2,7 @@ import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Forgot extends StatelessWidget {
   static String route = '/chef/forgotpassword';
@@ -44,12 +45,12 @@ class Forgot extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                const Center(
+                 Center(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 270, 30, 10),
                     child: Text(
                       "Forgot your Password ?",
-                      style: TextStyle(
+                      style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.bold,
                           color: CustomColor.myRedColor,
                           fontSize: 18),
@@ -57,11 +58,11 @@ class Forgot extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
                   child: Text(
                     "Enter the Email address associated with \n your account",
-                    style: TextStyle(
+                    style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                         fontSize: 10),
@@ -83,7 +84,7 @@ class Forgot extends StatelessWidget {
                         borderSide: const BorderSide(color: Colors.transparent),
                       ),
                       hintText: 'Email',
-                      hintStyle: const TextStyle(
+                      hintStyle:  GoogleFonts.dmSans(
                           fontWeight: FontWeight.bold, fontSize: 20),
                       enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.black12),

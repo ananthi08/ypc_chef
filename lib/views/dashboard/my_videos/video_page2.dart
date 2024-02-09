@@ -3,6 +3,7 @@ import 'package:chef_frontend/service/post_api/selectedvideo.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:video_player/video_player.dart';
 
 class Myvideospage2 extends StatefulWidget {
@@ -166,7 +167,7 @@ Future<void> fetchVideoDetails() async {
                             isPortrait ? screenWidth * 0.05 : 16.0),
                         child: Text(
                           productDetail?.text ?? '',
-                          style: const TextStyle(
+                          style:  GoogleFonts.dmSans(
                             fontSize: 20,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -199,7 +200,7 @@ Future<void> fetchVideoDetails() async {
                     padding: const EdgeInsets.all(25.0),
                     child: Text(
                       productDetail?.description ?? 'No description found',
-                      style: const TextStyle(
+                      style:  GoogleFonts.dmSans(
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -226,19 +227,19 @@ Future<void> fetchVideoDetails() async {
                   ),
 
                   // Ingredient
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "Ingredients",
-                            style: TextStyle(
+                            style: GoogleFonts.dmSans(
                               fontSize: 16,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'dmsans',
+                              
                             ),
                           ),
                         ),
@@ -259,7 +260,7 @@ Future<void> fetchVideoDetails() async {
                    
                             Text(
                               ingredient?.name ?? '',
-                              style: const TextStyle(
+                              style:  GoogleFonts.dmSans(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: Colors.black,
@@ -269,7 +270,7 @@ Future<void> fetchVideoDetails() async {
                               width: screenWidth * 0.18,
                               child: Text(
                                 ingredient?.quantity ?? '',
-                                style: const TextStyle(
+                                style:  GoogleFonts.dmSans(
                                   fontSize: 16,
                                   color: Colors.black,
                                 ),
@@ -286,19 +287,19 @@ Future<void> fetchVideoDetails() async {
                   ),
 
                   // steps
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                   Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "Steps",
-                            style: TextStyle(
+                            style: GoogleFonts.dmSans(
                               fontSize: 16,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'dmsans',
+                              
                             ),
                           ),
                         ),
@@ -323,7 +324,7 @@ Future<void> fetchVideoDetails() async {
                               width: screenWidth * 0.18,
                          child:   Text(
                               step?.stepNo ?? '',
-                              style: const TextStyle(
+                              style:  GoogleFonts.dmSans(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: Colors.black,
@@ -335,7 +336,7 @@ Future<void> fetchVideoDetails() async {
                               child: 
                               Text(
                                 step?.stepDescription ?? '',
-                                style: const TextStyle(
+                                style:  GoogleFonts.dmSans(
                                   fontSize: 16,
                                   color: Colors.black,
                                 ),

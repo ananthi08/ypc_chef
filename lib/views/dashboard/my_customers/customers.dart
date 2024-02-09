@@ -1,5 +1,6 @@
 import 'package:chef_frontend/common_widget/customimage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomersPage extends StatefulWidget {
   const CustomersPage({Key? key}) : super(key: key);
@@ -51,9 +52,9 @@ class _CustomersPageState extends State<CustomersPage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
+                             Text(
                               'My Customers',
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -68,14 +69,14 @@ class _CustomersPageState extends State<CustomersPage> {
                                   children: [
                                     Text(
                                       followingCount.toString(),
-                                      style: const TextStyle(
+                                      style:  GoogleFonts.dmSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Text(
+                                     Text(
                                       'Following',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                         fontSize: 12,
                                         color: Colors.grey,
                                       ),
@@ -87,14 +88,14 @@ class _CustomersPageState extends State<CustomersPage> {
                                   children: [
                                     Text(
                                       followersCount.toString(),
-                                      style: const TextStyle(
+                                      style:  GoogleFonts.dmSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Text(
+                                     Text(
                                       'Followers',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                         fontSize: 12,
                                         color: Colors.grey,
                                       ),
@@ -133,7 +134,7 @@ class _CustomersPageState extends State<CustomersPage> {
 //             children: [
 //               const Text(
 //                 'User Name',
-//                 style: TextStyle(
+//                 style: GoogleFonts.dmSans(
 //                   fontSize: 18,
 //                   fontWeight: FontWeight.bold,
 //                 ),
@@ -178,9 +179,9 @@ class _CustomersPageState extends State<CustomersPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                 Text(
                   'User Name',
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

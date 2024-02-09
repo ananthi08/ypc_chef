@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -10,11 +11,11 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
-   return const Scaffold(
+   return  Scaffold(
       body: Center(
         child: Text(
           "CHAT PAGE",
-          style: TextStyle(fontSize: 40),
+          style: GoogleFonts.dmSans(fontSize: 40),
         ),
       ),
     );

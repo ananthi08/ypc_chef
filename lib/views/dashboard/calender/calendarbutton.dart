@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
@@ -18,7 +19,7 @@ child: Container(
     borderRadius: BorderRadius.circular(20),
     color: const Color(0xFF4e5ae8),
   ),
-  child: Center(child: Text(label, style: const TextStyle(color: Colors.white),)) ,
+  child: Center(child: Text(label, style:  GoogleFonts.dmSans(color: Colors.white),)) ,
 ),
     );
   }

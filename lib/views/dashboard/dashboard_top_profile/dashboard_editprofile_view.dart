@@ -160,7 +160,7 @@ import 'package:provider/provider.dart';
 //                   children: [
 //                     Text(
 //                       " Edit Profile",
-//                       style: TextStyle(
+//                       style: GoogleFonts.dmSans(
 //                           fontWeight: FontWeight.bold,
 //                           color: CustomColor.myRedColor,
 //                           fontSize: 18),
@@ -213,7 +213,7 @@ import 'package:provider/provider.dart';
 //                         padding: EdgeInsets.fromLTRB(0, 0, 260, 0),
 //                         child: Text(
 //                           'User Name',
-//                           style: TextStyle(
+//                           style: GoogleFonts.dmSans(
 //                             fontSize: 15,
 //                             color: Colors.black,
 //                           ),
@@ -234,7 +234,7 @@ import 'package:provider/provider.dart';
 //                             controller: nameController,
 //                             decoration: InputDecoration(
 //                               hintText: "Your Name",
-//                               hintStyle: TextStyle(
+//                               hintStyle: GoogleFonts.dmSans(
 //                                 fontSize: 15,
 //                                 color: Colors.grey.shade400,
 //                               ),
@@ -254,7 +254,7 @@ import 'package:provider/provider.dart';
 //                         padding: EdgeInsets.fromLTRB(0, 0, 280, 0),
 //                         child: Text(
 //                           'Email Id',
-//                           style: TextStyle(
+//                           style: GoogleFonts.dmSans(
 //                             fontSize: 15,
 //                             color: Colors.black87,
 //                           ),
@@ -275,7 +275,7 @@ import 'package:provider/provider.dart';
 //                             controller: emailIdController,
 //                             decoration: InputDecoration(
 //                               hintText: "Your Mail",
-//                               hintStyle: TextStyle(
+//                               hintStyle: GoogleFonts.dmSans(
 //                                 fontSize: 15,
 //                                 color: Colors.grey.shade400,
 //                               ),
@@ -297,7 +297,7 @@ import 'package:provider/provider.dart';
 //                         padding: EdgeInsets.fromLTRB(0, 0, 230, 0),
 //                         child: Text(
 //                           'Mobile Number',
-//                           style: TextStyle(
+//                           style: GoogleFonts.dmSans(
 //                             fontSize: 15,
 //                             color: Colors.black87,
 //                           ),
@@ -315,7 +315,7 @@ import 'package:provider/provider.dart';
 //                           controller: mobilenumberController,
 //                           decoration: InputDecoration(
 //                             hintText: 'Mobile Number',
-//                             hintStyle: TextStyle(
+//                             hintStyle: GoogleFonts.dmSans(
 //                               fontSize: 15,
 //                               color: Colors.grey.shade400,
 //                             ),
@@ -338,7 +338,7 @@ import 'package:provider/provider.dart';
 //                         padding: EdgeInsets.fromLTRB(0, 0, 260, 0),
 //                         child: Text(
 //                           'Password',
-//                           style: TextStyle(
+//                           style: GoogleFonts.dmSans(
 //                             fontSize: 15,
 //                             color: Colors.black87,
 //                           ),
@@ -361,7 +361,7 @@ import 'package:provider/provider.dart';
 //                             keyboardType: TextInputType.visiblePassword,
 //                             decoration: InputDecoration(
 //                               hintText: "Enter Your Password",
-//                               hintStyle: TextStyle(
+//                               hintStyle: GoogleFonts.dmSans(
 //                                 fontSize: 15,
 //                                 color: Colors.grey.shade400,
 //                               ),
@@ -389,7 +389,7 @@ import 'package:provider/provider.dart';
 //                       ),
 //                       Text(
 //                         errorText,
-//                         style: const TextStyle(
+//                         style: const GoogleFonts.dmSans(
 //                           color: Colors.red,
 //                         ),
 //                       ),
@@ -762,15 +762,15 @@ class _EditprofileState extends State<Editprofile> {
               const SizedBox(
                 height: 25,
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+               Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Column(
                   children: [
                     Text(
                       " Edit Profile",
-                      style: TextStyle(
+                      style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF3E4D52),
+                          color: const Color(0xFF3E4D52),
                           fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
@@ -823,11 +823,11 @@ class _EditprofileState extends State<Editprofile> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 30),
                         child: Text(
                           'User Name',
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(
                             fontSize: 15,
                             color: Colors.black,
                           ),
@@ -850,7 +850,7 @@ class _EditprofileState extends State<Editprofile> {
                             controller: nameController,
                             decoration: InputDecoration(
                               hintText: "username",
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 color: Colors.grey.shade400,
                               ),
@@ -866,11 +866,11 @@ class _EditprofileState extends State<Editprofile> {
                         ),
                       ),
                       // const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 30),
                         child: Text(
                           'Email Id',
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(
                             fontSize: 15,
                             color: Colors.black87,
                           ),
@@ -891,7 +891,7 @@ class _EditprofileState extends State<Editprofile> {
                             controller: emailIdController,
                             decoration: InputDecoration(
                               hintText: email,
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 color: Colors.grey.shade400,
                               ),
@@ -912,11 +912,11 @@ class _EditprofileState extends State<Editprofile> {
                         ),
                       ),
 
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 30),
                         child: Text(
                           'Whatsapp Number',
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(
                             fontSize: 15,
                             color: Colors.black87,
                           ),
@@ -952,16 +952,16 @@ class _EditprofileState extends State<Editprofile> {
 
                       Text(
                         errorText,
-                        style: const TextStyle(
+                        style:  GoogleFonts.dmSans(
                           color: Colors.red,
                         ),
                       ),
 
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 30),
                         child: Text(
                           'Gender',
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(
                             fontSize: 15,
                             color: Colors.black87,
                           ),
@@ -975,9 +975,9 @@ class _EditprofileState extends State<Editprofile> {
                         child: DropdownButtonFormField(
                           decoration: InputDecoration(
                             hintText: 'Select',
-                            hintStyle: const TextStyle(
+                            hintStyle:  GoogleFonts.dmSans(
                               fontSize: 15,
-                              color: Color.fromARGB(255, 0, 0, 0),
+                              color: const Color.fromARGB(255, 0, 0, 0),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -1015,11 +1015,11 @@ class _EditprofileState extends State<Editprofile> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 30),
                         child: Text(
                           'Facebook Link',
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(
                             fontSize: 15,
                             color: Colors.black,
                           ),
@@ -1038,7 +1038,7 @@ class _EditprofileState extends State<Editprofile> {
                             controller: facebookController,
                             decoration: InputDecoration(
                               hintText: "facebook link",
-                              hintStyle: TextStyle(
+                              hintStyle: GoogleFonts.dmSans(
                                 fontSize: 15,
                                 color: Colors.grey.shade400,
                               ),
@@ -1109,10 +1109,10 @@ class _EditprofileState extends State<Editprofile> {
                                     press();
                                   }
                                 },
-                                child: const Text(
+                                child:  Text(
                                   'Save Changes',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
+                                  style: GoogleFonts.dmSans(
+                                    color: const Color.fromARGB(255, 255, 255, 255),
                                   ),
                                 ),
                               ),

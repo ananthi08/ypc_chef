@@ -10,6 +10,7 @@ import 'package:chef_frontend/constants/utilities.dart';
 import 'package:chef_frontend/model/auth_model.dart';
 import 'package:chef_frontend/service/auth_service/authentication_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -38,9 +39,9 @@ class _VerifyOtpForSigninState extends State<VerifyOtpForSignin> {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: const TextStyle(
+      textStyle:  GoogleFonts.dmSans(
         fontSize: 22,
-        color: Color.fromRGBO(0, 0, 0, 1),
+        color: const Color.fromRGBO(0, 0, 0, 1),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

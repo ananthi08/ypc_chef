@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Feed extends StatefulWidget {
   const Feed({super.key});
@@ -10,11 +11,11 @@ class Feed extends StatefulWidget {
 class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
-   return const Scaffold(
+   return  Scaffold(
       body: Center(
         child: Text(
           "Feed PAGE",
-          style: TextStyle(fontSize: 40),
+          style: GoogleFonts.dmSans(fontSize: 40),
         ),
       ),
     );

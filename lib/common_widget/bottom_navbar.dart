@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Bottomnavbar extends StatelessWidget {
   const Bottomnavbar({
@@ -12,7 +13,7 @@ class Bottomnavbar extends StatelessWidget {
       data: NavigationBarThemeData(
           indicatorColor: Colors.blue.shade100,
           labelTextStyle: MaterialStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+             GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w500),
           )),
       child: NavigationBar(destinations:const [
         NavigationDestination(

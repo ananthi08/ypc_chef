@@ -9,6 +9,7 @@ import 'package:chef_frontend/views/dashboard/my_customers/customers.dart';
 import 'package:chef_frontend/views/dashboard/my_videos/my_videos_page_1.dart';
 import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Dashboardview extends StatefulWidget {
   static String route = '/chef/dashboard';
@@ -92,13 +93,13 @@ class _DashboardviewState extends State<Dashboardview> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                     Text(
                       'Dashboard',
-                      style: TextStyle(
+                      style: GoogleFonts.dmSans(
                           color: Colors.black,
                           fontSize: 34,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'DMSans'),
+                          ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -162,22 +163,22 @@ class _DashboardviewState extends State<Dashboardview> {
                                     const SizedBox(
                                       height: 1,
                                     ),
-                                    const Text(
+                                     Text(
                                       'My Videos',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'DMSans'),
+                                         ),
                                     ),
                                   ],
                                 ),
                               ),
                               Text(
                                 '${videoUrls.length} Videos',
-                                style: const TextStyle(
+                                style:  GoogleFonts.dmSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
-                                    fontFamily: 'DMSans'),
+                                    ),
                               ),
                             ],
                           ),
@@ -217,22 +218,22 @@ class _DashboardviewState extends State<Dashboardview> {
                                     const SizedBox(
                                       height: 1,
                                     ),
-                                    const Text(
+                                     Text(
                                       'My Followers',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'DMSans'),
+                                          ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Text(
+                               Text(
                                 '23 people',
-                                style: TextStyle(
+                                style: GoogleFonts.dmSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
-                                    fontFamily: 'DMSans'),
+                                   ),
                               ),
                             ],
                           ),
@@ -272,22 +273,22 @@ class _DashboardviewState extends State<Dashboardview> {
                                     const SizedBox(
                                       height: 1,
                                     ),
-                                    const Text(
+                                     Text(
                                       'View Schedule',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'DMSans'),
+                                         ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Text(
+                               Text(
                                 '5 Tasks',
-                                style: TextStyle(
+                                style: GoogleFonts.dmSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
-                                    fontFamily: 'DMSans'),
+                                   ),
                               ),
                             ],
                           ),
@@ -321,22 +322,22 @@ class _DashboardviewState extends State<Dashboardview> {
                                     const SizedBox(
                                       height: 1,
                                     ),
-                                    const Text(
+                                     Text(
                                       'Payment',
-                                      style: TextStyle(
+                                      style: GoogleFonts.dmSans(
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: 'DMSans'),
+                                         ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Text(
+                               Text(
                                 '23 Payment',
-                                style: TextStyle(
+                                style: GoogleFonts.dmSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
-                                    fontFamily: 'DMSans'),
+                                    ),
                               ),
                             ],
                           ),

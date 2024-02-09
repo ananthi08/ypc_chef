@@ -18,6 +18,8 @@ class CalendarView extends StatefulWidget {
 
 class _CalendarViewState extends State<CalendarView> {
   DateTime _selectedDate = DateTime.now();
+  
+  get dmSansBoldTextStyle => null;
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
@@ -112,7 +114,7 @@ _addDateBar(){
                   
                   ),
                 
-                  const Text("Today", 
+                   Text("Today", 
                   style: dmSansBoldTextStyle ,
                   ),
                 

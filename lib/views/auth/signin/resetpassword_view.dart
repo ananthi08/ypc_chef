@@ -64,11 +64,11 @@ class _ResetState extends State<Reset> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       RichText(
-                        text: const TextSpan(
+                        text:  TextSpan(
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Reset',
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -76,7 +76,7 @@ class _ResetState extends State<Reset> {
                             ),
                             TextSpan(
                               text: ' Password',
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
                                 color: CustomColor.myRedColor,

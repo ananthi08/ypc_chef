@@ -44,7 +44,7 @@ class MyInputField extends StatelessWidget {
                 cursorColor:
                     Get.isDarkMode ? Colors.grey[100] : Colors.grey[700],
                 controller: controller,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style:  GoogleFonts.dmSans(fontWeight: FontWeight.bold),
                 decoration: InputDecoration(
                   hintText: hint,
                   focusedBorder: UnderlineInputBorder(

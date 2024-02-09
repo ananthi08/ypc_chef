@@ -10,6 +10,7 @@ import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
 // import 'package:chef_frontend/views/first_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Profilepage extends StatefulWidget {
   static String route = '/chef/dashboard/Profilepage';
@@ -77,9 +78,9 @@ class _ProfilepageState extends State<Profilepage> {
             const SizedBox(
               height: 30,
             ),
-            const Text(
+             Text(
               "Profile",
-              style: TextStyle(
+              style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.bold,
                   color: CustomColor.myRedColor,
                   fontSize: 20),
@@ -115,7 +116,7 @@ class _ProfilepageState extends State<Profilepage> {
             ),
             Text(
               userName,
-              style: const TextStyle(
+              style:  GoogleFonts.dmSans(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 18),
@@ -126,7 +127,7 @@ class _ProfilepageState extends State<Profilepage> {
             ),
             Text(
               email,
-              style: const TextStyle(
+              style:  GoogleFonts.dmSans(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                   fontSize: 12),
@@ -147,21 +148,21 @@ class _ProfilepageState extends State<Profilepage> {
                   ),
                 );
               },
-              child: const Text(
+              child:  Text(
                 'Edit Profile',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                style: GoogleFonts.dmSans(
+                  color: const Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            const Row(
+             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
                     "Account",
-                    style: TextStyle(
+                    style: GoogleFonts.dmSans(
                       color: CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -198,9 +199,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Security",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -227,9 +228,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Notification",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -258,9 +259,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Privacy",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -277,13 +278,13 @@ class _ProfilepageState extends State<Profilepage> {
             // const SizedBox(
             //   height: 20,
             // ),
-            const Row(
+             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
                     "Support & About",
-                    style: TextStyle(
+                    style: GoogleFonts.dmSans(
                       color:CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -317,9 +318,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "My Subscription",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -346,9 +347,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Help & support",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -377,9 +378,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Term and policies",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -396,13 +397,13 @@ class _ProfilepageState extends State<Profilepage> {
             const SizedBox(
               height: 20,
             ),
-            const Row(
+             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Text(
                     "Actions",
-                    style: TextStyle(
+                    style: GoogleFonts.dmSans(
                       color:CustomColor.myRedColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -436,9 +437,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Report a Problem",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -465,9 +466,9 @@ class _ProfilepageState extends State<Profilepage> {
                             width: 35,
                           ),
                           GestureDetector(
-                            child: const Text(
+                            child:  Text(
                               "Add account",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -504,9 +505,9 @@ class _ProfilepageState extends State<Profilepage> {
                         ),
                       );
                     },
-                            child: const Text(
+                            child:  Text(
                               "Log Out",
-                              style: TextStyle(
+                              style: GoogleFonts.dmSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -532,7 +533,7 @@ class _ProfilepageState extends State<Profilepage> {
         ),
       ),
    bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         color:const Color.fromARGB(255, 240, 240, 240),
 
 
@@ -549,7 +550,7 @@ class _ProfilepageState extends State<Profilepage> {
           IconButton(onPressed: (){
             Navigator.pushNamed(context, Dashboardview.route);
           },
-          icon: Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
+          icon: const Icon(Icons.home_filled,color: Color.fromARGB(255, 173, 20, 0),)
           ),
 
 // for cart
@@ -557,21 +558,21 @@ class _ProfilepageState extends State<Profilepage> {
             
           }, 
           
-          icon: Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
+          icon: const Icon(Icons.shopping_cart_checkout,color: Color.fromARGB(255, 173, 20, 0),)
           ),
 // for mail
           IconButton(onPressed: (){
             
           }, 
           
-          icon: Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
+          icon: const Icon(Icons.notifications_active,color:Color.fromARGB(255, 173, 20, 0),)
           ),
 
               IconButton(onPressed: (){
             
           }, 
           
-          icon: Icon(Icons.mail,color: Color.fromARGB(255, 173, 20, 0),)
+          icon: const Icon(Icons.mail,color: Color.fromARGB(255, 173, 20, 0),)
           ),
 
 

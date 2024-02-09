@@ -6,6 +6,7 @@ import 'package:chef_frontend/views/dashboard/feed/FEED.dart';
 import 'package:chef_frontend/views/dashboard/videoupload_page/uploaded_video.dart';
 import 'package:chef_frontend/views/dashboard/my_videos/video_page2.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
@@ -143,9 +144,9 @@ class _MyvideospageState extends State<Myvideospage> {
                             children: [
                               Image.asset("assets/mxplayer.jpeg"),
                               const SizedBox(width: 15),
-                              const Text(
+                               Text(
                                 'My Videos',
-                                style: TextStyle(
+                                style: GoogleFonts.dmSans(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -404,7 +405,7 @@ class _MyvideospageState extends State<Myvideospage> {
                                               children: [
                                                 Text(
                                                   videos[index]['text'],
-                                                  style: const TextStyle(
+                                                  style:  GoogleFonts.dmSans(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 13.0,
                                                   ),
@@ -438,7 +439,7 @@ class _MyvideospageState extends State<Myvideospage> {
                                               children: [
                                                 Text(
                                                   'Likes: ${videos[index]['likes'] ?? '0'}',
-                                                  style: const TextStyle(
+                                                  style:  GoogleFonts.dmSans(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 13.0,
                                                   ),
@@ -454,7 +455,7 @@ class _MyvideospageState extends State<Myvideospage> {
                                               children: [
                                                 Text(
                                                   'Cuisines: ${videos[index]['nationalCuisine'] ?? ''}',
-                                                  style: const TextStyle(
+                                                  style:  GoogleFonts.dmSans(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 13.0,
                                                   ),

@@ -1,6 +1,7 @@
 // import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void popuperror({
   required BuildContext context,
@@ -11,9 +12,9 @@ void popuperror({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text(
+        title:  Text(
           "Error",
-          style: TextStyle(
+          style: GoogleFonts.dmSans(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -58,7 +59,7 @@ void showCustomSnackBar({
               const SizedBox(width: 8.0), 
               Text(
                 text,
-                style: const TextStyle(
+                style:  GoogleFonts.dmSans(
                   color: Colors.white,
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -110,7 +111,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: const TextStyle(
+                style:  GoogleFonts.dmSans(
                   color: Colors.white,
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
@@ -118,7 +119,7 @@ class AwesomeSnackbarContent extends StatelessWidget {
               ),
               // Text(
               //   message,
-              //   style: TextStyle(
+              //   style: GoogleFonts.dmSans(
               //     color: Colors.white,
               //     fontSize: 16.0,
               //   ),

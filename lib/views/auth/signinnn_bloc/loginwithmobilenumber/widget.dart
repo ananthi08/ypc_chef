@@ -6,6 +6,7 @@ import 'package:chef_frontend/common_widget/dual_color_widget.dart';
 import 'package:chef_frontend/views/auth/signinnn_bloc/loginwithmobilenumber/MobileNumberBloc.dart';
 import 'package:chef_frontend/views/auth/signup/signup_view.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 class MobileNumber extends StatefulWidget {
   static String route = '/chef/send_otp';
 
@@ -111,8 +112,8 @@ class _MobileNumberState extends State<MobileNumber> {
                                 final isLoading = snapshot.data ?? false;
                                    return isLoading
                                     ? const CircularProgressIndicator(color:Colors.white,)
-                                    : const Text('Verify',
-                                        style: TextStyle(fontSize: 20),
+                                    :  Text('Verify',
+                                        style: GoogleFonts.dmSans(fontSize: 20),
                                       );
                               },
                             ),
@@ -128,9 +129,9 @@ class _MobileNumberState extends State<MobileNumber> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       "Not registered yet!",
-                      style: TextStyle(
+                      style: GoogleFonts.dmSans(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -147,9 +148,9 @@ class _MobileNumberState extends State<MobileNumber> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child:  Text(
                         "Sign Up",
-                        style: TextStyle(
+                        style: GoogleFonts.dmSans(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: CustomColor.myRedColor,

@@ -65,7 +65,7 @@ class Headtextdualcolor extends StatelessWidget {
         children: [
           Text(
             text1,
-            style: const TextStyle(
+            style:  GoogleFonts.dmSans(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -75,7 +75,7 @@ class Headtextdualcolor extends StatelessWidget {
           ),
           Text(
             text2,
-            style: const TextStyle(
+            style:  GoogleFonts.dmSans(
               fontWeight: FontWeight.bold,
               fontSize: 20,
               color: CustomColor.myRedColor,
@@ -86,7 +86,7 @@ class Headtextdualcolor extends StatelessWidget {
           ),
           Text(
             text3 ?? '',
-            style: const TextStyle(
+            style:  GoogleFonts.dmSans(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
