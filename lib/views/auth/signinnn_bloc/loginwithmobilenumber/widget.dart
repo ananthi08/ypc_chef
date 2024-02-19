@@ -39,7 +39,7 @@ class _MobileNumberState extends State<MobileNumber> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_backspace_sharp),
           onPressed: () {
             Navigator.of(context).pop();
           },

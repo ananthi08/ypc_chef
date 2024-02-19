@@ -250,7 +250,7 @@ class _DashboardviewState extends State<Dashboardview> {
                                 ),
                               ),
                                Text(
-                                '${followersList?.length} Peoples',
+                                '${followersList?.length} Followers',
                                 style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

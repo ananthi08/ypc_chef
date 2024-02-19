@@ -163,7 +163,7 @@ class _SigninState extends State<Signin> {
             Padding(
              padding: const EdgeInsets.symmetric(horizontal: 15, ),
               child: IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.keyboard_backspace_sharp),
                 onPressed: () {
                   Navigator.push(
                     context,

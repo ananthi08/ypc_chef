@@ -411,7 +411,7 @@ class _UploadVideoState extends State<UploadVideo> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_backspace_sharp),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -521,7 +521,7 @@ class _UploadVideoState extends State<UploadVideo> {
 
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -533,6 +533,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   decoration: InputDecoration(
                     hintText: "Enter Product Name",
                     hintStyle: GoogleFonts.dmSans(
+                      fontWeight: FontWeight.w400,
                       fontSize: 15,
                       color: Colors.grey.shade400,
                     ),
@@ -549,32 +550,39 @@ class _UploadVideoState extends State<UploadVideo> {
                   'Product Category',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
 
                 Container(
+                  // color: Colors.red,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 217, 217, 217),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 217, 217, 217),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                            width: MediaQuery.of(context).size.width * 0.20,
+                              // color: Colors.amber,
+                              child: Text(
                                 MainCategory,
                                 style:  GoogleFonts.dmSans(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   color: Colors.black,
                                 ),
                               ),
-                              Radio<String>(
+                            ),
+                            Container(
+                          width: MediaQuery.of(context).size.width * 0.05,
+                              child: Radio<String>(
                                 value: 'Main',
                                 groupValue: selectedCategory,
                                 onChanged: (value) {
@@ -585,30 +593,36 @@ class _UploadVideoState extends State<UploadVideo> {
                                   });
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.02,
+                        width: MediaQuery.of(context).size.width * 0.01,
                       ),
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 217, 217, 217),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 217, 217, 217),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.20,
+                              child: Text(
                                 SideCategory,
                                 style:  GoogleFonts.dmSans(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   color: Colors.black,
                                 ),
                               ),
-                              Radio<String>(
+                            ),
+                            Container(
+                            width: MediaQuery.of(context).size.width * 0.05,
+
+                              child: Radio<String>(
                                 value: 'Side',
                                 groupValue: selectedCategory,
                                 onChanged: (value) {
@@ -619,30 +633,41 @@ class _UploadVideoState extends State<UploadVideo> {
                                   });
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.02,
+                        width: MediaQuery.of(context).size.width * 0.01,
                       ),
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 217, 217, 217),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                               Text(
-                                'Others',
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Radio<String>(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.276,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 217, 217, 217),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                             Padding(
+                               padding: const EdgeInsets.only(left: 5),
+                               child: Container(
+                                // color: Colors.red,
+                                width: MediaQuery.of(context).size.width * 0.20,
+                                 child: Text(
+                                  'Others',
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                  ),
+                                                             ),
+                               ),
+                             ),
+                            Container(
+                                // color: Colors.amber,
+
+                            width: MediaQuery.of(context).size.width * 0.05,
+                              child: Radio<String>(
                                 value: 'Other',
                                 groupValue: selectedCategory,
                                 onChanged: (value) {
@@ -653,8 +678,8 @@ class _UploadVideoState extends State<UploadVideo> {
                                   });
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -663,7 +688,7 @@ class _UploadVideoState extends State<UploadVideo> {
 
                 const SizedBox(height: 15),
                 Text(
-                  'InterNational Cuisine',
+                  'International Cuisine',
                   // style: TextStyle(
                   //   fontSize: 15,
                   //   color: Color.fromARGB(255, 0, 0, 0),
@@ -671,7 +696,7 @@ class _UploadVideoState extends State<UploadVideo> {
 
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -741,7 +766,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   'National Cuisine',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -788,7 +813,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   'Product Serve Category',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -838,7 +863,7 @@ class _UploadVideoState extends State<UploadVideo> {
                   'Family Type',
                   style: GoogleFonts.dmSans(
                     fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -990,7 +1015,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                   'Ingredients',
                                   style: GoogleFonts.dmSans(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.normal,
+                                    fontWeight: FontWeight.w700,
                                     color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
@@ -1110,7 +1135,7 @@ class _UploadVideoState extends State<UploadVideo> {
                             child: Container(
                               height: 70,
                               width: 500,
-                              color: const Color.fromARGB(255, 246, 246, 246),
+                              color: const Color.fromARGB(255, 232, 232, 232),
                               margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -1119,7 +1144,8 @@ class _UploadVideoState extends State<UploadVideo> {
                                     Expanded(
                                       flex: 6,
                                       child: Container(
-                                        color: Colors.white,
+                                       color: const Color.fromARGB(
+                                            255, 255, 255, 255),
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Center(
@@ -1128,11 +1154,11 @@ class _UploadVideoState extends State<UploadVideo> {
                                               decoration: InputDecoration(
                                                 hintText:
                                                     'Enter Ingredient name',
+                                                    border:const OutlineInputBorder(),
                                                 hintStyle: GoogleFonts.dmSans(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.normal,
-                                                  color: const Color.fromARGB(
-                                                      255, 0, 0, 0),
+                                                   color:const Color.fromARGB(255, 198, 198, 198),
                                                 ),
                                               ),
                                             ),
@@ -1149,8 +1175,15 @@ class _UploadVideoState extends State<UploadVideo> {
                                         color: Colors.white,
                                         child: TextField(
                                           controller: quantityControllers[i],
-                                          decoration: const InputDecoration(
+                                          decoration:  InputDecoration(
                                             hintText: 'Qnty',
+                                              border:const OutlineInputBorder(),
+                                                hintStyle: GoogleFonts.dmSans(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
+                                              color:const Color.fromARGB(255, 198, 198, 198),
+
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -1173,6 +1206,7 @@ class _UploadVideoState extends State<UploadVideo> {
                                   'Click the add button to Enter the Steps',
                                   style: GoogleFonts.dmSans(
                                     fontSize: 15,
+                                    fontWeight: FontWeight.w700,
                                     color: const Color.fromARGB(255, 0, 0, 0),
                                   ),
                                 ),
@@ -1220,7 +1254,7 @@ class _UploadVideoState extends State<UploadVideo> {
                             child: Container(
                               height: 70,
                               width: 500,
-                              color: Colors.grey.shade400,
+                             color: const Color.fromARGB(255, 232, 232, 232),
                               margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -1245,14 +1279,16 @@ class _UploadVideoState extends State<UploadVideo> {
                                       flex: 6,
                                       child: Container(
                                         color: Colors.white,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: TextField(
-                                            controller: stepdesControllers[i],
-                                            decoration: const InputDecoration(
-                                              hintText: 'Steps Description',
-                                            ),
+                                        child: TextField(
+                                          controller: stepdesControllers[i],
+                                          decoration:  InputDecoration(
+                                            hintText: 'Steps Description',
+                                              border: const OutlineInputBorder(),
+                                                hintStyle: GoogleFonts.dmSans(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                                color:const Color.fromARGB(255, 198, 198, 198),
+                                              ),
                                           ),
                                         ),
                                       ),

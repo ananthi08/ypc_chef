@@ -109,7 +109,7 @@ class _AccountCreateState extends State<AccountCreate> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           IconButton(
-                            icon: const Icon(Icons.arrow_back),
+                            icon: const Icon(Icons.keyboard_backspace_sharp),
                             onPressed: () {
                               Navigator.push(
                                 context,

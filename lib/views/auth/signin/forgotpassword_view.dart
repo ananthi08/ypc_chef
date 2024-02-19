@@ -34,7 +34,7 @@ class Forgot extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           color: Colors.black,
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_backspace_sharp),
           onPressed: () {
             Navigator.of(context).pop();
           },

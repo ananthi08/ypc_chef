@@ -131,7 +131,7 @@ Future<void> fetchVideoDetails() async {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_backspace_sharp),
           onPressed: () {
             Navigator.pop(context);
           },

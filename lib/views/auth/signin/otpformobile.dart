@@ -125,7 +125,7 @@ class _VerifyOtpForSigninState extends State<VerifyOtpForSignin> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.keyboard_backspace_sharp),
           onPressed: () {
             Navigator.of(context).pop();
           },

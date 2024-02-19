@@ -87,7 +87,7 @@ class _CustomersPageState extends State<CustomersPage> {
                   children: [
                     Center(
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.keyboard_backspace_sharp),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

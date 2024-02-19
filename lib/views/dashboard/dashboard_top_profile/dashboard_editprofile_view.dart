@@ -128,7 +128,7 @@ import 'package:provider/provider.dart';
 //           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
 //           leading: IconButton(
 //             color: Colors.black,
-//             icon: const Icon(Icons.arrow_back),
+//             icon: const Icon(Icons.keyboard_backspace_sharp),
 //             onPressed: () async {
 //               Navigator.push(
 //                 context,
@@ -750,7 +750,7 @@ class _EditprofileState extends State<Editprofile> {
           elevation: 0,
           leading: IconButton(
             color: Colors.black,
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.keyboard_backspace_sharp),
             onPressed: () async {
               Navigator.of(context).pop();
             },

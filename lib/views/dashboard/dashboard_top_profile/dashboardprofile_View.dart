@@ -58,7 +58,7 @@ class _ProfilepageState extends State<Profilepage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.keyboard_backspace_sharp),
           color: Colors.black,
           onPressed: () {
             Navigator.push(
