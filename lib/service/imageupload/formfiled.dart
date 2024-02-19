@@ -21,6 +21,8 @@ class FormfieldApi {
     required String international,
     required String national,
     required String productserve,
+    required String familyType,
+
     required String? thumblineImageUrl,
 
     required List<Map<String, dynamic>> steps,
@@ -48,13 +50,14 @@ class FormfieldApi {
         ingredients: ingredients,
         steps: steps,
         videoUrl: videoUrl,
+        familyType:familyType,
         thumblineImageUrl:thumblineImageUrl,
 
 
 
       );
 
-    print('thumblineImageUrlthumblineImageUrl.....$thumblineImageUrl');
+    print('stepsstepsstepsstepsstepssteps.....$steps');
       String jsonBody = jsonEncode(uploadvideodata);
     http.Response response = await http.post(
         Uri.parse(baseUrl),

@@ -326,21 +326,27 @@ class _MyvideospageState extends State<Myvideospage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3, childAspectRatio: 2 / 2),
-                        // itemCount: videos.length,
-
+             
                         itemCount: getFilteredVideoss(light1).length,
-                        // itemCount: getSortedVideoss(selectedFilter).length,
-
+                    
                         itemBuilder: (context, index) {
                           // final videoUrl = videos[index]['videoUrl'];
                           final videoUrl =
                               getFilteredVideoss(light1)[index]['videoUrl'];
                           final adminApproved = videos[index]['adminApproved'];
-                          final videoController =
-                              VideoPlayerController.networkUrl(
-                            Uri.parse(
-                                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
-                          );
+                          // final videoController =
+                          //     VideoPlayerController.networkUrl(
+                          //   Uri.parse(
+
+                          //       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
+                          //       // 'https://www.youtube.com/watch?v=Bh60dU0Phd8'
+                          //       ),
+                          // );
+
+
+                            final videoController = VideoPlayerController.networkUrl(
+                          Uri.parse(
+                              'https://ypc123.s3.ap-south-1.amazonaws.com/Crab_Biryani_How_To_Make_Crab_Rice_Quick_And_Easy_Crab_Rice_%E0%A4%9A%E0%A4%BF%E0%A4%82%E0%A4%AC%E0%A5%8B%E0%A4%B0%E0%A5%80.mp4'));
                           // (adminApproved == 0 && light1 ) ;
 
                           return Padding(
@@ -402,6 +408,7 @@ class _MyvideospageState extends State<Myvideospage> {
                                             child: Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
                                                   videos[index]['text'],
@@ -422,7 +429,7 @@ class _MyvideospageState extends State<Myvideospage> {
                                                   )
                                                 else if (videos[index]
                                                         ['productType'] ==
-                                                    'Non-veg')
+                                                    'Non-Veg')
                                                   const CustomSVGImage(
                                                     path: "assets/nonveg.svg",
                                                     height: 15,

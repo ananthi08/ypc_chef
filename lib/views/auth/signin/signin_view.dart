@@ -160,16 +160,19 @@ class _SigninState extends State<Signin> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Firstpage(),
-                  ),
-                );
-              },
+            Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 15, ),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Firstpage(),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -225,7 +228,7 @@ class _SigninState extends State<Signin> {
                         ),
                       ),
                        Text(
-                        'to sign in.',
+                        'to sign in',
                         style:  GoogleFonts.dmSans(
                           fontSize: 15.0,
                           fontWeight: FontWeight.normal,
@@ -235,6 +238,8 @@ class _SigninState extends State<Signin> {
                        Text(
                         'User Email',
                         style:  GoogleFonts.dmSans(
+                          fontWeight: FontWeight.bold,
+                          
                           fontSize: 16,
                           color: const Color.fromARGB(255, 0, 0, 0),
                         ),
@@ -261,6 +266,8 @@ class _SigninState extends State<Signin> {
                        Text(
                         'Password',
                         style:  GoogleFonts.dmSans(
+                          fontWeight: FontWeight.bold,
+
                           fontSize: 16,
                           color: const Color.fromARGB(255, 0, 0, 0),
                         ),

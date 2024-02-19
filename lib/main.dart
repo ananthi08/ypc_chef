@@ -1,4 +1,5 @@
 import 'package:chef_frontend/constants/routes.dart';
+import 'package:chef_frontend/service/post_api/image_upload_provider.dart';
 import 'package:chef_frontend/service/provider/update_uploadvideo.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:chef_frontend/views/first_page_view.dart';
@@ -16,6 +17,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<SelectedDataModel>(create: (context) => SelectedDataModel()),
+        ChangeNotifierProvider(create: (context) => ImageUploadProvider()),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

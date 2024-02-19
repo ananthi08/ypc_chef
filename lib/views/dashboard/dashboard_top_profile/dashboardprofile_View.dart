@@ -98,7 +98,7 @@ class _ProfilepageState extends State<Profilepage> {
               
                   ),
                   child:  CircleAvatar(
-                              radius: 20,
+                              radius: 25,
                               backgroundImage: imageUrl.isNotEmpty
                                   ? NetworkImage('$node$imageUrl')
                                   : const NetworkImage(
@@ -193,7 +193,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.security,
-                            color: Colors.black87,
+                                                
+                                color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -222,7 +225,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.notifications,
-                            color: Colors.black87,
+                                                  // color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -253,7 +259,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.lock,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -312,7 +321,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.subscriptions,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -341,7 +353,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.question_mark_outlined,
-                            color: Colors.black87,
+                                               
+                                color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -372,7 +387,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.description,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -431,7 +449,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.report_problem,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -460,7 +481,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.account_circle ,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,
@@ -488,7 +512,10 @@ class _ProfilepageState extends State<Profilepage> {
                         children: [
                           const Icon(
                             Icons.account_circle,
-                            color: Colors.black87,
+                                                //  color: CustomColor.myRedColor,
+                                color: Colors.black87,
+
+
                           ),
                           const SizedBox(
                             width: 35,

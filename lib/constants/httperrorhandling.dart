@@ -21,17 +21,15 @@ void httpErroHandle({
         context: context,
         text: jsonDecode(response.body)["error"],
        
-    
-       
       );
       break;
     case 500:
       showCustomSnackBar(
         context: context,
-        text: jsonDecode(response.body)['errorCode']['message'],
+        text: jsonDecode(response.body)['error'],
       );
       break;
     default:
-      showCustomSnackBar(context: context, text: response.body);
+      showCustomSnackBar(context: context, text: jsonDecode(response.body)['error']);
   }
 }

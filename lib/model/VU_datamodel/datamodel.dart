@@ -8,6 +8,8 @@ class Videodata {
   String national;
   String productserve;
   String videoUrl;
+  String familyType;
+
   String? thumblineImageUrl;
 
   
@@ -27,6 +29,7 @@ class Videodata {
     required this.steps,
     required this.videoUrl,
     required this.thumblineImageUrl,
+    required this.familyType,
 
 
 
@@ -43,6 +46,8 @@ class Videodata {
       'ingredients': ingredients,
       'steps': steps,
       'videoUrl': videoUrl,
+      'familyType': familyType,
+
       'thumblineImageUrl': thumblineImageUrl,
 
 
@@ -58,6 +63,8 @@ class Videodata {
       international: map['international'] as String,
       national: map['national'] as String,
       videoUrl: map['videoUrl'] as String,
+      familyType: map['familyType'] as String,
+
       ingredients: List<Map<String, dynamic>>.from(map['ingredients']),
       steps: List<Map<String, dynamic>>.from(map['steps']),
       productserve: map['productserve'] as String,

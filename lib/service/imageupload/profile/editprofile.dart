@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/service/post_api/image_upload_provider.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboard_editprofile_view.dart';
+import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class EditProfile {
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Editprofile()),
+          MaterialPageRoute(builder: (context) => const Profilepage()),
         );
       } else {
         print("${response.statusCode}");

@@ -1,23 +1,17 @@
-// import 'dart:io';
 
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/constants/validation.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
 import 'package:chef_frontend/service/imageupload/image_upload.dart';
 import 'package:chef_frontend/service/imageupload/profile/editprofile.dart';
 import 'package:chef_frontend/service/post_api/image_upload_provider.dart';
-import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
-import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 
 
@@ -649,6 +643,8 @@ class _EditprofileState extends State<Editprofile> {
 
   File? selectedImage;
   String? propicurl;
+
+  
   Future<void> selectImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
@@ -691,6 +687,10 @@ class _EditprofileState extends State<Editprofile> {
   }
 
    String imageUrl = '';
+
+
+
+   
   Future<void> getUserId() async {
     try {
       final chefDetails = await _chefDetails
@@ -1105,9 +1105,9 @@ class _EditprofileState extends State<Editprofile> {
                                   minimumSize: const Size(310, 45),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
+                                  // if (_formKey.currentState!.validate()) {
                                     press();
-                                  }
+                                  // }
                                 },
                                 child:  Text(
                                   'Save Changes',

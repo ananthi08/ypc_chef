@@ -104,7 +104,8 @@ class _AccountCreateState extends State<AccountCreate> {
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Row(
+                      child: 
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           IconButton(
@@ -117,6 +118,7 @@ class _AccountCreateState extends State<AccountCreate> {
                               );
                             },
                           ),
+                          // SizedBox(width: 100,),
                           SizedBox(
                             height: 50.0,
                             width: 280.0,
@@ -209,8 +211,12 @@ class _AccountCreateState extends State<AccountCreate> {
                                 child: Text(
                                   'User Name',
                                   style:  GoogleFonts.dmSans(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
+                                  fontWeight: FontWeight.bold,
+
+                                    fontSize: 13,
+                                    // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                   ),
                                 ),
 
@@ -248,10 +254,14 @@ class _AccountCreateState extends State<AccountCreate> {
                               padding: const EdgeInsets.only(left: 10),
                               child: Container(
                                 child: Text(
-                                  'Email Id',
+                                  'Email Id*',
                                   style: GoogleFonts.dmSans(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
+                                    fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+
+                                    // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                   ),
                                 ),
 
@@ -271,7 +281,9 @@ class _AccountCreateState extends State<AccountCreate> {
                                   hintText: "Your Mail",
                                   hintStyle:  GoogleFonts.dmSans(
                                     fontSize: 15,
-                                    color: Colors.grey.shade400,
+                                    // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                   ),
 
                                   border: OutlineInputBorder(
@@ -289,8 +301,12 @@ class _AccountCreateState extends State<AccountCreate> {
                               child: Text(
                                 'Mobile Number', // Your label or hint text
                                 style:  GoogleFonts.dmSans(
-                                  fontSize: 15,
-                                  color: Colors.grey.shade400,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+
+                                  // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                 ),
                               ),
                             ),
@@ -305,7 +321,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                 decoration: InputDecoration(
                                   hintText: 'Mobile Number',
                                   hintStyle:  GoogleFonts.dmSans(
-                                    fontSize: 15,
+                                    fontSize: 13,
                                     color: Colors.grey.shade400,
                                   ),
                                   border: OutlineInputBorder(
@@ -335,8 +351,12 @@ class _AccountCreateState extends State<AccountCreate> {
                                 child: Text(
                                   'Password',
                                   style: GoogleFonts.dmSans(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
+                                    fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+
+                                    // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                   ),
                                 ),
                               ),
@@ -373,7 +393,7 @@ class _AccountCreateState extends State<AccountCreate> {
                                       _isObscure
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: Colors.grey,
+                                      color: const Color.fromARGB(255, 131, 131, 131),
                                     ),
                                   ),
                                 ),
@@ -386,8 +406,12 @@ class _AccountCreateState extends State<AccountCreate> {
                                 child: Text(
                                   'Confirm Password',
                                   style: GoogleFonts.dmSans(
-                                    fontSize: 15,
-                                    color: Colors.grey.shade400,
+                                    fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+
+                                    // color: Colors.grey.shade400,
+                                    color: Colors.black,
+
                                   ),
                                 ),
                               ),
@@ -411,19 +435,19 @@ class _AccountCreateState extends State<AccountCreate> {
                                   ),
                                   filled: true,
                                   fillColor: Colors.grey.shade200,
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _isobscure = !_isobscure;
-                                      });
-                                    },
-                                    child: Icon(
-                                      _isobscure
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
+                                  // suffixIcon: GestureDetector(
+                                  //   onTap: () {
+                                  //     setState(() {
+                                  //       _isobscure = !_isobscure;
+                                  //     });
+                                  //   },
+                                  //   child: Icon(
+                                  //     _isobscure
+                                  //         ? Icons.visibility_off
+                                  //         : Icons.visibility,
+                                  //     color: Colors.grey,
+                                  //   ),
+                                  // ),
                                 ),
                                 validator: (value) {
                                   return ValidationforTextformField()

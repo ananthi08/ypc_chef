@@ -26,7 +26,27 @@ class ApiService {
     }
   }
 
+  Future<List<Map<String, dynamic>>> fetchfamilytype() async {
+    String baseUrl = '$getbaseUrl/ypc/familytype';
 
+    try {
+      final response = await http.get(
+        Uri.parse(baseUrl),
+        headers: kHeader,
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        log(response.body);
+        return List<Map<String, dynamic>>.from(data);
+      } else {
+        throw Exception('Failed to load data from the API. Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Error fetching data: $e');
+      throw Exception('An error occurred while fetching data from the API.');
+    }
+  }
   // fetch international cuisine
 
 

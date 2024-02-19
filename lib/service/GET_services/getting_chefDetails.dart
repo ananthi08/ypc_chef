@@ -13,7 +13,8 @@ class GETchefDetails {
       String? chefId = prefs.getString("chefId");
       String baseUrl = '$kbaseUrl/chef/$chefId/details';
 
-print("chefIdchefIdchefId$chefId") ;     final response = await http.get(
+print("chefIdchefIdchefId$chefId") ;     
+final response = await http.get(
         Uri.parse(baseUrl),
         headers: kHeader,
       );
@@ -22,7 +23,7 @@ print("chefIdchefIdchefId$chefId") ;     final response = await http.get(
 
         if (responseData.containsKey('chefDetails')) {
           Map<String, dynamic> chef = responseData['chefDetails'];
-          print(responseData['chefDetails']);
+          // print(responseData['chefDetails']);
 
           String id = chef['id'].toString();
           String email = chef['email'].toString();

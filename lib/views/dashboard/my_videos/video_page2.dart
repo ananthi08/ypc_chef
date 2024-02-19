@@ -51,9 +51,14 @@ Future<void> fetchVideoDetails() async {
         //   Uri.parse(videoUrl),
         // );
 
-         videoController = VideoPlayerController.networkUrl(Uri.parse(
-              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-              );
+        //  videoController = VideoPlayerController.networkUrl(Uri.parse(
+        //       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+        //       );
+
+
+            final videoController = VideoPlayerController.networkUrl(
+                          Uri.parse(
+                              'https://ypc123.s3.ap-south-1.amazonaws.com/Crab_Biryani_How_To_Make_Crab_Rice_Quick_And_Easy_Crab_Rice_%E0%A4%9A%E0%A4%BF%E0%A4%82%E0%A4%AC%E0%A5%8B%E0%A4%B0%E0%A5%80.mp4'));
 
         await videoController!.initialize();
 

@@ -87,6 +87,7 @@ class SignupApi {
         },
       );
     } catch (e) {
+      print("eeeeeeeeeeeeee$e");
       showCustomSnackBar(
         context: context,
         text: e.toString(),

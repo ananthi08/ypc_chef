@@ -2,6 +2,7 @@
 import 'package:chef_frontend/common_widget/bottom_navbar.dart';
 import 'package:chef_frontend/constants/global_variable.dart';
 import 'package:chef_frontend/service/GET_services/getting_chefDetails.dart';
+import 'package:chef_frontend/service/GET_services/getting_userfollowed_deatils.dart';
 import 'package:chef_frontend/views/auth/signin/forgotpassword_view.dart';
 import 'package:chef_frontend/views/dashboard/calender/calender.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_top_profile/dashboardprofile_View.dart';
@@ -29,14 +30,35 @@ class _DashboardviewState extends State<Dashboardview> {
     super.initState();
     getUserId();
     fetchAndDisplayVideos();
+    getFollowersDetails();
   }
 
+  List<USERFOLLOWMODEL>? followersList;
+
+  Future<void> getFollowersDetails() async {
+    GetFollowersDetails followersDetails = GetFollowersDetails();
+    List<USERFOLLOWMODEL>? followers =
+        await followersDetails.getDetailsOfFollowers();
+
+    if (followers != null) {
+      for (var follower in followers) {
+        if (follower != null) {
+          print("${follower.userName}");
+        }
+      }
+
+      setState(() {
+        followersList = followers;
+      });
+    } else {}
+  }
   late String userId = '';
   late String userName = '';
   late String email = '';
+  
+  String imageUrl = '';
   final GETchefDetails _chefDetails = GETchefDetails();
 
-  String imageUrl = '';
   Future<void> getUserId() async {
     try {
       final chefDetails = await _chefDetails
@@ -112,9 +134,9 @@ class _DashboardviewState extends State<Dashboardview> {
                                   ? NetworkImage('$node$imageUrl')
                                   : const NetworkImage(
                                       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
-                              backgroundColor: Colors.black,
+                              // backgroundColor: Colors.black,
                             ),
-                            color: Colors.black87,
+                            // color: Colors.black87,
                             onPressed: () async {
                               Navigator.push(
                                 context,
@@ -228,8 +250,8 @@ class _DashboardviewState extends State<Dashboardview> {
                                 ),
                               ),
                                Text(
-                                '23 people',
-                                style: GoogleFonts.dmSans(
+                                '${followersList?.length} Peoples',
+                                style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
@@ -386,8 +408,11 @@ class _DashboardviewState extends State<Dashboardview> {
         color: const Color.fromARGB(255, 240, 240, 240),
         // ignore: sized_box_for_whitespace
         child: Container(
+                    
+
           height: 50,
           child: Row(
+            
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
 // for home
