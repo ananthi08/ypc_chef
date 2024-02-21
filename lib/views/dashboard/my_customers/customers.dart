@@ -140,25 +140,8 @@ class _CustomersPageState extends State<CustomersPage> {
                                         minimumSize: const Size(135, 40),
                                       ),
                                       onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  'Remove Following Customer'),
-                                              content: const Text(
-                                                  'Your custom text here!'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text('Confirm'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
+  
+
                                       },
                                       child: const Text('Following',
                                           style:
@@ -243,25 +226,133 @@ class _CustomersPageState extends State<CustomersPage> {
                                       minimumSize: const Size(135, 35),
                                     ),
                                     onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text(
-                                                'Remove Following Customer'),
-                                            content: const Text(
-                                                'Your custom text here!'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text('Confirm'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
+                                      // showDialog(
+                                      //   context: context,
+                                      //   builder: (BuildContext context) {
+                                      //     return AlertDialog(
+                                      //       title: const Text(
+                                      //           'Remove Following Customer'),
+                                      //       content: const Text(
+                                      //           'Your custom text here!'),
+                                      //       actions: <Widget>[
+                                      //         TextButton(
+                                      //           onPressed: () {
+                                      //             Navigator.of(context).pop();
+                                      //           },
+                                      //           child: const Text('Confirm'),
+                                      //         ),
+                                      //       ],
+                                      //     );
+                                      //   },
+                                      // );
+
+  showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding:const EdgeInsets.only(
+              top: 70.0,
+              bottom: 16.0,
+              left: 16.0,
+              right: 16.0,
+            ),
+            margin:const EdgeInsets.only(top: 50.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow:const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  offset:  Offset(0.0, 10.0),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+               const Text(
+                  'Remove Following Customer',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              const  SizedBox(height: 16.0),
+             const   Text(
+                  'Are you sure want to remove?',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              const  SizedBox(height: 24.0),
+                //  Align(
+                //   alignment: Alignment.bottomLeft,
+                //   child: TextButton(
+                //     onPressed: () {
+                //       Navigator.of(context).pop();
+                //     },
+                //     child: Text(
+                //       'Cancel',
+                //       style: TextStyle(
+                //         color: CustomColor.myRedColor,
+                //         fontSize: 18.0,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child:const Text(
+                      'Confirm',
+                      style: TextStyle(
+                        color: CustomColor.myRedColor,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+    const     Positioned(
+            top: 0,
+            left: 16.0,
+            right: 16.0,
+            child: CircleAvatar(
+              backgroundColor: CustomColor.myRedColor,
+              radius: 50.0,
+              child: Icon(
+                Icons.highlight_remove_sharp,
+                color: Colors.white,
+                size: 50.0,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  },
+);
+
                                     },
                                     child: const Text('Following',
                                         style: TextStyle(color: Colors.white)),

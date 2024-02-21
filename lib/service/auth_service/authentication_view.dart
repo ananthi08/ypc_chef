@@ -7,6 +7,7 @@ import 'package:chef_frontend/constants/httperrorhandling.dart';
 import 'package:chef_frontend/constants/utilities.dart';
 import 'package:chef_frontend/views/auth/signin/otpformobile.dart';
 import 'package:chef_frontend/views/auth/signin/resetpassword_view.dart';
+import 'package:chef_frontend/views/auth/signin/signin_view.dart';
 import 'package:chef_frontend/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -485,5 +486,35 @@ String otpp = '';
 
 
 
+ void deleteAccount({
+    required context,
+  }) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? userId = prefs.getString("userId");
+      String baseUrl = '$kbaseUrl/chef/profile/delete/$userId';
 
+      final response = await http.put(
+        Uri.parse(baseUrl),
+        headers: kHeader,
+      );
+
+      httpErroHandle(
+        context: context,
+        response: response,
+        onSuccess: () async {
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Signin()),
+                        );
+        },
+      );
+    } catch (e) {
+      showCustomSnackBar(
+        context: context,
+        text: "$e",
+      );
+    }
+  }
 }

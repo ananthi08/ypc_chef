@@ -97,6 +97,8 @@ flutter:
   - assets/
   - assets/customer2.svg
   - assets/dashboard/
+  - assets/icons/
+
 
   
   #   - images/a_dot_ham.jpeg

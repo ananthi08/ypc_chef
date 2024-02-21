@@ -1,3 +1,4 @@
+import 'package:chef_frontend/common_widget/custom_GREEN/customgreen.dart';
 import 'package:chef_frontend/service/post_api/product_detail_model.dart';
 import 'package:chef_frontend/service/post_api/selectedvideo.dart';
 import 'package:chewie/chewie.dart';
@@ -159,11 +160,15 @@ Future<void> fetchVideoDetails() async {
                   )
                 : const CircularProgressIndicator(),
           ),
-          Expanded(
+
+
+
+
+ Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -172,13 +177,66 @@ Future<void> fetchVideoDetails() async {
                             isPortrait ? screenWidth * 0.05 : 16.0),
                         child: Text(
                           productDetail?.text ?? '',
-                          style:  GoogleFonts.dmSans(
+                          style: GoogleFonts.dmSans(
                             fontSize: 20,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
+
+
+
+
+
+                      // Center(
+                      //   child: LikeButton(
+                      //     size: 20,
+                      //     circleColor: const CircleColor(
+                      //         start: Color(0xff00ddff), end: Color(0xff0099cc)),
+                      //     bubblesColor: const BubblesColor(
+                      //       dotPrimaryColor: Color(0xff33b5e5),
+                      //       dotSecondaryColor: Color(0xff0099cc),
+                      //     ),
+                      //     likeBuilder: (bool isLiked) {
+                      //       return Icon(
+                      //         Icons.thumb_up,
+                      //         color: isLiked
+                      //             ? CustomColor.myRedColor
+                      //             : Colors.grey,
+                      //         size: 20,
+                      //       );
+                      //     },      
+                      //     likeCount: 0,
+                      //     countBuilder:
+                      //         (int? count, bool isliked, String text) {
+                      //       var color =
+                      //           isliked ? CustomColor.myRedColor : Colors.grey;
+                      //       Widget result;
+                      //       if (count == 0) {
+                      //         result = const Text("like");
+                      //       } else {
+                      //         result = Text(
+                      //           text,
+                      //           style: GoogleFonts.dmSans(color: color),
+                      //         );
+                      //         return result;
+                      //       }
+                      //     },
+                      //     onTap: (isLiked) =>
+                      //         onLikeButtonTapped(productDetail?.id, isLiked),
+                      //   ),
+                      // ),
+
+
+
+
+
+     
+
+// in backend userLikesReceipes this is not saving {important}
+
+                      
                     ],
                   ),
 
@@ -197,15 +255,71 @@ Future<void> fetchVideoDetails() async {
                     ),
                   ),
 
-                 
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipOval(
+                            child: Image.network(
+                              // '$node${productDetail?.chefUrl}',
+                              'http://192.168.29.223:4000/uploadimage/1698476769601.jpg',
+                              width: 30,
+                              height: 30,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              print(
+                                  "productDetail?.chefIdproductDetail?.chefIdproductDetail?.chefId${{
+                                productDetail?.chefId
+                              }}");
+                            
+                            },
+                            child: Text(
+                              productDetail?.chefName ?? '',
+                              style: GoogleFonts.dmSans(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
 
-              
+             
+
+                      
+                      ],
+                    ),
+                  ),
+
+                  // Divider
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            color: const Color.fromARGB(255, 202, 202, 202),
+                            height: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   Padding(
                     padding: const EdgeInsets.all(25.0),
                     child: Text(
-                      productDetail?.description ?? 'No description found',
-                      style:  GoogleFonts.dmSans(
+                      productDetail?.description ?? 'No description',
+                      style: GoogleFonts.dmSans(
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -232,7 +346,7 @@ Future<void> fetchVideoDetails() async {
                   ),
 
                   // Ingredient
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: <Widget>[
@@ -241,11 +355,9 @@ Future<void> fetchVideoDetails() async {
                           child: Text(
                             "Ingredients",
                             style: GoogleFonts.dmSans(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              
-                            ),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: CustomColor.myRedColor),
                           ),
                         ),
                       ],
@@ -260,39 +372,120 @@ Future<void> fetchVideoDetails() async {
                       return Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                          //      crossAxisAlignment: CrossAxisAlignment
+                          //       .center,
                           children: <Widget>[
-                   
-                            Text(
-                              ingredient?.name ?? '',
-                              style:  GoogleFonts.dmSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.18,
-                              child: Text(
-                                ingredient?.quantity ?? '',
-                                style:  GoogleFonts.dmSans(
-                                  fontSize: 16,
-                                  color: Colors.black,
+                            Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 230, 229, 229))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Image.asset(
+                                      'assets/oil.png',
+                                      width: screenWidth * 0.077,
+                                      height: 30,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
+                            ),
+                            const SizedBox(width: 10),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: screenWidth * 0.5,
+                                  child: Text(
+                                    ingredient?.name ?? '',
+                                    style: GoogleFonts.dmSans(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // SizedBox(width: 50),
+
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: screenWidth * 0.2,
+                                  child: SizedBox(
+                                    child: Text(
+                                      ingredient?.quantity ?? '',
+
+                                      // style: const GoogleFonts.dmSans(
+                                      //   fontSize: 16,
+                                      //   color: Colors.black,
+                                      // ),
+
+                                      style: GoogleFonts.dmSans(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
+
+                        //     Center(
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment
+                        //         .stretch,
+                        //     children: <Widget>[
+                        //       Image.asset(
+                        //         'assets/oil.png',
+                        //         width: 30,
+                        //         height: 30,
+                        //       ),
+                        //       SizedBox(width: 8),
+                        //       Text(
+                        //         ingredient?.name ?? '',
+                        //         style: const GoogleFonts.dmSans(
+                        //           fontWeight: FontWeight.bold,
+                        //           fontSize: 16,
+                        //           color: Colors.black,
+                        //         ),
+                        //       ),
+                        //       SizedBox(
+                        //         width: screenWidth * 0.18,
+                        //         child: Text(
+                        //           ingredient?.quantity ?? '',
+                        //           style: const GoogleFonts.dmSans(
+                        //             fontSize: 16,
+                        //             color: Colors.black,
+                        //             fontWeight: FontWeight.w300,
+                        //             fontFamily: 'dmsans',
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       );
                     },
                   ),
 
-                const SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
 
                   // steps
-                   Padding(
+                  // if( productDetail!.steps.isNotEmpty)
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: <Widget>[
@@ -302,9 +495,8 @@ Future<void> fetchVideoDetails() async {
                             "Steps",
                             style: GoogleFonts.dmSans(
                               fontSize: 16,
-                              color: Colors.black,
+                              color: CustomColor.myRedColor,
                               fontWeight: FontWeight.bold,
-                              
                             ),
                           ),
                         ),
@@ -320,30 +512,27 @@ Future<void> fetchVideoDetails() async {
                       return Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                   
-
-
-                         SizedBox(
-                              width: screenWidth * 0.18,
-                         child:   Text(
-                              step?.stepNo ?? '',
-                              style:  GoogleFonts.dmSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black,
+                            SizedBox(
+                              width: screenWidth * 0.07,
+                              child: Text(
+                                step?.stepNo ?? '',
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                         ),
                             SizedBox(
-                              width: screenWidth * 0.18,
-                              child: 
-                              Text(
+                              width: screenWidth * 0.70,
+                              child: Text(
                                 step?.stepDescription ?? '',
-                                style:  GoogleFonts.dmSans(
-                                  fontSize: 16,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 14,
                                   color: Colors.black,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -352,12 +541,212 @@ Future<void> fetchVideoDetails() async {
                       );
                     },
                   ),
-
-
                 ],
               ),
             ),
           ),
+
+
+
+          // Expanded(
+          //   child: SingleChildScrollView(
+          //     child: Column(
+          //       children: <Widget>[
+          //         const SizedBox(height: 10),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           children: <Widget>[
+          //             Padding(
+          //               padding: EdgeInsets.all(
+          //                   isPortrait ? screenWidth * 0.05 : 16.0),
+          //               child: Text(
+          //                 productDetail?.text ?? '',
+          //                 style:  GoogleFonts.dmSans(
+          //                   fontSize: 20,
+          //                   color: Colors.black,
+          //                   fontWeight: FontWeight.bold,
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+
+          //         // Divider
+          //         Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //           child: Row(
+          //             children: <Widget>[
+          //               Expanded(
+          //                 child: Container(
+          //                   color: const Color.fromARGB(255, 202, 202, 202),
+          //                   height: 1.0,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+
+                 
+
+              
+
+          //         Padding(
+          //           padding: const EdgeInsets.all(25.0),
+          //           child: Text(
+          //             productDetail?.description ?? 'No description found',
+          //             style:  GoogleFonts.dmSans(
+          //               fontSize: 16,
+          //               color: Colors.black,
+          //             ),
+          //           ),
+          //         ),
+
+          //         // Divider
+          //         Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //           child: Row(
+          //             children: <Widget>[
+          //               Expanded(
+          //                 child: Container(
+          //                   color: const Color.fromARGB(255, 202, 202, 202),
+          //                   height: 1.0,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+
+          //         const SizedBox(
+          //           height: 10,
+          //         ),
+
+          //         // Ingredient
+          //          Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //           child: Row(
+          //             children: <Widget>[
+          //               Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: Text(
+          //                   "Ingredients",
+          //                   style: GoogleFonts.dmSans(
+          //                     fontSize: 16,
+          //                     color: Colors.black,
+          //                     fontWeight: FontWeight.bold,
+                              
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+
+          //         // Ingredient Rows
+          //         ...List<Widget>.generate(
+          //           productDetail?.ingredients.length ?? 0,
+          //           (index) {
+          //             final ingredient = productDetail?.ingredients[index];
+          //             return Padding(
+          //               padding: const EdgeInsets.all(16.0),
+          //               child: Row(
+          //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //                 children: <Widget>[
+                   
+          //                   Text(
+          //                     ingredient?.name ?? '',
+          //                     style:  GoogleFonts.dmSans(
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 16,
+          //                       color: Colors.black,
+          //                     ),
+          //                   ),
+          //                   SizedBox(
+          //                     width: screenWidth * 0.18,
+          //                     child: Text(
+          //                       ingredient?.quantity ?? '',
+          //                       style:  GoogleFonts.dmSans(
+          //                         fontSize: 16,
+          //                         color: Colors.black,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             );
+          //           },
+          //         ),
+
+          //       const SizedBox(
+          //           height: 10,
+          //         ),
+
+          //         // steps
+          //          Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //           child: Row(
+          //             children: <Widget>[
+          //               Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: Text(
+          //                   "Steps",
+          //                   style: GoogleFonts.dmSans(
+          //                     fontSize: 16,
+          //                     color: Colors.black,
+          //                     fontWeight: FontWeight.bold,
+                              
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+
+          //         // Ingredient Rows
+          //         ...List<Widget>.generate(
+          //           productDetail?.steps.length ?? 0,
+          //           (index) {
+          //             final step = productDetail?.steps[index];
+          //             return Padding(
+          //               padding: const EdgeInsets.all(16.0),
+          //               child: Row(
+          //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //                 children: <Widget>[
+                   
+
+
+          //                SizedBox(
+          //                     width: screenWidth * 0.18,
+          //                child:   Text(
+          //                     step?.stepNo ?? '',
+          //                     style:  GoogleFonts.dmSans(
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 16,
+          //                       color: Colors.black,
+          //                     ),
+          //                   ),
+          //                ),
+          //                   SizedBox(
+          //                     width: screenWidth * 0.18,
+          //                     child: 
+          //                     Text(
+          //                       step?.stepDescription ?? '',
+          //                       style:  GoogleFonts.dmSans(
+          //                         fontSize: 16,
+          //                         color: Colors.black,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             );
+          //           },
+          //         ),
+
+
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
